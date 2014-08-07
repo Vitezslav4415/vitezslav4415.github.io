@@ -31,7 +31,6 @@ q:before, q:after { content: ""; content: none; }
     height: 2585px;
     width: 2264px;
     background: url(images/Map2.jpg);
-	/*opacity: 0.1;*/
 }
 
 .order-march-0,
