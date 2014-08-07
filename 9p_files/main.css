@@ -860,7 +860,7 @@ q:before, q:after { content: ""; content: none; }
 	left: 15%
 }
 .pos-deepwood {
-	top: 21%;
+	top: 20%;
 	left: 18%;
 }
 .pos-dreadfort {
@@ -909,7 +909,7 @@ q:before, q:after { content: ""; content: none; }
 }
 .pos-dragonstone {
     top: 61%;
-    left: 50%;
+    left: 51%;
 }
 
 .pos-bayofice {
@@ -1082,7 +1082,7 @@ q:before, q:after { content: ""; content: none; }
     left: 39%;
 }
 .pos-kingslanding {
-    top: 68%;
+    top: 67%;
     left: 36%;
 }
 /*****************************************/
@@ -1091,8 +1091,8 @@ q:before, q:after { content: ""; content: none; }
 	left: 44%;
 }
 .pos-bloodygate {
-	top: 53%;
-	left: 39%;
+	top: 52%;
+	left: 40%;
 }
 .pos-kingsroad {
 	top: 55%;
@@ -1103,8 +1103,8 @@ q:before, q:after { content: ""; content: none; }
 	left: 43%;
 }
 .pos-whisperingwood {
-	top: 54%;
-	left: 23%;
+	top: 52.5%;
+	left: 24.5%;
 }
 .pos-banefort {
 	top: 56%;
@@ -1204,7 +1204,7 @@ q:before, q:after { content: ""; content: none; }
 }
 .pos-bayofnorvos {
 	top: 47%;
-	left: 78%
+	left: 79%
 }
 
 
