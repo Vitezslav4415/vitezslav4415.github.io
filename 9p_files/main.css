@@ -1234,7 +1234,7 @@ q:before, q:after { content: ""; content: none; }
 	top: 48%;
 	left: 53%
 }
-.pos-byte {
+.pos-byte, .pos-thebyte {
 	top: 38%;
 	left: 44%
 }
@@ -1344,6 +1344,7 @@ q:before, q:after { content: ""; content: none; }
 .unit.pos-seaofmyrth ~ .unit.pos-seaofmyrth,
 .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs,
 .unit.pos-thebyte ~ .unit.pos-thebyte,
+.unit.pos-byte ~ .unit.pos-byte,
 .unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos {
     margin-left: -42px;
     margin-top: -10px;
@@ -1448,6 +1449,7 @@ q:before, q:after { content: ""; content: none; }
 .unit.pos-seaofmyrth ~ .unit.pos-seaofmyrth ~ .unit.pos-seaofmyrth,
 .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs,
 .unit.pos-thebyte ~ .unit.pos-thebyte ~ .unit.pos-thebyte,
+.unit.pos-byte ~ .unit.pos-byte ~ .unit.pos-byte,
 .unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos {
     margin-left: -63px;
     margin-top: -52px;
@@ -1552,6 +1554,7 @@ q:before, q:after { content: ""; content: none; }
 .unit.pos-seaofmyrth ~ .unit.pos-seaofmyrth ~ .unit.pos-seaofmyrth ~ .unit.pos-seaofmyrth,
 .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs,
 .unit.pos-thebyte ~ .unit.pos-thebyte ~ .unit.pos-thebyte ~ .unit.pos-thebyte,
+.unit.pos-byte ~ .unit.pos-byte ~ .unit.pos-byte ~ .unit.pos-byte,
 .unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos {
     margin-left: 0px;
     margin-top: -10px;
