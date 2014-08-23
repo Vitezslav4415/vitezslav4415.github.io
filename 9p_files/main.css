@@ -181,6 +181,9 @@ q:before, q:after { content: ""; content: none; }
 .routed-footman-greyjoy,
 .routed-footman-tyrell,
 .routed-footman-martell,
+.routed-footman-arryn,
+.routed-footman-tully,
+.routed-footman-targaryen,
 
 .routed-knight-lannister,
 .routed-knight-stark,
@@ -188,6 +191,9 @@ q:before, q:after { content: ""; content: none; }
 .routed-knight-greyjoy,
 .routed-knight-tyrell,
 .routed-knight-martell,
+.routed-knight-arryn,
+.routed-knight-tully,
+.routed-knight-targaryen,
 
 .routed-ship-lannister,
 .routed-ship-stark,
@@ -195,13 +201,19 @@ q:before, q:after { content: ""; content: none; }
 .routed-ship-greyjoy,
 .routed-ship-tyrell,
 .routed-ship-martell,
+.routed-ship-arryn,
+.routed-ship-tully,
+.routed-ship-targaryen,
 
 .routed-siege-lannister,
 .routed-siege-stark,
 .routed-siege-baratheon,
 .routed-siege-greyjoy,
 .routed-siege-tyrell,
-.routed-siege-martell {
+.routed-siege-martell,
+.routed-siege-arryn,
+.routed-siege-tully,
+.routed-siege-targaryen {
     background-color: rgba(0, 0, 0, .7);
     box-shadow: 0 0 10px rgba(0, 0, 0, .7);
     border-radius: 50%;
