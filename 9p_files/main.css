@@ -712,19 +712,19 @@ q:before, q:after { content: ""; content: none; }
     top: 3.95%;
 }
 .pos-wilding-9 {
-    left: 29%;
+    left: 28.5%;
     top: 3.95%;
 }
 .pos-wilding-12 {
-    left: 33%;
+    left: 32.5%;
     top: 3.95%;
 }
 .pos-wilding-15 {
-    left: 37%;
+    left: 36.5%;
     top: 3.95%;
 }
 .pos-wilding-18 {
-    left: 41%;
+    left: 40.5%;
     top: 3.95%;
 }
 .pos-round-1 {
@@ -904,15 +904,15 @@ q:before, q:after { content: ""; content: none; }
     left: 36%;
 }
 .pos-bearisland {
-	top: 13%;
-	left: 15%
+	top: 11.5%;
+	left: 16.5%;
 }
 .pos-deepwood {
-	top: 20%;
-	left: 18%;
+	top: 19.5%;
+	left: 21.5%;
 }
 .pos-dreadfort {
-	top: 23%;
+	top: 22%;
 	left: 39%;
 }
 .pos-winterfell {
@@ -994,7 +994,7 @@ q:before, q:after { content: ""; content: none; }
     left: 11%;
 }
 .pos-stoneysept {
-    top: 64%;
+    top: 63%;
     left: 27%;
 }
 .pos-harrenhal {
@@ -1056,8 +1056,8 @@ q:before, q:after { content: ""; content: none; }
     left: 6%;
 }
 .pos-sunspear {
-    top: 88%;
-    left: 47%;
+    top: 89%;
+	left: 45%;
 }
 .pos-sunspear-harbor {
     top: 90%;
@@ -1179,8 +1179,8 @@ q:before, q:after { content: ""; content: none; }
 	left: 64%
 }
 .pos-braavos {
-	top: 49%;
-	left: 73%
+	top: 50%;
+	left: 72%
 }
 .pos-andalos {
 	top: 56%;
@@ -1195,7 +1195,7 @@ q:before, q:after { content: ""; content: none; }
 	left: 69%
 }
 .pos-goldenfields {
-	top: 64%;
+	top: 65%;
 	left: 77%
 }
 .pos-myr {
@@ -1234,7 +1234,7 @@ q:before, q:after { content: ""; content: none; }
 	top: 94%;
 	left: 74%
 }
-.pos-gullet {
+.pos-gullet, .pos-thegullet {
 	top: 56%;
 	left: 55%
 }
@@ -1353,6 +1353,7 @@ q:before, q:after { content: ""; content: none; }
 .unit.pos-volantis-harbor ~ .unit.pos-volantis-harbor,
 .unit.pos-bayofrhoyne ~ .unit.pos-bayofrhoyne,
 .unit.pos-thegullet ~ .unit.pos-thegullet,
+.unit.pos-gullet ~ .unit.pos-gullet,
 .unit.pos-seaofmyrth ~ .unit.pos-seaofmyrth,
 .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs,
 .unit.pos-thebyte ~ .unit.pos-thebyte,
@@ -1458,6 +1459,7 @@ q:before, q:after { content: ""; content: none; }
 .unit.pos-volantis-harbor ~ .unit.pos-volantis-harbor ~ .unit.pos-volantis-harbor,
 .unit.pos-bayofrhoyne ~ .unit.pos-bayofrhoyne ~ .unit.pos-bayofrhoyne,
 .unit.pos-thegullet ~ .unit.pos-thegullet ~ .unit.pos-thegullet,
+.unit.pos-gullet ~ .unit.pos-gullet ~ .unit.pos-gullet,
 .unit.pos-seaofmyrth ~ .unit.pos-seaofmyrth ~ .unit.pos-seaofmyrth,
 .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs,
 .unit.pos-thebyte ~ .unit.pos-thebyte ~ .unit.pos-thebyte,
@@ -1563,6 +1565,7 @@ q:before, q:after { content: ""; content: none; }
 .unit.pos-volantis-harbor ~ .unit.pos-volantis-harbor ~ .unit.pos-volantis-harbor ~ .unit.pos-volantis-harbor,
 .unit.pos-bayofrhoyne ~ .unit.pos-bayofrhoyne ~ .unit.pos-bayofrhoyne ~ .unit.pos-bayofrhoyne,
 .unit.pos-thegullet ~ .unit.pos-thegullet ~ .unit.pos-thegullet ~ .unit.pos-thegullet,
+.unit.pos-gullet ~ .unit.pos-gullet ~ .unit.pos-gullet ~ .unit.pos-gullet,
 .unit.pos-seaofmyrth ~ .unit.pos-seaofmyrth ~ .unit.pos-seaofmyrth ~ .unit.pos-seaofmyrth,
 .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs,
 .unit.pos-thebyte ~ .unit.pos-thebyte ~ .unit.pos-thebyte ~ .unit.pos-thebyte,
