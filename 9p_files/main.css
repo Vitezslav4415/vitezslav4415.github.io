@@ -1170,7 +1170,8 @@ q:before, q:after { content: ""; content: none; }
 	top: 76%;
 	left: 30%;
 }
-.pos-rainwood {
+.pos-rainwood,
+.pos-griffinsroost {
 	top: 80%;
 	left: 43%;
 }
@@ -1255,6 +1256,10 @@ q:before, q:after { content: ""; content: none; }
 	left: 79%
 }
 
+.pos-skagos {
+  left: 48.5%;
+  top: 10%;
+}
 
 
 .unit.pos-twins ~ .unit.pos-twins,
@@ -1337,6 +1342,7 @@ q:before, q:after { content: ""; content: none; }
 .unit.pos-casterlyrock ~ .unit.pos-casterlyrock,
 .unit.pos-bitterbridge ~ .unit.pos-bitterbridge,
 .unit.pos-rainwood ~ .unit.pos-rainwood,
+.unit.pos-griffinsroost~ .unit.pos-griffinsroost,
 .unit.pos-lys ~ .unit.pos-lys,
 .unit.pos-braavos ~ .unit.pos-braavos,
 .unit.pos-andalos ~ .unit.pos-andalos,
@@ -1358,7 +1364,8 @@ q:before, q:after { content: ""; content: none; }
 .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs,
 .unit.pos-thebyte ~ .unit.pos-thebyte,
 .unit.pos-byte ~ .unit.pos-byte,
-.unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos {
+.unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos,
+.unit.pos-skagos ~ .unit.pos-skagos {
     margin-left: -42px;
     margin-top: -10px;
     z-index: 30;
@@ -1443,6 +1450,7 @@ q:before, q:after { content: ""; content: none; }
 .unit.pos-casterlyrock ~ .unit.pos-casterlyrock ~ .unit.pos-casterlyrock,
 .unit.pos-bitterbridge ~ .unit.pos-bitterbridge ~ .unit.pos-bitterbridge,
 .unit.pos-rainwood ~ .unit.pos-rainwood ~ .unit.pos-rainwood,
+.unit.pos-griffinsroost ~ .unit.pos-griffinsroost ~ .unit.pos-griffinsroost,
 .unit.pos-lys ~ .unit.pos-lys ~ .unit.pos-lys,
 .unit.pos-braavos ~ .unit.pos-braavos ~ .unit.pos-braavos,
 .unit.pos-andalos ~ .unit.pos-andalos ~ .unit.pos-andalos,
@@ -1464,7 +1472,8 @@ q:before, q:after { content: ""; content: none; }
 .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs,
 .unit.pos-thebyte ~ .unit.pos-thebyte ~ .unit.pos-thebyte,
 .unit.pos-byte ~ .unit.pos-byte ~ .unit.pos-byte,
-.unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos {
+.unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos,
+.unit.pos-skagos ~ .unit.pos-skagos ~ .unit.pos-skagos {
     margin-left: -63px;
     margin-top: -52px;
     z-index: 15;
@@ -1549,6 +1558,7 @@ q:before, q:after { content: ""; content: none; }
 .unit.pos-casterlyrock ~ .unit.pos-casterlyrock ~ .unit.pos-casterlyrock ~ .unit.pos-casterlyrock,
 .unit.pos-bitterbridge ~ .unit.pos-bitterbridge ~ .unit.pos-bitterbridge ~ .unit.pos-bitterbridge,
 .unit.pos-rainwood ~ .unit.pos-rainwood ~ .unit.pos-rainwood ~ .unit.pos-rainwood,
+.unit.pos-griffinsroost ~ .unit.pos-griffinsroost ~ .unit.pos-griffinsroost ~ .unit.pos-griffinsroost,
 .unit.pos-lys ~ .unit.pos-lys ~ .unit.pos-lys ~ .unit.pos-lys,
 .unit.pos-braavos ~ .unit.pos-braavos ~ .unit.pos-braavos ~ .unit.pos-braavos,
 .unit.pos-andalos ~ .unit.pos-andalos ~ .unit.pos-andalos ~ .unit.pos-andalos,
@@ -1570,7 +1580,8 @@ q:before, q:after { content: ""; content: none; }
 .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs ~ .unit.pos-bayofcrabs,
 .unit.pos-thebyte ~ .unit.pos-thebyte ~ .unit.pos-thebyte ~ .unit.pos-thebyte,
 .unit.pos-byte ~ .unit.pos-byte ~ .unit.pos-byte ~ .unit.pos-byte,
-.unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos {
+.unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos ~ .unit.pos-bayofnorvos,
+.unit.pos-skagos ~ .unit.pos-skagos ~ .unit.pos-skagos ~ .unit.pos-skagos {
     margin-left: 0px;
     margin-top: -10px;
     z-index: 25;
