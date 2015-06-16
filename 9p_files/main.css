@@ -948,8 +948,8 @@ q:before, q:after { content: ""; content: none; }
     left: 13%;
 }
 .pos-greywaterwatch {
-    top: 39%;
-    left: 20%;
+    top: 41%;
+    left: 21%;
 }
 .pos-moatcailin {
     top: 42%;
@@ -965,8 +965,8 @@ q:before, q:after { content: ""; content: none; }
     left: 3%;
 }
 .pos-shiveringsea {
-    top: 35%;
-    left: 73%;
+    top: 20%;
+    left: 53%;
 }
 .pos-narrowsea {
     top: 40%;
@@ -1114,8 +1114,8 @@ q:before, q:after { content: ""; content: none; }
 }
 /*****************************************/
 .pos-twins {
-    top: 47%;
-    left: 28%;
+    top: 48%;
+    left: 26%;
 }
 .pos-fingers {
     top: 43%;
@@ -1151,8 +1151,8 @@ q:before, q:after { content: ""; content: none; }
 	left: 43%;
 }
 .pos-whisperingwood {
-	top: 52.5%;
-	left: 24.5%;
+	top: 53%;
+	left: 23%;
 }
 .pos-banefort {
 	top: 56%;
@@ -1236,15 +1236,15 @@ q:before, q:after { content: ""; content: none; }
 	left: 74%
 }
 .pos-gullet, .pos-thegullet {
-	top: 56%;
-	left: 55%
+	top: 55%;
+	left: 58%
 }
 .pos-seaofmyrth {
 	top: 70%;
 	left: 60%
 }
 .pos-bayofcrabs {
-	top: 48%;
+	top: 49.5%;
 	left: 53%
 }
 .pos-byte, .pos-thebyte {
