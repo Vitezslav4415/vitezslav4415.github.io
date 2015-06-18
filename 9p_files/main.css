@@ -1223,6 +1223,10 @@ q:before, q:after { content: ""; content: none; }
 	top: 53%;
 	left: 81%
 }
+.pos-braavos-harbor {
+	top: 47.5%;
+	left: 68%
+}
 .pos-pentos-harbor {
 	top: 66%;
 	left: 62%
@@ -1355,6 +1359,7 @@ q:before, q:after { content: ""; content: none; }
 .unit.pos-seagard-harbor ~ .unit.pos-seagard-harbor,
 .unit.pos-gulltown-harbor ~ .unit.pos-gulltown-harbor,
 .unit.pos-norvos-harbor ~ .unit.pos-norvos-harbor,
+.unit.pos-braavos-harbor ~ .unit.pos-braavos-harbor,
 .unit.pos-pentos-harbor ~ .unit.pos-pentos-harbor,
 .unit.pos-volantis-harbor ~ .unit.pos-volantis-harbor,
 .unit.pos-bayofrhoyne ~ .unit.pos-bayofrhoyne,
@@ -1463,6 +1468,7 @@ q:before, q:after { content: ""; content: none; }
 .unit.pos-seagard-harbor ~ .unit.pos-seagard-harbor ~ .unit.pos-seagard-harbor,
 .unit.pos-gulltown-harbor ~ .unit.pos-gulltown-harbor ~ .unit.pos-gulltown-harbor,
 .unit.pos-norvos-harbor ~ .unit.pos-norvos-harbor ~ .unit.pos-norvos-harbor,
+.unit.pos-braavos-harbor ~ .unit.pos-braavos-harbor ~ .unit.pos-braavos-harbor,
 .unit.pos-pentos-harbor ~ .unit.pos-pentos-harbor ~ .unit.pos-pentos-harbor,
 .unit.pos-volantis-harbor ~ .unit.pos-volantis-harbor ~ .unit.pos-volantis-harbor,
 .unit.pos-bayofrhoyne ~ .unit.pos-bayofrhoyne ~ .unit.pos-bayofrhoyne,
@@ -1571,6 +1577,7 @@ q:before, q:after { content: ""; content: none; }
 .unit.pos-seagard-harbor ~ .unit.pos-seagard-harbor ~ .unit.pos-seagard-harbor ~ .unit.pos-seagard-harbor,
 .unit.pos-gulltown-harbor ~ .unit.pos-gulltown-harbor ~ .unit.pos-gulltown-harbor ~ .unit.pos-gulltown-harbor,
 .unit.pos-norvos-harbor ~ .unit.pos-norvos-harbor ~ .unit.pos-norvos-harbor ~ .unit.pos-norvos-harbor,
+.unit.pos-braavos-harbor ~ .unit.pos-braavos-harbor ~ .unit.pos-braavos-harbor ~ .unit.pos-braavos-harbor,
 .unit.pos-pentos-harbor ~ .unit.pos-pentos-harbor ~ .unit.pos-pentos-harbor ~ .unit.pos-pentos-harbor,
 .unit.pos-volantis-harbor ~ .unit.pos-volantis-harbor ~ .unit.pos-volantis-harbor ~ .unit.pos-volantis-harbor,
 .unit.pos-bayofrhoyne ~ .unit.pos-bayofrhoyne ~ .unit.pos-bayofrhoyne ~ .unit.pos-bayofrhoyne,
