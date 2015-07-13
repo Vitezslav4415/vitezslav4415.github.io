@@ -124,7 +124,7 @@ function updateHero(element, value) {
 	container.find('input[name="hero-y"]').attr('value','');
 	container.find('input[name="hero-hp"]').val(HEROES[value].hp);
 	container.find('input[name="hero-stamina"]').val(HEROES[value].stamina);
-	container.children('img').attr('src', 'images/heroes_cards/' + value.replace(new RegExp(" ",'g'), '_') + '.jpg');
+	container.children('img').attr('src', 'images/heroes_cards/' + value.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.jpg');
 	var heroId = container.parent().attr('id');
 	$('[href="#' + heroId + '"]').html(value);
 	updateArchetype(element, HEROES[value].archetype.title);
