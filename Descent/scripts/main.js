@@ -1403,9 +1403,9 @@ function constructSettingsFromConfig() {
 			var container = addObjectiveLine();
 			var objective = config.objectives[i];
 			updateObjective(container.find('.select-objective li')[0], objective.title);
-			container.find('[name="familiar-x"]').val(objective.x);
+			container.find('[name="objective-x"]').val(objective.x);
 			container.find('.x-title').html(getAlphabetChar(objective.x - 1) + ' ');
-			container.find('[name="familiar-y"]').val(objective.y);
+			container.find('[name="objective-y"]').val(objective.y);
 			container.find('.y-title').html(objective.y.toString() + ' ');
 		}
 	}
