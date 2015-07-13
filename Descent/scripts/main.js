@@ -1139,7 +1139,7 @@ function constructMapFromConfig() {
 				'transform-origin' : cellSize.toString() + 'px'
 			});
 		}
-		doorImage.attr('src', folder + door.title + '.png');
+		doorImage.attr('src', folder + door.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.png');
 		doorObject.append(doorImage);
 		$('#map .map').append(doorObject);
 	}
@@ -1154,7 +1154,7 @@ function constructMapFromConfig() {
 			'left' : (xs.x * cellSize).toString() + 'px',
 			'top' : (xs.y * cellSize).toString() + 'px'
 		});
-		xsImage.attr('src', folder + xs.title + '.png');
+		xsImage.attr('src', folder + xs.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.png');
 		xsObject.append(xsImage);
 		$('#map .map').append(xsObject);
 	}
@@ -1169,7 +1169,7 @@ function constructMapFromConfig() {
 			'left' : (objective.x * cellSize).toString() + 'px',
 			'top' : (objective.y * cellSize).toString() + 'px'
 		});
-		objectiveImage.attr('src', folder + objective.title + '.png');
+		objectiveImage.attr('src', folder + objective.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.png');
 		objectiveObject.append(objectiveImage);
 		$('#map .map').append(objectiveObject);
 	}
