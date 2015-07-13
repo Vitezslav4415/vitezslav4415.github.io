@@ -1,0 +1,256 @@
+body {
+	margin: 0;
+}
+
+.background {
+	background-color: black;
+	position: relative;
+	width: 1728px;
+	height: 1728px;
+	z-index: 100;
+	min-height: 600px;
+	padding-top: 64px;
+}
+
+body {
+	background: white;
+	padding: 20px;
+}
+
+.menu.active {
+	height: 100%;
+}
+
+.menu .show-menu,
+.menu.active .hide-menu {
+	display: block;
+}
+
+.menu.active .show-menu,
+.menu .hide-menu {
+	display: none;
+}
+
+.menu-item {
+	visibility: hidden;
+	opacity: 1;
+}
+
+.active .menu-item {
+	visibility: visible;
+}
+
+.map, .figures, .grid {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.map {
+	z-index: 100;
+}
+
+.grid {
+	z-index: 150;
+}
+
+.figures {
+	z-index: 200;
+}
+
+.oneCell,
+.twoCells,
+.threeCells,
+.mage,
+.warrior,
+.scout,
+.healer,
+.checkbox.apothecary,
+.checkbox.disciple,
+.checkbox.prophet,
+.checkbox.spiritspeaker,
+.checkbox.beastmaster,
+.checkbox.berserker,
+.checkbox.champion,
+.checkbox.knight,
+.checkbox.geomancer,
+.checkbox.hexer,
+.checkbox.necromancer,
+.checkbox.runemaster,
+.checkbox.stalker,
+.checkbox.thief,
+.checkbox.treasurehunter,
+.checkbox.wildlander,
+.items-selects .apothecary,
+.items-selects .disciple,
+.items-selects .prophet,
+.items-selects .spiritspeaker,
+.items-selects .beastmaster,
+.items-selects .berserker,
+.items-selects .champion,
+.items-selects .knight,
+.items-selects .geomancer,
+.items-selects .hexer,
+.items-selects .necromancer,
+.items-selects .runemaster,
+.items-selects .stalker,
+.items-selects .thief,
+.items-selects .treasurehunter,
+.items-selects .wildlander {
+	display: none;
+}
+
+.showOneCell .oneCell,
+.showTwoCells .twoCells,
+.showThreeCells .threeCells,
+.showarch.mage .mage,
+.showarch.warrior .warrior,
+.showarch.scout .scout,
+.showarch.healer .healer,
+.showarch,
+.showclass.apothecary .checkbox.apothecary,
+.showclass.disciple .checkbox.disciple,
+.showclass.prophet .checkbox.prophet,
+.showclass.spiritspeaker .checkbox.spiritspeaker,
+.showclass.beastmaster .checkbox.beastmaster,
+.showclass.berserker .checkbox.berserker,
+.showclass.champion .checkbox.champion,
+.showclass.knight .checkbox.knight,
+.showclass.geomancer .checkbox.geomancer,
+.showclass.hexer .checkbox.hexer,
+.showclass.necromancer .checkbox.necromancer,
+.showclass.runemaster .checkbox.runemaster,
+.showclass.stalker .checkbox.stalker,
+.showclass.thief .checkbox.thief,
+.showclass.treasurehunter .checkbox.treasurehunter,
+.showclass.wildlander .checkbox.wildlander,
+.showclass.apothecary.items-selects .apothecary,
+.showclass.disciple.items-selects .disciple,
+.showclass.prophet.items-selects .prophet,
+.showclass.spiritspeaker.items-selects .spiritspeaker,
+.showclass.beastmaster.items-selects .beastmaster,
+.showclass.berserker.items-selects .berserker,
+.showclass.champion.items-selects .champion,
+.showclass.knight.items-selects .knight,
+.showclass.geomancer.items-selects .geomancer,
+.showclass.hexer.items-selects .hexer,
+.showclass.necromancer.items-selects .necromancer,
+.showclass.runemaster.items-selects .runemaster,
+.showclass.stalker.items-selects .stalker,
+.showclass.thief.items-selects .thief,
+.showclass.treasurehunter.items-selects .treasurehunter,
+.showclass.wildlander.items-selects .wildlander,
+.showclass {
+	display: block;
+}
+
+.tab-pane {
+	padding: 20px;
+}
+
+#map {
+	padding: 0;
+}
+
+.select-row {
+	margin-bottom: 10px;
+}
+
+.select-row > input[type="text"] {
+	display: inline-block;
+	width: 104px;
+	position: relative;
+	top: 1px;
+}
+
+.select-row > .btn-group,
+.select-row > input[type="text"],
+.select-row > button,
+.items-selects > .btn-group,
+.sack-selects > .btn-group {
+	margin-right: 15px;
+}
+
+.select-monster button {
+	min-width: 140px;
+}
+
+.select-x > button, .select-y > button {
+	min-width: 161px;
+}
+
+#monsters .radio label {
+	display: block;
+}
+
+.select-row img {
+	margin: 20px;
+	display: block;
+	max-width: 600px;
+}
+
+.imagescontainer img {
+	display: none;
+	margin: 10px;
+	width: 200px;
+}
+
+.imagescontainer img.showimage {
+	display: inline-block;
+}
+
+.items-container img,
+.sack-container img {
+	margin: 10px 15px 10px 0;
+	display: inline-block;
+	width: 128px;
+	height: 192px;
+}
+
+.items-selects > .btn-group > button,
+.sack-selects > .btn-group > button {
+	width: 128px;
+}
+
+.secondary {
+	opacity: 0.5;
+}
+
+.sack-container button {
+	display: inline-block;
+}
+
+.hit-points,
+.stamina {
+	position: absolute;
+	left: 0;
+	color: white;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 20px;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	border-radius: 10px;
+}
+
+.hit-points {
+	top: 0;
+	background: red;
+}
+
+.stamina {
+	bottom: 0;
+	background: rgb(184, 157, 10);
+}
+
+.grid div {
+	margin-top: -64px;
+	width: 64px;
+	height: 64px;
+	color: white;
+	font-weight: bold;
+	line-height: 64px;
+	text-align: center;
+	font-size: 30px;
+}

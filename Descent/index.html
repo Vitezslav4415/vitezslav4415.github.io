@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html>
+	<head>
+		<link href="styles/main.css" rel="stylesheet" type="text/css"/>
+		<script src="scripts/jquery.min.js"></script>
+		<link rel="stylesheet" href="styles/bootstrap.min.css">
+		<script src="scripts/bootstrap.min.js"></script>
+		<script src="scripts/constants.js"></script>
+		<script src="scripts/main.js"></script>
+		<script src="scripts/base64.js"></script>
+	</head>
+	<body>
+		<div role="tabpanel">
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"><a href="#map" aria-controls="home" role="tab" data-toggle="tab" onclick="populate();">Map</a></li>
+				<li role="presentation"><a href="#map-controls" aria-controls="home" role="tab" data-toggle="tab">Map Controls</a></li>
+				<li role="presentation"><a href="#monsters" aria-controls="profile" role="tab" data-toggle="tab">Monsters and familiars</a></li>
+				<li role="presentation"><a href="#hero1" aria-controls="messages" role="tab" data-toggle="tab">Hero 1</a></li>
+				<li role="presentation"><a href="#hero2" aria-controls="messages" role="tab" data-toggle="tab">Hero 2</a></li>
+				<li role="presentation"><a href="#hero3" aria-controls="messages" role="tab" data-toggle="tab">Hero 3</a></li>
+				<li role="presentation"><a href="#hero4" aria-controls="messages" role="tab" data-toggle="tab">Hero 4</a></li>
+				<li role="presentation"><a href="#familiars" aria-controls="messages" role="tab" data-toggle="tab">Allies and familiars</a></li>
+				<li role="presentation"><a href="#misc" aria-controls="settings" role="tab" data-toggle="tab">Miscellaneous objects</a></li>
+			</ul>
+			
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="map">
+					<div class="background">
+						<div class="map"></div>
+						<div class="grid"></div>
+						<div class="figures"></div>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="map-controls">
+					<div id="tiles-container"><h1>Map tiles</h1></div>
+					<button type="button" class="btn btn-success" aria-expanded="false" onclick="addMapTileLine();">Add map tile</button>
+					<div id="doors-container"><h1>Doors</h1></div>
+					<button type="button" class="btn btn-success" aria-expanded="false" onclick="addDoorLine();">Add door</button>
+					<div id="xs-container"><h1>Xs</h1></div>
+					<button type="button" class="btn btn-success" aria-expanded="false" onclick="addXsLine();">Add X</button>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="monsters">
+					<div id="monsters-container"></div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="act" value="one" id="actOne" checked onclick="adjustAct();"> Act One Monsters
+						</label>
+						<label>
+							<input type="radio" name="act" value="two" id="actTwo" onclick="adjustAct();"> Act Two Monsters
+						</label>
+					</div>
+					<button type="button" class="btn btn-success" aria-expanded="false" onclick="addMonsterLine();">Add row</button>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="hero1"></div>
+				<div role="tabpanel" class="tab-pane" id="hero2"></div>
+				<div role="tabpanel" class="tab-pane" id="hero3"></div>
+				<div role="tabpanel" class="tab-pane" id="hero4"></div>
+				<div role="tabpanel" class="tab-pane" id="familiars">
+					<div id="allies-container"><h1>Allies</h1></div>
+					<button type="button" class="btn btn-success" aria-expanded="false" onclick="addAllyLine();">Add Ally</button>
+					<div id="familiars-container"><h1>Familiars</h1></div>
+					<button type="button" class="btn btn-success" aria-expanded="false" onclick="addFamiliarLine();">Add Familiar</button>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="misc">
+					<div id="objective-container"><h1>Objective objects</h1></div>
+					<button type="button" class="btn btn-success" aria-expanded="false" onclick="addObjectiveLine();">Add objectective object</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
