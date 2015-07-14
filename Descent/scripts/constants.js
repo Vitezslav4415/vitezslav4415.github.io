@@ -616,7 +616,9 @@ FAMILIARS_LIST = [
 	'Reanimate',
 	'Shadow',
 	'Skye',
-	'Wolf'
+	'Wolf',
+	'Villager Female',
+	'Villager Male'
 ];
 
 ALLIES_LIST = [
@@ -726,11 +728,14 @@ BLOCKS_LIST = [
 ];
 
 OBJECTIVES_LIST = [
-	'green',
-	'purple',
-	'red',
-	'white',
-	'unknown'
+	'Green',
+	'Purple',
+	'Red',
+	'White',
+	'Unknown',
+	'Search',
+	'Secret entrance indoors',
+	'Secret entrance outdoors'
 ];
 
 CONDITIONS_LIST = [
