@@ -754,6 +754,7 @@ function addHeroLine(number) {
 	heroLine.append(createInputSelect('Select Class ', 'class-title', 'select-class'));
 	heroLine.find('.select-class ul').addClass(ARCHETYPE_CLASSES + ' showarch').append(createClassSelectContent());
 	heroLine.append($('<input type="hidden" name="class-title" value=""/>'));
+	heroLine.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
 	heroLine.append(createSkillsBlock());
 	heroLine.append(createItemsBlock());
 	heroLine.append(createSackAndSearchBlock());
@@ -816,6 +817,7 @@ function addAllyLine() {
 	ally.find('.select-ally ul').append(createAlliesSelectContent());
 	ally.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
 	ally.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
+	ally.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
 	ally.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove row</button>'));
 	$('#allies-container').append(ally);
 	return ally;
@@ -828,6 +830,7 @@ function addFamiliarLine() {
 	familiar.find('.select-familiar ul').append(createFamiliarsSelectContent());
 	familiar.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
 	familiar.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
+	familiar.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
 	familiar.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove row</button>'));
 	$('#familiars-container').append(familiar);
 	return familiar;
@@ -1095,6 +1098,7 @@ function getAllies() {
 		ally.x = container.find('[name="ally-x"]').val();
 		ally.y = container.find('[name="ally-y"]').val();
 		ally.hp = container.find('[name="ally-hp"]').val();
+		ally.conditions = getConditions(container);
 		result.push(ally);
 	}
 	return result;
@@ -1110,6 +1114,7 @@ function getFamiliars() {
 		familiar.x = container.find('[name="familiar-x"]').val();
 		familiar.y = container.find('[name="familiar-y"]').val();
 		familiar.hp = container.find('[name="familiar-hp"]').val();
+		familiar.conditions = getConditions(container);
 		result.push(familiar);
 	}
 	return result;
@@ -1223,7 +1228,6 @@ function constructMapFromConfig() {
 		var monsterObject = $('<div>');
 		var monsterImage = $('<img>');
 		var monsterHp = $('<div>').addClass('hit-points');
-		var monsterConditions = $('<div>').addClass('conditions');
 		monsterHp.html(monster.hp.toString());
 		var folder = 'images/monsters_tokens/';
 		if (monster.vertical) folder += 'vertical/';
@@ -1233,17 +1237,9 @@ function constructMapFromConfig() {
 			'top' : (monster.y * cellSize).toString() + 'px'
 		});
 		monsterImage.attr('src', folder + monster.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + (monster.master ? '_master.png' : '.png'));
-		for (var j = 0; monster.conditions != undefined && j < monster.conditions.length; j++) {
-			var conditionObject = $('<img>').attr('src', 'images/conditions_tokens/' + monster.conditions[j].replace(new RegExp(" ",'g'), '_').toLowerCase() + '.png');
-			if (j > 0) conditionObject.css({
-				'position' : 'absolute',
-				'top' : (20*j).toString() + 'px'
-			});
-			monsterConditions.append(conditionObject);
-		}
 		monsterObject.append(monsterImage);
 		monsterObject.append(monsterHp);
-		monsterObject.append(monsterConditions);
+		addConditionsToImage(monsterObject, monster.conditions);
 		$('#map .figures').append(monsterObject);
 	}
 	
@@ -1262,6 +1258,7 @@ function constructMapFromConfig() {
 		allyImage.attr('src', folder + ally.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.png');
 		allyObject.append(allyImage);
 		allyObject.append(allyHp);
+		addConditionsToImage(allyObject, ally.conditions);
 		$('#map .figures').append(allyObject);
 	}
 	
@@ -1280,6 +1277,7 @@ function constructMapFromConfig() {
 		familiarImage.attr('src', folder + familiar.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.png');
 		familiarObject.append(familiarImage);
 		familiarObject.append(familiarHp);
+		addConditionsToImage(familiarObject, familiar.conditions);
 		$('#map .figures').append(familiarObject);
 	}
 	
@@ -1287,6 +1285,19 @@ function constructMapFromConfig() {
 	addHeroToMap(config.hero2);
 	addHeroToMap(config.hero3);
 	addHeroToMap(config.hero4);
+}
+
+function addConditionsToImage(sourcesObject, sourceConfig) {
+	var conditions = $('<div>').addClass('conditions');
+	for (var j = 0; sourceConfig != undefined && j < sourceConfig.length; j++) {
+		var conditionObject = $('<img>').attr('src', 'images/conditions_tokens/' + sourceConfig[j].replace(new RegExp(" ",'g'), '_').toLowerCase() + '.png');
+		if (j > 0) conditionObject.css({
+			'position' : 'absolute',
+			'top' : (20*j).toString() + 'px'
+		});
+		conditions.append(conditionObject);
+	}
+	sourcesObject.append(conditions);
 }
 
 function addHeroToMap(hero) {
@@ -1319,6 +1330,7 @@ function addHeroToMap(hero) {
 	heroObject.append(heroImage);
 	heroObject.append(heroHp);
 	heroObject.append(heroStamina);
+	addConditionsToImage(heroObject, hero.conditions);
 	$('#map .figures').append(heroObject);
 }
 
