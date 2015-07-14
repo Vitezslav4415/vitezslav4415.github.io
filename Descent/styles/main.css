@@ -257,6 +257,11 @@ body {
 
 .conditions {
 	position: absolute;
-	right: -15px;
+	right: -5px;
 	top: -15px;
+}
+
+.conditions img {
+	width: 30px;
+	left: 0;
 }
