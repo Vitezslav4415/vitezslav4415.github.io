@@ -142,7 +142,7 @@ function clearHero(element) {
 	var container = $(element).parents('.select-row');
 	container.find('.hero-title').html('Select hero ');
 	container.find('input[name="hero-title"]').attr('value','');
-	container.find('img').attr('src', 'images/heroes_cards/default.jpg');
+	container.children('img').attr('src', 'images/heroes_cards/default.jpg');
 }
 
 function updateArchetype(element, value) {
@@ -303,14 +303,23 @@ function clearHand(element) {
 	var second = $(element).parents('.select-weapon').hasClass('second-select');
 	var selector = '.hand';
 	if (second) selector += '2';
-	container.find('.items-container').find(selector).attr('src', 'images/misc/hand' + (second ? '2' : '') + '.png');
-	$(element).parents('.select-weapon').find('.weapon-title').html('Select Weapon ');
+	if (twohand) {
+		container.find('.items-container').find('.hand').attr('src', 'images/misc/hand.png');
+		container.find('.items-container').find('.hand2').attr('src', 'images/misc/hand2.png');
+		container.find('.weapon-title').html('Select Weapon ');
+		container.find('[name="hand"],[name="hand2"]').val('');
+	} else {
+		container.find('.items-container').find(selector).attr('src', 'images/misc/hand' + (second ? '2' : '') + '.png');
+		$(element).parents('.select-weapon').find('.weapon-title').html('Select Weapon ');
+		container.find('[name="hand' + (second ? '2' : '') + '"]').val('');
+	}
 }
 
 function clearArmor(element) {
 	var container = $(element).parents('.select-row');
 	container.find('.items-container').find('.armor').attr('src', 'images/misc/armor.png');
 	$(element).parents('.select-weapon').find('.weapon-title').html('Select Armor ');
+	container.find('[name="armor"]').val('');
 }
 
 function clearItem(element) {
@@ -320,6 +329,7 @@ function clearItem(element) {
 	if (second) selector += '2';
 	container.find('.items-container').find(selector).attr('src', 'images/misc/item.png');
 	$(element).parents('.select-item').find('.item-title').html('Select Item ');
+	container.find('input[name="item' + (second ? '2' : '') + '"]').attr('value', '');
 }
 
 function updateTile(element, value) {
