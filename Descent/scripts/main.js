@@ -1347,6 +1347,7 @@ function addHeroToMap(hero) {
 	heroObject.append(heroImage);
 	heroObject.append(heroHp);
 	heroObject.append(heroStamina);
+	if (hero.hp == 0) heroObject.addClass('secondary');
 	addConditionsToImage(heroObject, hero.conditions);
 	$('#map .figures').append(heroObject);
 }
