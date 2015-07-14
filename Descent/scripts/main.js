@@ -430,6 +430,20 @@ function clearObjective(element) {
 	container.find('input[name="objective-title"]').attr('value','');
 }
 
+function updateCondition(element, value) {
+	var container = $(element).parents('.select-row');
+	var id = $(element).parents('.select-condition').attr('id');
+	container.find('.condition-title').html(value + ' ');
+	container.find('#input' + id).attr('value',value);
+}
+
+function removeCondition(element) {
+	var conditionSelect = $(element).parents('.select-condition'); 
+	var id = conditionSelect.attr('id'); 
+	conditionSelect.remove();
+	$('#input' + id).remove();
+}
+
 function removeRow(element) {
 	$(element).parents('.select-row').remove();
 }
@@ -679,6 +693,24 @@ function createObjectiveSelectContent() {
 	return html;
 }
 
+function createConditionSelectContent() {
+	var html = addOption('Remove condition', '', 'removeCondition(this);');
+	for (var i = 0; i < CONDITIONS_LIST.length; i++) {
+		html += addOption(CONDITIONS_LIST[i] + ' ', '', 'updateCondition(this, \'' + CONDITIONS_LIST[i] + '\')');
+	}
+	return html;
+}
+
+function addCondition(button) {
+	var condition = $(createInputSelect('Select condition', 'condition-title', 'select-condition')).attr('id', 'condition' + conditionNumber.toString());
+	condition.find('ul').append(createConditionSelectContent());
+	var buttonObject = $(button);
+	buttonObject.before(condition);
+	buttonObject.before('<input type="hidden" name="condition-title" id="inputcondition' + conditionNumber.toString() + '" value=""/>');
+	conditionNumber += 1;
+	return condition;
+}
+
 function addUnitLine(line, title) {
 	line.addClass('select-row');
 	line.append(createInputSelect('Select ' + title, title.toLowerCase() + '-title', 'select-' + title.toLowerCase()));
@@ -694,6 +726,7 @@ function addMonsterLine() {
 	var monsterLine = $('<div>').attr('id','monster' + monsterNumber.toString());
 	monsterNumber += 1;
 	addUnitLine(monsterLine, 'monster');
+	monsterLine.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
 	monsterLine.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove row</button>'));
 	monsterLine.append($('<input type="hidden" name="master" value=""/>'));
 	monsterLine.append($('<input type="hidden" name="monster-y-size" value=""/>'));
@@ -949,7 +982,17 @@ function monster(element) {
 	monster.y = container.find('[name="monster-y"]').val();
 	monster.vertical = container.find('[name="monster-x-size"]').val() < container.find('[name="monster-y-size"]').val();
 	monster.hp = container.find('[name="monster-hp"]').val();
+	monster.conditions = getConditions(container);
 	return monster;
+}
+
+function getConditions(container) {
+	var conditions = container.find('[name="condition-title"]');
+	var result = [];
+	for (var i = 0; i < conditions.length; i++) {
+		result.push($(conditions[i]).val());
+	}
+	return result;
 }
 
 function hero(element) {
@@ -964,6 +1007,7 @@ function hero(element) {
 	hero.skills = getSkills(container, hero.className);
 	hero.items = getItems(container);
 	hero.sack = getSackAndSearch(container);
+	hero.conditions = getConditions(container);
 	return hero;
 }
 
@@ -1179,6 +1223,7 @@ function constructMapFromConfig() {
 		var monsterObject = $('<div>');
 		var monsterImage = $('<img>');
 		var monsterHp = $('<div>').addClass('hit-points');
+		var monsterConditions = $('<div>').addClass('conditions');
 		monsterHp.html(monster.hp.toString());
 		var folder = 'images/monsters_tokens/';
 		if (monster.vertical) folder += 'vertical/';
@@ -1188,8 +1233,17 @@ function constructMapFromConfig() {
 			'top' : (monster.y * cellSize).toString() + 'px'
 		});
 		monsterImage.attr('src', folder + monster.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + (monster.master ? '_master.png' : '.png'));
+		for (var j = 0; monster.conditions != undefined && j < monster.conditions.length; j++) {
+			var conditionObject = $('<img>').attr('src', 'images/conditions_tokens/' + monster.conditions[j].replace(new RegExp(" ",'g'), '_').toLowerCase() + '.png');
+			if (j > 0) conditionObject.css({
+				'position' : 'absolute',
+				'top' : (20*j).toString() + 'px'
+			});
+			monsterConditions.append(conditionObject);
+		}
 		monsterObject.append(monsterImage);
 		monsterObject.append(monsterHp);
+		monsterObject.append(monsterConditions);
 		$('#map .figures').append(monsterObject);
 	}
 	
@@ -1270,10 +1324,9 @@ function addHeroToMap(hero) {
 
 function constructSettingsFromConfig() {
 	for (var i=1; i <= 4; i++) {
-		var j = i.toString();
-		var heroConfig = config['hero' + j.toString()];
+		var heroConfig = config['hero' + i.toString()];
 		if (heroConfig.title != "" && heroConfig.title != undefined) {
-			var heroSelector = '#hero' + j.toString();
+			var heroSelector = '#hero' + i.toString();
 			updateHero($(heroSelector + ' .select-hero li')[0],heroConfig.title);
 			$(heroSelector + ' [name="hero-hp"]').val(heroConfig.hp);
 			$(heroSelector + ' [name="hero-stamina"]').val(heroConfig.stamina);
@@ -1304,10 +1357,14 @@ function constructSettingsFromConfig() {
 				updateItem($(heroSelector + ' .select-item.second-select [onclick="updateItem(this, \'' + heroConfig.items.item2 + '\')"]'), heroConfig.items.item2);
 			}
 			if (heroConfig.sack != undefined) {
-				for (var k = 0; k < heroConfig.sack.length; k++) {
+				for (var j = 0; j < heroConfig.sack.length; j++) {
 					var sackAttribute = addToSack($(heroSelector + ' .sack-container button'));
-					updateSackItem($(heroSelector + ' [sack="' + sackAttribute + '"] [onclick="updateSackItem(this, \'' + heroConfig.sack[k] + '\')"]'), heroConfig.sack[k]);
+					updateSackItem($(heroSelector + ' [sack="' + sackAttribute + '"] [onclick="updateSackItem(this, \'' + heroConfig.sack[j] + '\')"]'), heroConfig.sack[j]);
 				}
+			}
+			for (var j = 0; heroConfig.conditions != undefined && j < heroConfig.conditions.length; j++) {
+				var condition = addCondition($(heroSelector).find('.btn-warning'));
+				updateCondition(condition.find('li')[0], heroConfig.conditions[j]);
 			}
 		}
 	}
@@ -1335,6 +1392,10 @@ function constructSettingsFromConfig() {
 				var yValue = height.toString() + monster.y.toString();
 				updateCoordinate(monsterLine.find('.select-y [onclick="updateCoordinate(this, \'' + yValue + '\');"]'), yValue);
 				monsterLine.find('input[name="monster-hp"]').val(monster.hp);
+				for (var j = 0; monster.conditions != undefined && j < monster.conditions.length; j++) {
+					var condition = addCondition(monsterLine.find('.btn-warning'));
+					updateCondition(condition.find('li')[0], monster.conditions[j]);
+				}
 			}
 		}
 	}

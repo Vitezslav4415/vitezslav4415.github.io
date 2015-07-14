@@ -254,3 +254,9 @@ body {
 	text-align: center;
 	font-size: 30px;
 }
+
+.conditions {
+	position: absolute;
+	right: -15px;
+	top: -15px;
+}
