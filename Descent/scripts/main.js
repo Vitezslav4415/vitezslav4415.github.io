@@ -700,6 +700,10 @@ function createObjectiveSelectContent() {
 	for (var i = 0; i < OBJECTIVES_LIST.length; i++) {
 		html += addOption(OBJECTIVES_LIST[i] + ' ', '', 'updateObjective(this, \'' + OBJECTIVES_LIST[i] + '\')');
 	}
+	html += '<li role="separator" class="divider"></li>';
+	for (var i = 0; i < MISCELLANEOUS_LIST.length; i++) {
+		html += addOption(MISCELLANEOUS_LIST[i] + ' ', '', 'updateObjective(this, \'' + MISCELLANEOUS_LIST[i] + '\')');
+	}
 	return html;
 }
 
@@ -1222,7 +1226,7 @@ function constructMapFromConfig() {
 		var objective = config.objectives[i];
 		var objectiveObject = $('<div>');
 		var objectiveImage = $('<img>');
-		var folder = 'images/misc/objective_';
+		var folder = 'images/misc/';
 		objectiveObject.css({
 			'position' : 'absolute',
 			'left' : (objective.x * cellSize).toString() + 'px',
