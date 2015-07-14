@@ -742,10 +742,16 @@ MISCELLANEOUS_LIST = [
 ];
 
 CONDITIONS_LIST = [
+	'Bleeding',
 	'Burning',
 	'Cursed',
 	'Diseased',
+	'Doomed',
+	'Hexed',
 	'Immobilized',
+	'Infected',
+	'Insight',
+	'Marked',
 	'Poisoned',
 	'Stunned',
 	'Weakened'
