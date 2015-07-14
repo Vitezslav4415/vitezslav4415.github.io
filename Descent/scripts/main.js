@@ -143,6 +143,9 @@ function clearHero(element) {
 	container.find('.hero-title').html('Select hero ');
 	container.find('input[name="hero-title"]').attr('value','');
 	container.children('img').attr('src', 'images/heroes_cards/default.jpg');
+	var heroId = container.parent().attr('id');
+	heroId = heroId.substring(0, 5);
+	$(heroId).html('Hero ' + heroId.substring(4, 5));
 }
 
 function updateArchetype(element, value) {
