@@ -254,6 +254,7 @@ for (var i = 0; i < RELICS_LIST.length; i++) {
 
 //Classes
 var apothecary = {},
+	bard = {};
 	disciple = {},
 	prophet = {},
 	spiritspeaker = {},
@@ -261,6 +262,8 @@ var apothecary = {},
 	berserker = {},
 	champion = {},
 	knight = {},
+	skirmisher = {},
+	conjurer = {},
 	geomancer = {},
 	hexer = {},
 	necromancer = {},
@@ -268,9 +271,11 @@ var apothecary = {},
 	stalker = {},
 	thief = {},
 	treasureHunter = {},
-	wildlander = {};
+	wildlander = {},
+	shadowwalker = {};
 	
 	apothecary.title = 'Apothecary';
+	bard.title = 'Bard';
 	disciple.title = 'Disciple';
 	prophet.title = 'Prophet';
 	spiritspeaker.title = 'Spiritspeaker';
@@ -278,6 +283,8 @@ var apothecary = {},
 	berserker.title = 'Berserker';
 	champion.title = 'Champion';
 	knight.title = 'Knight';
+	skirmisher.title = 'Skirmisher';
+	conjurer.title = 'Conjurer';
 	geomancer.title = 'Geomancer';
 	hexer.title = 'Hexer';
 	necromancer.title = 'Necromancer';
@@ -286,6 +293,7 @@ var apothecary = {},
 	thief.title = 'Thief';
 	treasureHunter.title = 'Treasure Hunter';
 	wildlander.title = 'Wildlander';
+	shadowwalker.title = 'Shadow Walker';
 
 	//Skills
 	apothecary.skills = [
@@ -299,6 +307,20 @@ var apothecary = {},
 		['Secret Formula', 2],
 		['Hidden Stash', 3],
 		['Potent Remedies', 3]
+	];
+	
+	bard.skills = [
+		['Aria Of War', 2],
+		['Cacophony', 3],
+		['Concentration', 2],
+		['Dissonance', 1],
+		['Lute', 0, item],
+		['Peaceful Rest', 1],
+		['Rehersal', 2],
+		['Song Of Mending', 0],
+		['Traveler\'S Blade', 0, hand],
+		['Understudy', 1],
+		['Wayfarer', 3]
 	];
 	
 	beastmaster.skills = [
@@ -341,6 +363,20 @@ var apothecary = {},
 		['Valor Of Heroes', 0],
 		['Valorous Strike', 3],
 		['Worn Greatsword', 0, twohand]
+	];
+	
+	conjurer.skills = [
+		['Blinding Light', 2],
+		['Channeling', 0],
+		['Focus Fire', 2],
+		['Illusory Path', 1],
+		['Many Friends', 1],
+		['Mirror Image', 0],
+		['Prismatic Assault', 3],
+		['Prismatic Staff', 0, twohand],
+		['Refraction', 1],
+		['Sleight Of Mind', 2],
+		['Vortex', 3]
 	];
 	
 	disciple.skills = [
@@ -437,6 +473,35 @@ var apothecary = {},
 		['Rune Mastery', 2],
 		['Runic Knowledge', 0],
 		['Runic Sorcery', 2]
+	];
+	
+	shadowwalker.skills = [	
+		['Dark Servant', 1],
+		['Dark Shift', 2],
+		['Endless Void', 2],
+		['Faithful Friend', 1],
+		['Feathered Hatchet', 0, hand],
+		['Otherworldly', 2],
+		['Shadow Puppet', 3],
+		['Shadow Soul', 0],
+		['Shadow Step', 3],
+		['Soul Bound', 0],
+		['Through The Veil', 1],
+		['Tribal Cloak', 0, armor]
+	];
+	
+	skirmisher.skills = [
+		['Back In Action', 1],
+		['Born In Battle', 2],
+		['Carve A Path', 3],
+		['Deep Wounds', 1],
+		['Dual Strike', 0],
+		['Ever In Motion', 2],
+		['Jagged Handaxe', 0, hand],
+		['Keen Edge', 1],
+		['Rusted Handaxe', 0, hand],
+		['Unrelenting', 2],
+		['Unstoppable', 3],
 	];
 	
 	spiritspeaker.skills = [
