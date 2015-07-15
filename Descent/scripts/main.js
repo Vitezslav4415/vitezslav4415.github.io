@@ -169,13 +169,40 @@ function clearArchetype(element) {
 	adjustClass(element, ARCHETYPE_CLASSES);
 }
 
-function updateClass(element, value) {
+function updateClass(element, value, skipItems) {
 	var container = $(element).parents('.select-row');
 	container.find('.class-title').html(value + ' ');
 	container.find('input[name="class-title"]').attr('value',value);
-	adjustArchetype(element, CLASSES[value].archetype.title);
+	var currentClass = CLASSES[value];
+	adjustArchetype(element, currentClass.archetype.title);
 	adjustSkills(element, value);
 	adjustItems(element, value);
+	if (skipItems == undefined || !skipItems) {
+		var handUsed = false;
+		var itemUsed = false;
+		for (var i = 0; i < currentClass.skills.length; i++) {
+			var skill = currentClass.skills[i];
+			var itemType = skill[2];
+			if (itemType != undefined) {
+				switch (itemType) {
+				case hand:
+					updateHand(container.find('.select-weapon' + (handUsed ? '.second-select' : ':not(.second-select)') + ' li:not(.twohand).' + value.replace(new RegExp(" ",'g'), '').toLowerCase() + ' a')[0], skill[0]);
+					handUsed = true;
+					break;
+				case twohand:
+					updateHand(container.find('.select-weapon' + (handUsed ? '.second-select' : ':not(.second-select)') + ' li.twohand.' + value.replace(new RegExp(" ",'g'), '').toLowerCase() + ' a')[0], skill[0]);
+					handUsed = true;
+					break;
+				case armor:
+					updateArmor(container.find('.select-armor li.' + value.replace(new RegExp(" ",'g'), '').toLowerCase() + ' a')[0], skill[0]);
+					break;
+				case item:
+					updateItem(container.find('.select-item' + (itemUsed ? '.second-select' : ':not(.second-select)') + ' li.' + value.replace(new RegExp(" ",'g'), '').toLowerCase() + ' a')[0], skill[0]);
+					itemUsed = true;
+				}
+			}
+		}
+	}
 }
 
 function adjustClass(element, archetype) {
@@ -1365,7 +1392,7 @@ function constructSettingsFromConfig() {
 			$(heroSelector + ' [name="hero-y"]').val(heroConfig.y);
 			$(heroSelector + ' .y-title').html(heroConfig.y.toString() + ' ');
 			if (heroConfig.className != undefined) {
-				updateClass($(heroSelector + ' .select-class li')[0], heroConfig.className.toString());
+				updateClass($(heroSelector + ' .select-class li')[0], heroConfig.className.toString(), true);
 			}
 			if (heroConfig.skills != undefined) {
 				updateSkills($(heroSelector + ' .skills-container'), heroConfig.skills);

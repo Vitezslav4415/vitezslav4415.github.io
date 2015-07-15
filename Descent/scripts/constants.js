@@ -579,13 +579,13 @@ var wiz = {},
 	sup = {};
 
 	wiz.title = 'Mage';
-	wiz.classes = [geomancer, hexer, necromancer, runemaster];
+	wiz.classes = [conjurer, geomancer, hexer, necromancer, runemaster];
 	war.title = 'Warrior';
-	war.classes = [beastmaster, berserker, champion, knight];
+	war.classes = [beastmaster, berserker, champion, knight, skirmisher];
 	rog.title = 'Scout';
-	rog.classes = [stalker, thief, treasureHunter, wildlander];
+	rog.classes = [shadowwalker, stalker, thief, treasureHunter, wildlander];
 	sup.title = 'Healer';
-	sup.classes = [apothecary, disciple, prophet, spiritspeaker];			
+	sup.classes = [apothecary, bard, disciple, prophet, spiritspeaker];			
 
 var ARCHETYPE_CLASSES = 'mage warrior scout healer';
 var ARCHETYPES_LIST = [wiz, war, rog, sup];
