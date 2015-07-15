@@ -81,6 +81,10 @@ body {
 .checkbox.thief,
 .checkbox.treasurehunter,
 .checkbox.wildlander,
+.checkbox.bard,
+.checkbox.skirmisher,
+.checkbox.conjurer,
+.checkbox.shadowwalker,
 .items-selects .apothecary,
 .items-selects .disciple,
 .items-selects .prophet,
@@ -96,7 +100,11 @@ body {
 .items-selects .stalker,
 .items-selects .thief,
 .items-selects .treasurehunter,
-.items-selects .wildlander {
+.items-selects .wildlander,
+.items-selects .bard,
+.items-selects .skirmisher,
+.items-selects .conjurer,
+.items-selects .shadowwalker {
 	display: none;
 }
 
@@ -124,6 +132,10 @@ body {
 .showclass.thief .checkbox.thief,
 .showclass.treasurehunter .checkbox.treasurehunter,
 .showclass.wildlander .checkbox.wildlander,
+.showclass.bard .checkbox.bard,
+.showclass.skirmisher .checkbox.skirmisher,
+.showclass.conjurer .checkbox.conjurer,
+.showclass.shadowwalker .checkbox.shadowwalker,
 .showclass.apothecary.items-selects .apothecary,
 .showclass.disciple.items-selects .disciple,
 .showclass.prophet.items-selects .prophet,
@@ -140,6 +152,10 @@ body {
 .showclass.thief.items-selects .thief,
 .showclass.treasurehunter.items-selects .treasurehunter,
 .showclass.wildlander.items-selects .wildlander,
+.showclass.bard.items-selects .bard,
+.showclass.skirmisher.items-selects .skirmisher,
+.showclass.conjurer.items-selects .conjurer,
+.showclass.shadowwalker.items-selects .shadowwalker,
 .showclass {
 	display: block;
 }

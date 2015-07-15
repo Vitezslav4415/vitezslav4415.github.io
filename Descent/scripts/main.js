@@ -145,7 +145,7 @@ function clearHero(element) {
 	container.children('img').attr('src', 'images/heroes_cards/default.jpg');
 	var heroId = container.parent().attr('id');
 	heroId = heroId.substring(0, 5);
-	$(heroId).html('Hero ' + heroId.substring(4, 5));
+	$('[href="#' + heroId + '"]').html('Hero ' + heroId.substring(4, 5));
 }
 
 function updateArchetype(element, value) {
@@ -1398,19 +1398,19 @@ function constructSettingsFromConfig() {
 				updateSkills($(heroSelector + ' .skills-container'), heroConfig.skills);
 				adjustSkillsImages($(heroSelector + ' .skills-container'));
 			}
-			if (heroConfig.items != undefined && heroConfig.items.hand != undefined) {
+			if (heroConfig.items != undefined && heroConfig.items.hand != undefined && heroConfig.items.hand != '') {
 				updateHand($(heroSelector + ' .select-weapon:not(.second-select) [onclick="updateHand(this, \'' + heroConfig.items.hand + '\')"]'), heroConfig.items.hand);
 			}
-			if (heroConfig.items != undefined && heroConfig.items.hand2 != undefined) {
+			if (heroConfig.items != undefined && heroConfig.items.hand2 != undefined && heroConfig.items.hand2 != '') {
 				updateHand($(heroSelector + ' .select-weapon.second-select [onclick="updateHand(this, \'' + heroConfig.items.hand2 + '\')"]'), heroConfig.items.hand2);
 			}
-			if (heroConfig.items != undefined && heroConfig.items.armor != undefined) {
+			if (heroConfig.items != undefined && heroConfig.items.armor != undefined && heroConfig.items.armor != '') {
 				updateArmor($(heroSelector + ' .select-armor [onclick="updateArmor(this, \'' + heroConfig.items.armor + '\')"]'), heroConfig.items.armor);
 			}
-			if (heroConfig.items != undefined && heroConfig.items.item != undefined) {
+			if (heroConfig.items != undefined && heroConfig.items.item != undefined && heroConfig.items.item != '') {
 				updateItem($(heroSelector + ' .select-item:not(.second-select) [onclick="updateItem(this, \'' + heroConfig.items.item + '\')"]'), heroConfig.items.item);
 			}
-			if (heroConfig.items != undefined && heroConfig.items.item2 != undefined) {
+			if (heroConfig.items != undefined && heroConfig.items.item2 != undefined && heroConfig.items.item2 != '') {
 				updateItem($(heroSelector + ' .select-item.second-select [onclick="updateItem(this, \'' + heroConfig.items.item2 + '\')"]'), heroConfig.items.item2);
 			}
 			if (heroConfig.sack != undefined) {
