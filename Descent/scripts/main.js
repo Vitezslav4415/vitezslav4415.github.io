@@ -176,6 +176,7 @@ function updateClass(element, value, skipItems) {
 	var currentClass = CLASSES[value];
 	adjustArchetype(element, currentClass.archetype.title);
 	adjustSkills(element, value);
+	adjustSkillsImages(element);
 	adjustItems(element, value);
 	if (skipItems == undefined || !skipItems) {
 		var handUsed = false;
