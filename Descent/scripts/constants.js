@@ -682,6 +682,7 @@ FAMILIARS_LIST = [
 	'Shadow',
 	'Skye',
 	'Wolf',
+	'Stone',
 	'Villager Female',
 	'Villager Male'
 ];
