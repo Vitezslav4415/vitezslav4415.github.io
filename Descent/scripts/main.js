@@ -334,7 +334,9 @@ function clearHand(element) {
 	var second = $(element).parents('.select-weapon').hasClass('second-select');
 	var selector = '.hand';
 	if (second) selector += '2';
-	if (twohand) {
+	var twoHand = container.find('.hand2').hasClass('secondary');
+	if (twoHand) {
+		container.find('.hand2').removeClass('secondary');
 		container.find('.items-container').find('.hand').attr('src', 'images/misc/hand.png');
 		container.find('.items-container').find('.hand2').attr('src', 'images/misc/hand2.png');
 		container.find('.weapon-title').html('Select Weapon ');
