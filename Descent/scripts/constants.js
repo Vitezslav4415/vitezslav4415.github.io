@@ -853,3 +853,5 @@ var actOne = true;
 
 var mapWidth = 26;
 var mapHeight = 26;
+
+var monsterList = new Set();

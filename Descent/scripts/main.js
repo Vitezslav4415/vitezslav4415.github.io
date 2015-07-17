@@ -16,8 +16,17 @@ function addOption(title, optionClass, functionCallback) {
 	return '<li class="' + optionClass + '"><a href="#" onclick="' + functionCallback + '">' + title + '</a></li>';
 }
 
+function adjustMonsterList() {
+	monsterList = new Set();
+	var monsters = $('[name="monster-title"]');
+	for (var i = 0; i < monsters.length; i++) {
+		monsterList.add($(monsters[i]).val());
+	}
+}
+
 function updateMonster(element, value) {
 	updateOption(element, value, true);
+	adjustMonsterList();
 }
 
 function updateCoordinate(element, value) {
