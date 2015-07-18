@@ -281,3 +281,9 @@ body {
 	width: 30px;
 	left: 0;
 }
+
+.overlord-cards-images-container img {
+	margin: 10px 10px 10px 0;
+	width: 200px;
+	cursor: pointer;
+}

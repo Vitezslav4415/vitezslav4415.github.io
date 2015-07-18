@@ -972,6 +972,60 @@ function createItemsBlock() {
 	return html;
 }
 
+function createOverlordCardsBlock() {
+	var html = $('<div>').addClass('overlord-cards-container');
+	var cardsImages = $('<div>').addClass('overlord-cards-images-container');
+	for (c in OVERLORD_CARDS) {
+		if (OVERLORD_CARDS[c] == undefined) continue;
+		var cardType = OVERLORD_CARDS[c];
+		for (var i = 0; i < cardType.length; i++) {
+			var card = cardType[i];
+			if (true || c != 'basic' && c != 'basic2') {
+				var cardCheckbox = $('<div>').addClass('checkbox');
+				cardCheckbox.append($('<label><input type="checkbox" name="' + card.title + '" onClick="adjustOverlordCardsImages();"/> ' + card.title + '</label>'));
+				html.append(cardCheckbox);
+			}
+			cardsImages.append($('<img>').attr('src', 'images/overlord_cards/' + c + '/' + card.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.jpg').attr('card', card.title).attr('onclick','$(this).toggleClass(\'secondary\');').css('display','none'));
+		}
+	}
+	html.prepend(cardsImages);
+	$('#overlord-container').append(html);
+	adjustOverlordCardsImages();
+}
+
+function adjustOverlordCardsImages() {
+	$('.overlord-cards-images-container img').css('display','none');
+	var overlordCards = $('.overlord-cards-container input[type="checkbox"]');
+	for (var i = 0; i < overlordCards.length; i++) {
+		var overlordCard = $(overlordCards[i]);
+		if (overlordCard.prop('checked')) {
+			$('.overlord-cards-images-container img[card="' + overlordCard.attr('name') + '"]').css('display', 'inline-block');
+		}
+	}
+}
+
+function selectBasicOverlordDeck() {
+	switchBasicOverlordDeck(true);
+}
+
+function selectBasic2OverlordDeck() {
+	switchBasicOverlordDeck(false);
+}
+
+function switchBasicOverlordDeck(first) {
+	for (var i = 0; i < OVERLORD_CARDS['basic'].length; i++) {
+		updateOverlordCard(OVERLORD_CARDS['basic'][i].title, first);
+	}
+	for (var i = 0; i < OVERLORD_CARDS['basic2'].length; i++) {
+		updateOverlordCard(OVERLORD_CARDS['basic2'][i].title, !first);
+	}
+	adjustOverlordCardsImages();
+}
+
+function updateOverlordCard(title, value) {
+	$('.overlord-cards-container input[name="' + title + '"]').prop('checked', value);
+}
+
 function createSackAndSearchBlock() {
 	var html = $('<div>').addClass('sack-block');
 	var sackContainer = $('<div>').addClass('sack-container');
@@ -1186,6 +1240,22 @@ function getObjectives() {
 		objective.x = container.find('[name="objective-x"]').val();
 		objective.y = container.find('[name="objective-y"]').val();
 		result.push(objective);
+	}
+	return result;
+}
+
+function getOverlordCards() {
+	$('.overlord-cards-images-container img').css('display','none');
+	var overlordCards = $('.overlord-cards-container input[type="checkbox"]');
+	var result = [];
+	for (var i = 0; i < overlordCards.length; i++) {
+		var overlordCard = $(overlordCards[i]);
+		if (overlordCard.prop('checked')) {
+			var card = {};
+			card.secondary = $('.overlord-cards-images-container img[card="' + overlordCard.attr('name') + '"]').hasClass('secondary');
+			card.title = overlordCard.attr('name');
+			result.push(card);
+		}
 	}
 	return result;
 }
@@ -1539,6 +1609,12 @@ function constructSettingsFromConfig() {
 			container.find('.y-title').html(objective.y.toString() + ' ');
 		}
 	}
+	for (var i = 0; config.overlord != undefined && config.overlord.cards != undefined && i < config.overlord.cards.length; i++) {
+		updateOverlordCard(card.title, true);
+		if (card.secondary) {
+			$('[card="' + card.title + '"').addClass('secondary');
+		}
+	}
 }
 
 function updateConfig() {
@@ -1565,6 +1641,8 @@ function collectData() {
 	config.allies = getAllies();
 	config.familiars = getFamiliars();
 	config.objectives = getObjectives();
+	config.overlord = {};
+	config.overlord.cards = getOverlordCards();
 }
 
 function drawGrid() {
@@ -1599,6 +1677,7 @@ $(function() {
 	for (var i = 1; i <= 4; i++) {
 		addHeroLine(i);
 	}
+	createOverlordCardsBlock();
 	drawGrid();
 	if (window.location.hash != "") {
 		decodeConfig();
