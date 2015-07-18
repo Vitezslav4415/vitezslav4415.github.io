@@ -823,6 +823,79 @@ CONDITIONS_LIST = [
 	'Weakened'
 ];
 
+OVERLORD_CARDS_LIST = [
+	['Critical Blow', 'basic', 1],
+	['Dark Charm', 'basic', 1],
+	['Dark Fortune', 'basic', 2],
+	['Dark Might', 'basic', 2],
+	['Dash', 'basic', 2],
+	['Frenzy', 'basic', 2],
+	['Pit Trap', 'basic', 1],
+	['Poison Dart', 'basic', 1],
+	['Tripwire', 'basic', 2],
+	['Word Of Misery', 'basic', 1],
+	['Befuddle', 'basic2', 2],
+	['Blinding Speed', 'basic2', 2],
+	['Dirty Fighting', 'basic2', 2],
+	['Flurry', 'basic2', 1],
+	['Grease Trap', 'basic2', 1],
+	['Mental Error', 'basic2', 1],
+	['Mimic', 'basic2', 1],
+	['Overwhelm', 'basic2', 1],
+	['Reflective Ward', 'basic2', 1],
+	['Sign Of Weakness', 'basic2', 1],
+	['Uncontrolled Power', 'basic2', 2],
+	['Adaptive Contagion', 'infector', 1],
+	['Airborne', 'infector', 1],
+	['Contaminated', 'infector', 1],
+	['Dark Host', 'infector', 1],
+	['Outbreak', 'infector', 1],
+	['Tainted Blow', 'infector', 1],
+	['Virulent Infection', 'infector', 1],
+	['Diabolic Power', 'magus', 1],
+	['Rise Again', 'magus', 1],
+	['Unholy Ritual', 'magus', 1],
+	['Word Of Despair', 'magus', 1],
+	['Word Of Pain', 'magus', 1],
+	['Offertory Affliction', 'overlord_reward', 1],
+	['Secrets Of Flesh', 'overlord_reward', 1],
+	['Toxic Reprisal', 'overlord_reward', 1],
+	['Blood Bargaining', 'punisher', 1],
+	['Exploit Weakness', 'punisher', 1],
+	['No Rest For The Wicked', 'punisher', 1],
+	['Price Of Prevention', 'punisher', 1],
+	['Trading Pains', 'punisher', 1],
+	['Spligs Revenge', 'quest_reward', 1],
+	['Twin Souls', 'quest_reward', 1],
+	['The Wyrm Queens Favor', 'rumor_reward', 1],
+	['Curse Of The Monkey God', 'saboteour', 1],
+	['Explosive Runes', 'saboteour', 1],
+	['Uthuk Demon Trap', 'saboteour', 1],
+	['Web Trap', 'saboteour', 1],
+	['Wicked Laughter', 'saboteour', 1],
+	['Dark Remedy', 'universal', 1],
+	['Dark Resilience', 'universal', 1],
+	['Plan Ahead', 'universal', 1],
+	['Schemes', 'universal', 1],
+	['Blood Lust', 'warlord', 1],
+	['Blood Rage', 'warlord', 1],
+	['Dark Fortitude', 'warlord', 1],
+	['Expert Blow', 'warlord', 1],
+	['Reinforce', 'warlord', 1],
+];
+
+var OVERLORD_CARDS = {};
+
+for (var i = 0; i < OVERLORD_CARDS_LIST.length; i++) {
+	var card = {};
+	card.title = OVERLORD_CARDS_LIST[i][0];
+	card.number = OVERLORD_CARDS_LIST[i][2];
+	if (OVERLORD_CARDS[OVERLORD_CARDS_LIST[i][1]] == undefined) {
+		OVERLORD_CARDS[OVERLORD_CARDS_LIST[i][1]] = [];
+	}
+	OVERLORD_CARDS[OVERLORD_CARDS_LIST[i][1]].push(card);
+}
+
 var SHOWING_CLASSES = [];
 SHOWING_CLASSES[1] = 'showOneCell';
 SHOWING_CLASSES[2] = 'showTwoCells';
