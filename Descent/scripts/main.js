@@ -1254,7 +1254,7 @@ function getOverlordCards() {
 		var overlordCard = $(overlordCards[i]);
 		if (overlordCard.prop('checked')) {
 			var card = {};
-			card.secondary = $('.overlord-cards-images-container img[card="' + overlordCard.attr('name') + '"]').hasClass('secondary');
+			card.secondary = $('.overlord-cards-images-container img[card="' + overlordCard.attr('name') + '"].secondary').length;
 			card.title = overlordCard.attr('name');
 			result.push(card);
 		}
@@ -1614,9 +1614,13 @@ function constructSettingsFromConfig() {
 	for (var i = 0; config.overlord != undefined && config.overlord.cards != undefined && i < config.overlord.cards.length; i++) {
 		var card = config.overlord.cards[i];
 		updateOverlordCard(card.title, true);
-		if (card.secondary) {
-			$('[card="' + card.title + '"').addClass('secondary');
+		var imageObjects = $('[card="' + card.title + '"');
+		for (var j = 0; j < card.secondary && j < imageObjects.length; j++) {
+			$(imageObjects[j]).addClass('secondary');
 		}
+	}
+	if (config.overlord != undefined && config.overlord.cards != undefined) {
+		adjustOverlordCardsImages();
 	}
 }
 
