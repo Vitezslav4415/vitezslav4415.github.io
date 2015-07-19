@@ -985,7 +985,9 @@ function createOverlordCardsBlock() {
 				cardCheckbox.append($('<label><input type="checkbox" name="' + card.title + '" onClick="adjustOverlordCardsImages();"/> ' + card.title + '</label>'));
 				html.append(cardCheckbox);
 			}
-			cardsImages.append($('<img>').attr('src', 'images/overlord_cards/' + c + '/' + card.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.jpg').attr('card', card.title).attr('onclick','$(this).toggleClass(\'secondary\');').css('display','none'));
+			for (j = 0; j < card.number; j++) {
+				cardsImages.append($('<img>').attr('src', 'images/overlord_cards/' + c + '/' + card.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.jpg').attr('card', card.title).attr('onclick','$(this).toggleClass(\'secondary\');').css('display','none'));
+			}
 		}
 	}
 	html.prepend(cardsImages);
@@ -1610,6 +1612,7 @@ function constructSettingsFromConfig() {
 		}
 	}
 	for (var i = 0; config.overlord != undefined && config.overlord.cards != undefined && i < config.overlord.cards.length; i++) {
+		var card = config.overlord.cards[i];
 		updateOverlordCard(card.title, true);
 		if (card.secondary) {
 			$('[card="' + card.title + '"').addClass('secondary');
