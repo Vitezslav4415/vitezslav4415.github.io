@@ -688,9 +688,13 @@ FAMILIARS_LIST = [
 ];
 
 ALLIES_LIST = [
-	'Sarina',
+	'Serena',
 	'Raythen'
 ];
+
+ALLIES_SKILLS = {};
+ALLIES_SKILLS['Serena'] = ['Aura Of Might', 'Healing Aura', 'Holy Hammer'];
+ALLIES_SKILLS['Raythen'] = ['Back Strike', 'Night Prowler', 'Sharp Eyes'];
 
 MAP_TILES_LIST = [
 	'1',
