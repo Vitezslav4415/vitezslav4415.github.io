@@ -56,6 +56,21 @@ var MONSTERS_LIST = [
 	['Zombie',1,1,false]
 ];
 
+var LIEUTENANTS_LIST = [
+	'Ariad',
+	'Baron Zachareth',
+	'Belthir',
+	'Bolgoreth',
+	'Lady Eliza Farrow',
+	'Lord Merick Farrow',
+	'Queen Ariad',
+	'Raythen',
+	'Serena',
+	'Sir Alric Farrow',
+	'Splig',
+	'Valyndra',
+];
+
 var MONSTERS_HP = [
 	['Arachyura',5,7,7,9],
 	['Bandit',4,5,6,7],
