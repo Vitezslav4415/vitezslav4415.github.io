@@ -185,6 +185,8 @@ body {
 .items-selects > .btn-group,
 .sack-selects > .btn-group {
 	margin-right: 15px;
+	margin-bottom: 15px;
+	vertical-align: top;
 }
 
 .select-monster button {
@@ -205,10 +207,14 @@ body {
 	max-width: 600px;
 }
 
-.imagescontainer img {
-	display: none;
+.imagescontainer img,
+.ally-skills-images-container img {
 	margin: 10px;
 	width: 200px;
+}
+
+.imagescontainer img {
+	display: none;
 }
 
 .imagescontainer img.showimage {
@@ -282,8 +288,13 @@ body {
 	left: 0;
 }
 
-.overlord-cards-images-container img {
+.overlord-cards-images-container img,
+img.ally-image,
+img.ally-image-back {
 	margin: 10px 10px 10px 0;
 	width: 200px;
+}
+
+.overlord-cards-images-container img {
 	cursor: pointer;
 }

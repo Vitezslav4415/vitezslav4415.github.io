@@ -2,6 +2,18 @@ function toggleMenu() {
 	$('.menu').toggleClass('active');
 }
 
+function urlize(value) {
+	return somethingize(value, '_'); 
+}
+
+function folderize(value) {
+	return somethingize(value, '');
+}
+
+function somethingize(value, replacement) {
+	return value.replace(new RegExp(" ",'g'), replacement).toLowerCase();
+}
+
 function createSelect(title) {
 	html = '<div class="btn-group select-x showOneCell showTwoCells"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">' + title + ' <span class="caret"></span></button><ul class="dropdown-menu" role="menu"></ul></div>';
 	
@@ -13,7 +25,8 @@ function addOptionOld(title, value, optionClass) {
 }
 
 function addOption(title, optionClass, functionCallback) {
-	return '<li class="' + optionClass + '"><a href="#" onclick="' + functionCallback + '">' + title + '</a></li>';
+	//return '<li class="' + optionClass + '"><a href="#" onclick="' + functionCallback + '">' + title + '</a></li>';
+	return '<li class="' + optionClass + '"><a onclick="' + functionCallback + '">' + title + '</a></li>';
 }
 
 function adjustMonsterList() {
@@ -133,7 +146,7 @@ function updateHero(element, value) {
 	container.find('input[name="hero-y"]').attr('value','');
 	container.find('input[name="hero-hp"]').val(HEROES[value].hp);
 	container.find('input[name="hero-stamina"]').val(HEROES[value].stamina);
-	container.children('img').attr('src', 'images/heroes_cards/' + value.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.jpg');
+	container.children('img').attr('src', 'images/heroes_cards/' + urlize(value) + '.jpg');
 	var heroId = container.parent().attr('id');
 	$('[href="#' + heroId + '"]').html(value);
 	updateArchetype(element, HEROES[value].archetype.title);
@@ -196,18 +209,18 @@ function updateClass(element, value, skipItems) {
 			if (itemType != undefined) {
 				switch (itemType) {
 				case hand:
-					updateHand(container.find('.select-weapon' + (handUsed ? '.second-select' : ':not(.second-select)') + ' li:not(.twohand).' + value.replace(new RegExp(" ",'g'), '').toLowerCase() + ' a')[0], skill[0]);
+					updateHand(container.find('.select-weapon' + (handUsed ? '.second-select' : ':not(.second-select)') + ' li:not(.twohand).' + folderize(value) + ' a')[0], skill[0]);
 					handUsed = true;
 					break;
 				case twohand:
-					updateHand(container.find('.select-weapon' + (handUsed ? '.second-select' : ':not(.second-select)') + ' li.twohand.' + value.replace(new RegExp(" ",'g'), '').toLowerCase() + ' a')[0], skill[0]);
+					updateHand(container.find('.select-weapon' + (handUsed ? '.second-select' : ':not(.second-select)') + ' li.twohand.' + folderize(value) + ' a')[0], skill[0]);
 					handUsed = true;
 					break;
 				case armor:
-					updateArmor(container.find('.select-armor li.' + value.replace(new RegExp(" ",'g'), '').toLowerCase() + ' a')[0], skill[0]);
+					updateArmor(container.find('.select-armor li.' + folderize(value) + ' a')[0], skill[0]);
 					break;
 				case item:
-					updateItem(container.find('.select-item' + (itemUsed ? '.second-select' : ':not(.second-select)') + ' li.' + value.replace(new RegExp(" ",'g'), '').toLowerCase() + ' a')[0], skill[0]);
+					updateItem(container.find('.select-item' + (itemUsed ? '.second-select' : ':not(.second-select)') + ' li.' + folderize(value) + ' a')[0], skill[0]);
 					itemUsed = true;
 				}
 			}
@@ -239,19 +252,19 @@ function updateSkills(element, skillValues) {
 
 function adjustSkills(element, value) {
 	var container = $(element).parents('.select-row');
-	container.find('.skills-container').attr("class", "showclass skills-container " + value.replace(new RegExp(" ",'g'), '').toLowerCase());
+	container.find('.skills-container').attr("class", "showclass skills-container " + folderize(value));
 }
 
 function adjustItems(element, value) {
 	var container = $(element).parents('.select-row');
-	container.find('.items-selects').attr("class", "showclass items-selects " + value.replace(new RegExp(" ",'g'), '').toLowerCase());
+	container.find('.items-selects').attr("class", "showclass items-selects " + folderize(value));
 }
 
 function adjustSkillsImages(element) {
 	var container = $(element).parents('.select-row');
 	var checkedSkills = [];
 	var className = container.find('input[name="class-title"]').attr('value');
-	var skills = $(container).find('.checkbox.' + className.replace(new RegExp(" ",'g'), '').toLowerCase() + ' input');
+	var skills = $(container).find('.checkbox.' + folderize(className) + ' input');
 	for (var i = 0; i < skills.length; i++) {
 		var currentSkill = $(skills[i]);
 		if (currentSkill.prop('checked')) {
@@ -261,6 +274,20 @@ function adjustSkillsImages(element) {
 	container.find('.imagescontainer img').removeClass('showimage');
 	for (var i = 0; i < checkedSkills.length; i++) {
 		container.find('[skill="' + checkedSkills[i] + '"]').addClass('showimage');
+	}
+}
+
+function adjustAlliesSkillsImages(element) {
+	var container = $(element).parents('.select-row');
+	container.find('.ally-skills-images-container img').css('display','none');
+	var ally = container.find('[name="ally-title"]').val();
+	var checkboxes = container.find('[ally="' + ally + '"] input[type="checkbox"]');
+	for (var i = 0; i < checkboxes.length; i++) {
+		var checkbox = $(checkboxes[i]);
+		if (checkbox.prop('checked')) {
+			var skill = checkbox.attr('name');
+			container.find('img[skill="' + skill + '"][ally="' + ally + '"]').css('display','inline-block');
+		}
 	}
 }
 
@@ -277,11 +304,11 @@ function updateHand(element, value) {
 	var src;
 	if ($(element).parent().hasClass('classitem')) {
 		var classValue = container.find('input[name="class-title"]').attr('value');
-		src = 'images/classes_cards/' + classValue.replace(new RegExp(" ",'g'), '').toLowerCase() + '/' + value.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.jpg';
+		src = 'images/classes_cards/' + folderize(classValue) + '/' + urlize(value) + '.jpg';
 	} else {
 		var tierFolder = tierOne ? 'tier_one' : 'tier_two';
 		if (relic) tierFolder = 'relic';
-		src = 'images/items_cards/' + tierFolder + '/' + value.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.jpg';
+		src = 'images/items_cards/' + tierFolder + '/' + urlize(value) + '.jpg';
 	}
 	container.find('.items-container').find(twohand ? '.hand,.hand2' : selector).attr('src', src);
 	if (!twohand && oldTwoHand) {
@@ -306,11 +333,11 @@ function updateArmor(element, value) {
 	var src;
 	if ($(element).parent().hasClass('classitem')) {
 		var classValue = container.find('input[name="class-title"]').attr('value');
-		src = 'images/classes_cards/' + classValue.replace(new RegExp(" ",'g'), '').toLowerCase() + '/' + value.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.jpg';
+		src = 'images/classes_cards/' + folderize(classValue) + '/' + urlize(value) + '.jpg';
 	} else {
 		var tierFolder = tierOne ? 'tier_one' : 'tier_two';
 		if (relic) tierFolder = 'relic';
-		src = 'images/items_cards/' + tierFolder + '/' + value.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.jpg';
+		src = 'images/items_cards/' + tierFolder + '/' + urlize(value) + '.jpg';
 	}
 	container.find('.items-container').find('.armor').attr('src', src);
 	$(element).parents('.select-armor').find('.armor-title').html(value + ' ');
@@ -327,11 +354,11 @@ function updateItem(element, value) {
 	var src;
 	if ($(element).parent().hasClass('classitem')) {
 		var classValue = container.find('input[name="class-title"]').attr('value');
-		src = 'images/classes_cards/' + classValue.replace(new RegExp(" ",'g'), '').toLowerCase() + '/' + value.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.jpg';
+		src = 'images/classes_cards/' + folderize(classValue) + '/' + urlize(value) + '.jpg';
 	} else {
 		var tierFolder = tierOne ? 'tier_one' : 'tier_two';
 		if (relic) tierFolder = 'relic';
-		src = 'images/items_cards/' + tierFolder + '/' + value.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.jpg';
+		src = 'images/items_cards/' + tierFolder + '/' + urlize(value) + '.jpg';
 	}
 	container.find('.items-container').find(selector).attr('src', src);
 	$(element).parents('.select-item').find('.item-title').html(value + ' ');
@@ -450,12 +477,18 @@ function updateAlly(element, value) {
 	var container = $(element).parents('.select-row');
 	container.find('.ally-title').html(value + ' ');
 	container.find('input[name="ally-title"]').attr('value',value);
+	container.find('img.ally-image').attr('src', 'images/allies_cards/' + urlize(value) + '.png').css('display','inline-block');
+	container.find('img.ally-image-back').attr('src', 'images/allies_cards/' + urlize(value) + '_back.png').css('display','inline-block');
+	container.find('[ally="' + value + '"] input[type="checkbox"]').parent().parent().css('display', 'block');
+	adjustAlliesSkillsImages(element);
 }
 
 function clearAlly(element) {
 	var container = $(element).parents('.select-row');
 	container.find('.ally-title').html('Select Ally ');
 	container.find('input[name="ally-title"]').attr('value','');
+	container.find('img.ally-image').css('display','none');
+	container.find('img.ally-image-back').css('display','none');
 }
 
 function updateFamiliar(element, value) {
@@ -875,6 +908,11 @@ function addAllyLine() {
 	ally.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
 	ally.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
 	ally.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove row</button>'));
+	ally.append($('<br/>'));
+	ally.append($('<img src="" style="display: none;">').addClass('ally-image'));
+	ally.append($('<img src="" style="display: none;">').addClass('ally-image-back'));
+	ally.append($('<br/>'));
+	ally.append(getAllySkillsBlock());
 	$('#allies-container').append(ally);
 	return ally;
 }
@@ -909,13 +947,13 @@ function createSkillsBlock() {
 	var html = $('<div>').addClass('showClass').addClass('skills-container');
 	html.append($('<h1>Skills</h1>'));
 	var skillsImages = $('<div>').addClass('imagescontainer');
-	for (c in CLASSES) {
-		if (CLASSES[c] == undefined) continue;
-		var currentClass = CLASSES[c];
+	for (ally in CLASSES) {
+		if (CLASSES[ally] == undefined) continue;
+		var currentClass = CLASSES[ally];
 		for (var i = 0; i < currentClass.skills.length; i++) {
 			var skill = currentClass.skills[i];
 			if (skill[2] != undefined) continue;
-			var classUpdatedTitle = currentClass.title.replace(new RegExp(" ",'g'), '').toLowerCase();
+			var classUpdatedTitle = folderize(currentClass.title);
 			var skillObject = $('<div>').addClass('checkbox').addClass(classUpdatedTitle);
 			skillObject.append($('<label><input type="checkbox" name="' + skill[0] + '" onClick="adjustSkillsImages(this);"/> ' + skill[0] + '</label>'));
 			if (skill[1] == 0) {
@@ -924,10 +962,30 @@ function createSkillsBlock() {
 				skillObject.find('input').attr('disabled', '');
 			}
 			html.append(skillObject);
-			skillsImages.append($('<img>').attr('src', 'images/classes_cards/' + classUpdatedTitle + '/' + skill[0].replace(new RegExp(" ",'g'), '_').toLowerCase() + '.jpg').attr('skill', skill[0]));
+			skillsImages.append($('<img>').attr('src', 'images/classes_cards/' + classUpdatedTitle + '/' + urlize(skill[0]) + '.jpg').attr('skill', skill[0]));
 		}
 	}
 	html.append(skillsImages);
+	return html;
+}
+
+function getAllySkillsBlock() {
+	var html = $('<div>').addClass('ally-skills-container');
+	html.append($('<h2>Ally skills</h3>'));
+	var allySkillsImages = $('<div>').addClass('ally-skills-images-container');
+	for (ally in ALLIES_SKILLS) {
+		if (ALLIES_SKILLS[ally] == undefined) continue;
+		var allySkills = ALLIES_SKILLS[ally];
+		for (var i = 0; i < allySkills.length; i++) {
+			var skill = allySkills[i];
+			var skillObject = $('<div ally="' + ally + '">').addClass('checkbox');
+			skillObject.css('display', 'none');
+			skillObject.append($('<label><input type="checkbox" name="' + skill + '" onClick="adjustAlliesSkillsImages(this);"/> ' + skill + '</label>'));
+			html.append(skillObject);
+			allySkillsImages.append($('<img style="display: none;">').attr('src', 'images/ally_skill_cards/' + urlize(ally) + '/' + urlize(skill) + '.jpg').attr('skill', skill).attr('ally',ally));
+		}
+	}
+	html.append(allySkillsImages);
 	return html;
 }
 
@@ -975,18 +1033,18 @@ function createItemsBlock() {
 function createOverlordCardsBlock() {
 	var html = $('<div>').addClass('overlord-cards-container');
 	var cardsImages = $('<div>').addClass('overlord-cards-images-container');
-	for (c in OVERLORD_CARDS) {
-		if (OVERLORD_CARDS[c] == undefined) continue;
-		var cardType = OVERLORD_CARDS[c];
+	for (ally in OVERLORD_CARDS) {
+		if (OVERLORD_CARDS[ally] == undefined) continue;
+		var cardType = OVERLORD_CARDS[ally];
 		for (var i = 0; i < cardType.length; i++) {
 			var card = cardType[i];
-			if (true || c != 'basic' && c != 'basic2') {
+			if (true || ally != 'basic' && ally != 'basic2') {
 				var cardCheckbox = $('<div>').addClass('checkbox');
 				cardCheckbox.append($('<label><input type="checkbox" name="' + card.title + '" onClick="adjustOverlordCardsImages();"/> ' + card.title + '</label>'));
 				html.append(cardCheckbox);
 			}
-			for (j = 0; j < card.number; j++) {
-				cardsImages.append($('<img>').attr('src', 'images/overlord_cards/' + c + '/' + card.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.jpg').attr('card', card.title).attr('onclick','$(this).toggleClass(\'secondary\');').css('display','none'));
+			for (var j = 0; j < card.number; j++) {
+				cardsImages.append($('<img>').attr('src', 'images/overlord_cards/' + ally + '/' + urlize(card.title) + '.jpg').attr('card', card.title).attr('onclick','$(this).toggleClass(\'secondary\');').css('display','none'));
 			}
 		}
 	}
@@ -1076,7 +1134,7 @@ function updateSackItem(element, value) {
 	if (classItem) {
 		folder = 'classes_cards/' + parent.attr('class').replace(new RegExp("classitem",'g'), '').replace(new RegExp("twohand",'g'), '').replace(new RegExp(" ",'g'), '');
 	}
-	container.find('img[sack="' + elementAttr + '"]').attr('src', 'images/' + folder + '/' + value.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.jpg').attr('item', value);
+	container.find('img[sack="' + elementAttr + '"]').attr('src', 'images/' + folder + '/' + urlize(value) + '.jpg').attr('item', value);
 	container.find('div[sack="' + elementAttr + '"]').find('.sack-title').html(value + ' ');
 }
 
@@ -1128,7 +1186,7 @@ function hero(element) {
 
 function getSkills(container, className) {
 	var result = [];
-	var skills = $(container).find('.checkbox.' + className.replace(new RegExp(" ",'g'), '').toLowerCase() + ' input');
+	var skills = $(container).find('.checkbox.' + folderize(className) + ' input');
 	for (var i = 0; i < skills.length; i++) {
 		var currentSkill = $(skills[i]); 
 		result.push([currentSkill.attr('name'), currentSkill.prop('checked')]);
@@ -1211,6 +1269,14 @@ function getAllies() {
 		ally.y = container.find('[name="ally-y"]').val();
 		ally.hp = container.find('[name="ally-hp"]').val();
 		ally.conditions = getConditions(container);
+		ally.skills = [];
+		var skillCheckboxes = container.find('input[type="checkbox"]');
+		for (var j = 0; j < skillCheckboxes.length; j++) {
+			var skillCheckbox = $(skillCheckboxes[j]);
+			if (skillCheckbox.prop('checked')) {
+				ally.skills.push(skillCheckbox.attr('name'));
+			}
+		}
 		result.push(ally);
 	}
 	return result;
@@ -1316,7 +1382,7 @@ function constructMapFromConfig() {
 				'transform-origin' : cellSize.toString() + 'px'
 			});
 		}
-		doorImage.attr('src', folder + door.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.png');
+		doorImage.attr('src', folder + urlize(door.title) + '.png');
 		doorObject.append(doorImage);
 		$('#map .map').append(doorObject);
 	}
@@ -1331,7 +1397,7 @@ function constructMapFromConfig() {
 			'left' : (xs.x * cellSize).toString() + 'px',
 			'top' : (xs.y * cellSize).toString() + 'px'
 		});
-		xsImage.attr('src', folder + xs.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.png');
+		xsImage.attr('src', folder + urlize(xs.title) + '.png');
 		xsObject.append(xsImage);
 		$('#map .map').append(xsObject);
 	}
@@ -1346,7 +1412,7 @@ function constructMapFromConfig() {
 			'left' : (objective.x * cellSize).toString() + 'px',
 			'top' : (objective.y * cellSize).toString() + 'px'
 		});
-		objectiveImage.attr('src', folder + objective.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.png');
+		objectiveImage.attr('src', folder + urlize(objective.title) + '.png');
 		objectiveObject.append(objectiveImage);
 		$('#map .map').append(objectiveObject);
 	}
@@ -1364,7 +1430,7 @@ function constructMapFromConfig() {
 			'left' : (monster.x * cellSize).toString() + 'px',
 			'top' : (monster.y * cellSize).toString() + 'px'
 		});
-		monsterImage.attr('src', folder + monster.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + (monster.master ? '_master.png' : '.png'));
+		monsterImage.attr('src', folder + urlize(monster.title) + (monster.master ? '_master.png' : '.png'));
 		monsterObject.append(monsterImage);
 		monsterObject.append(monsterHp);
 		addConditionsToImage(monsterObject, monster.conditions);
@@ -1383,7 +1449,7 @@ function constructMapFromConfig() {
 			'left' : (ally.x * cellSize).toString() + 'px',
 			'top' : (ally.y * cellSize).toString() + 'px'
 		});
-		allyImage.attr('src', folder + ally.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.png');
+		allyImage.attr('src', folder + urlize(ally.title) + '.png');
 		allyObject.append(allyImage);
 		allyObject.append(allyHp);
 		addConditionsToImage(allyObject, ally.conditions);
@@ -1402,7 +1468,7 @@ function constructMapFromConfig() {
 			'left' : (familiar.x * cellSize).toString() + 'px',
 			'top' : (familiar.y * cellSize).toString() + 'px'
 		});
-		familiarImage.attr('src', folder + familiar.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.png');
+		familiarImage.attr('src', folder + urlize(familiar.title) + '.png');
 		familiarObject.append(familiarImage);
 		familiarObject.append(familiarHp);
 		addConditionsToImage(familiarObject, familiar.conditions);
@@ -1418,7 +1484,7 @@ function constructMapFromConfig() {
 function addConditionsToImage(sourcesObject, sourceConfig) {
 	var conditions = $('<div>').addClass('conditions');
 	for (var j = 0; sourceConfig != undefined && j < sourceConfig.length; j++) {
-		var conditionObject = $('<img>').attr('src', 'images/conditions_tokens/' + sourceConfig[j].replace(new RegExp(" ",'g'), '_').toLowerCase() + '.png');
+		var conditionObject = $('<img>').attr('src', 'images/conditions_tokens/' + urlize(sourceConfig[j]) + '.png');
 		if (j > 0) conditionObject.css({
 			'position' : 'absolute',
 			'top' : (20*j).toString() + 'px'
@@ -1441,7 +1507,7 @@ function addHeroToMap(hero) {
 		'left' : (hero.x * cellSize).toString() + 'px',
 		'top' : (hero.y * cellSize).toString() + 'px'
 	});
-	heroImage.attr('src', folder + hero.title.replace(new RegExp(" ",'g'), '_').toLowerCase() + '.png');
+	heroImage.attr('src', folder + urlize(hero.title) + '.png');
 	if (hero.title == 'Leoric of the book') {
 		var aura = $('<div>');
 		aura.css({
@@ -1586,6 +1652,10 @@ function constructSettingsFromConfig() {
 			container.find('[name="ally-y"]').val(ally.y);
 			container.find('.y-title').html(ally.y.toString() + ' ');
 			container.find('[name="ally-hp"]').val(ally.hp);
+			for (var j = 0; ally.skills != undefined && j < ally.skills.length; j++) {
+				container.find('[name="' + ally.skills[j] + '"]').prop('checked', true);
+			}
+			adjustAlliesSkillsImages(container.children()[0]);
 		}
 	}
 	if (config.familiars != undefined) {
