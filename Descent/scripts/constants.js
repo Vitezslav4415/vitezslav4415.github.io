@@ -834,12 +834,13 @@ CONDITIONS_LIST = [
 	'Doomed',
 	'Hexed',
 	'Immobilized',
-	'Infected',
-	'Insight',
-	'Marked',
 	'Poisoned',
 	'Stunned',
-	'Weakened'
+	'Weakened',
+	'Elixir',
+	'Infected',
+	'Insight',
+	'Marked'
 ];
 
 OVERLORD_CARDS_LIST = [
