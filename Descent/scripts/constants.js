@@ -57,18 +57,23 @@ var MONSTERS_LIST = [
 ];
 
 var LIEUTENANTS_LIST = [
-	'Ariad',
-	'Baron Zachareth',
-	'Belthir',
-	'Bolgoreth',
-	'Lady Eliza Farrow',
-	'Lord Merick Farrow',
-	'Queen Ariad',
-	'Raythen',
-	'Serena',
-	'Sir Alric Farrow',
-	'Splig',
-	'Valyndra',
+	['Ariad', true],
+	['Baron Zachareth', true],
+	['Belthir', true],
+	['Bolgoreth', true],
+	['Lady Eliza Farrow', true],
+	['Lord Merick Farrow', true],
+	['Mirklace', false],
+	['Queen Ariad', true],
+	['Raythen', true],
+	['Rylan Olliven', false],
+	['Serena', true],
+	['Skarn', true],
+	['Sir Alric Farrow', true],
+	['Splig', true],
+	['Tristayne Olliven', false],
+	['Valyndra', true],
+	['Verminous', true]
 ];
 
 var MONSTERS_HP = [
@@ -690,6 +695,7 @@ HEROES_LIST.sort(listsort);
 
 FAMILIARS_LIST = [
 	'Brightblaze',
+	'Image',
 	'Kata',
 	'Mata',
 	'Pico',
@@ -822,8 +828,9 @@ OBJECTIVES_LIST = [
 
 MISCELLANEOUS_LIST = [
 	'Search',
-	'Secret entrance indoors',
-	'Secret entrance outdoors'
+	'Secret Entrance Indoors',
+	'Secret Entrance Outdoors',
+	'Sun Stone'
 ];
 
 CONDITIONS_LIST = [

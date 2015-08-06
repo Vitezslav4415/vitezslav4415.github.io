@@ -291,11 +291,17 @@ body {
 
 .overlord-cards-images-container img,
 img.ally-image,
-img.ally-image-back {
+img.ally-image-back,
+img.lieutenant-image,
+img.lieutenant-image-back {
 	margin: 10px 10px 10px 0;
 	width: 200px;
 }
 
 .overlord-cards-images-container img {
+	cursor: pointer;
+}
+
+.dropdown-menu>li>a {
 	cursor: pointer;
 }

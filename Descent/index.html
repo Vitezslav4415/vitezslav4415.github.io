@@ -42,15 +42,13 @@
 				</div>
 				<div role="tabpanel" class="tab-pane" id="monsters">
 					<div id="monsters-container"></div>
+					<div id="lieutenants-container"></div>
 					<div class="radio">
-						<label>
-							<input type="radio" name="act" value="one" id="actOne" checked onclick="adjustAct();"> Act One Monsters
-						</label>
-						<label>
-							<input type="radio" name="act" value="two" id="actTwo" onclick="adjustAct();"> Act Two Monsters
-						</label>
+						<label><input type="radio" name="act" value="one" id="actOne" checked onclick="adjustAct();"> Act One Monsters</label>
+						<label><input type="radio" name="act" value="two" id="actTwo" onclick="adjustAct();"> Act Two Monsters</label>
 					</div>
-					<button type="button" class="btn btn-success" aria-expanded="false" onclick="addMonsterLine();">Add row</button>
+					<button type="button" class="btn btn-success" aria-expanded="false" onclick="addMonsterLine();">Add monster row</button>
+					<button type="button" class="btn btn-success" aria-expanded="false" onclick="addLieutenantLine();">Add lieutenant row</button>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="hero1"></div>
 				<div role="tabpanel" class="tab-pane" id="hero2"></div>

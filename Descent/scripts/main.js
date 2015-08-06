@@ -11,6 +11,10 @@ function folderize(value) {
 }
 
 function somethingize(value, replacement) {
+	if (value == undefined) {
+		condole.log('somethingize value is undefined');
+		return '';
+	}
 	return value.replace(new RegExp(" ",'g'), replacement).toLowerCase();
 }
 
@@ -114,6 +118,7 @@ function updateOption(element, value, isMonster) {
 			container.find('input[name="ally-x"]').attr('value',selectedCoordinate);
 			container.find('input[name="familiar-x"]').attr('value',selectedCoordinate);
 			container.find('input[name="objective-x"]').attr('value',selectedCoordinate);
+			container.find('input[name="lieutenant-x"]').attr('value',selectedCoordinate);
 			container.find('input[name="monster-x-size"]').attr('value',selectedSize);
 			container.find('.x-title').html($(element).html() + ' ');
 			if (!parent.hasClass('squared')) {
@@ -129,6 +134,7 @@ function updateOption(element, value, isMonster) {
 			container.find('input[name="ally-y"]').attr('value',selectedCoordinate);
 			container.find('input[name="familiar-y"]').attr('value',selectedCoordinate);
 			container.find('input[name="objective-y"]').attr('value',selectedCoordinate);
+			container.find('input[name="lieutenant-y"]').attr('value',selectedCoordinate);
 			container.find('input[name="monster-y-size"]').attr('value',selectedSize);
 			if (!parent.hasClass('squared')) {
 				container.find('.select-x').removeClass(SHOWING_CLASSES[selectedSize]);
@@ -491,6 +497,29 @@ function clearAlly(element) {
 	container.find('img.ally-image-back').css('display','none');
 }
 
+function updateLieutenant(element, value, showBack) {
+	var container = $(element).parents('.select-row');
+	container.find('.lieutenant-title').html(value + ' ');
+	container.find('input[name="lieutenant-title"]').attr('value',value);
+	var actAcronym = '_act';
+	container.find('img.lieutenant-image').attr('src', 'images/lieutenant_cards/' + urlize(value) + actAcronym + (actOne ? '1' : '2') + '.jpg').css('display','inline-block');
+	if (showBack) {
+		container.find('img.lieutenant-image-back').attr('src', 'images/lieutenant_cards/' + urlize(value) + actAcronym + (actOne ? '1' : '2') + '_back.jpg').css('display','inline-block');
+	} else {
+		container.find('img.lieutenant-image-back').css('display','none');
+	}
+	container.find('[lieutenant="' + value + '"] input[type="checkbox"]').parent().parent().css('display', 'block');
+//	adjustAlliesSkillsImages(element);
+}
+
+function clearLieutenant(element) {
+	var container = $(element).parents('.select-row');
+	container.find('.lieutenant-title').html('Select Lieutenant ');
+	container.find('input[name="lieutenant-title"]').attr('value','');
+	container.find('img.lieutenant-image').css('display','none');
+	container.find('img.lieutenant-image-back').css('display','none');
+}
+
 function updateFamiliar(element, value) {
 	var container = $(element).parents('.select-row');
 	container.find('.familiar-title').html(value + ' ');
@@ -790,6 +819,14 @@ function createConditionSelectContent() {
 	return html;
 }
 
+function createLieutenantsSelectContent() {
+	var html = addOption('Clear', '', 'clearLieutenant(this);');
+	for (var i = 0; i < LIEUTENANTS_LIST.length; i++) {
+		html += addOption(LIEUTENANTS_LIST[i][0] + ' ', '', 'updateLieutenant(this, \'' + LIEUTENANTS_LIST[i][0] + '\', ' + LIEUTENANTS_LIST[i][1].toString() + ')');
+	}
+	return html;
+}
+
 function addCondition(button) {
 	var condition = $(createInputSelect('Select condition', 'condition-title', 'select-condition')).attr('id', 'condition' + conditionNumber.toString());
 	condition.find('ul').append(createConditionSelectContent());
@@ -941,6 +978,24 @@ function addObjectiveLine() {
 	objective.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove row</button>'));
 	$('#objective-container').append(objective);
 	return objective;
+}
+
+function addLieutenantLine() {
+	var lieutenant = $('<div>');
+	addUnitLine(lieutenant, 'Lieutenant');
+	
+	lieutenant.find('.select-lieutenant ul').append(createLieutenantsSelectContent());
+	lieutenant.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
+	lieutenant.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
+	lieutenant.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
+	lieutenant.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove row</button>'));
+	lieutenant.append($('<br/>'));
+	lieutenant.append($('<img src="" style="display: none;">').addClass('lieutenant-image'));
+	lieutenant.append($('<img src="" style="display: none;">').addClass('lieutenant-image-back'));
+	lieutenant.append($('<br/>'));
+//	lieutenant.append(getAllySkillsBlock());
+	$('#lieutenants-container').append(lieutenant);
+	return lieutenant;
 }
 
 function createSkillsBlock() {
@@ -1282,6 +1337,31 @@ function getAllies() {
 	return result;
 }
 
+function getLieutenants() {
+	var result = [];
+	var lieutenants = $('#lieutenants-container .select-row');
+	for (var i = 0; i < lieutenants.length; i++) {
+		var container = $(lieutenants[i]);
+		var lieutenant = {};
+		lieutenant.title = container.find('[name="lieutenant-title"]').val();
+		lieutenant.x = container.find('[name="lieutenant-x"]').val();
+		lieutenant.y = container.find('[name="lieutenant-y"]').val();
+		lieutenant.hp = container.find('[name="lieutenant-hp"]').val();
+		lieutenant.conditions = getConditions(container);
+		lieutenant.hasBack = container.find('img.lieutenant-image-back').css('display') != 'none';
+		lieutenant.skills = [];
+		var skillCheckboxes = container.find('input[type="checkbox"]');
+		for (var j = 0; j < skillCheckboxes.length; j++) {
+			var skillCheckbox = $(skillCheckboxes[j]);
+			if (skillCheckbox.prop('checked')) {
+				lieutenant.skills.push(skillCheckbox.attr('name'));
+			}
+		}
+		result.push(lieutenant);
+	}
+	return result;
+}
+
 function getFamiliars() {
 	var result = [];
 	var familiars = $('#familiars-container .select-row');
@@ -1422,7 +1502,7 @@ function constructMapFromConfig() {
 		var monsterObject = $('<div>');
 		var monsterImage = $('<img>');
 		var monsterHp = $('<div>').addClass('hit-points');
-		monsterHp.html(monster.hp.toString());
+		monsterHp.html(monster.hp == undefined ? '' : monster.hp.toString());
 		var folder = 'images/monsters_tokens/';
 		if (monster.vertical) folder += 'vertical/';
 		monsterObject.css({
@@ -1454,6 +1534,25 @@ function constructMapFromConfig() {
 		allyObject.append(allyHp);
 		addConditionsToImage(allyObject, ally.conditions);
 		$('#map .figures').append(allyObject);
+	}
+	
+	for (var i = 0; config.lieutenants != undefined && i < config.lieutenants.length; i++) {
+		var lieutenant = config.lieutenants[i];
+		var lieutenantObject = $('<div>');
+		var lieutenantImage = $('<img>');
+		var lieutenantHp = $('<div>').addClass('hit-points');
+		lieutenantHp.html(lieutenant.hp.toString());
+		var folder = 'images/monsters_tokens/';
+		lieutenantObject.css({
+			'position' : 'absolute',
+			'left' : (lieutenant.x * cellSize).toString() + 'px',
+			'top' : (lieutenant.y * cellSize).toString() + 'px'
+		});
+		lieutenantImage.attr('src', folder + urlize(lieutenant.title) + '.png');
+		lieutenantObject.append(lieutenantImage);
+		lieutenantObject.append(lieutenantHp);
+		addConditionsToImage(lieutenantObject, lieutenant.conditions);
+		$('#map .figures').append(lieutenantObject);
 	}
 	
 	for (var i = 0; config.familiars != undefined && i < config.familiars.length; i++) {
@@ -1658,6 +1757,22 @@ function constructSettingsFromConfig() {
 			adjustAlliesSkillsImages(container.children()[0]);
 		}
 	}
+	if (config.lieutenants != undefined) {
+		for (var i = 0 ; i < config.lieutenants.length; i++) {
+			var container = addLieutenantLine();
+			var lieutenant = config.lieutenants[i];
+			updateLieutenant(container.find('.select-lieutenant li')[0], lieutenant.title, lieutenant.hasBack);
+			container.find('[name="ally-x"]').val(lieutenant.x);
+			container.find('.x-title').html(getAlphabetChar(lieutenant.x - 1) + ' ');
+			container.find('[name="ally-y"]').val(lieutenant.y);
+			container.find('.y-title').html(lieutenant.y.toString() + ' ');
+			container.find('[name="ally-hp"]').val(lieutenant.hp);
+			for (var j = 0; lieutenant.skills != undefined && j < lieutenant.skills.length; j++) {
+				container.find('[name="' + lieutenant.skills[j] + '"]').prop('checked', true);
+			}
+//			adjustAlliesSkillsImages(container.children()[0]);
+		}
+	}
 	if (config.familiars != undefined) {
 		for (var i = 0 ; i < config.familiars.length; i++) {
 			var container = addFamiliarLine();
@@ -1703,7 +1818,7 @@ function decodeConfig() {
 }
 
 function collectData() {
-	var monsterRows = $('#monsters .select-row');
+	var monsterRows = $('#monsters-container .select-row');
 	config.monsters = [];
 	for (var i = 0; i < monsterRows.length; i++) {
 		config.monsters.push(monster(monsterRows[i]));
@@ -1720,6 +1835,7 @@ function collectData() {
 	config.objectives = getObjectives();
 	config.overlord = {};
 	config.overlord.cards = getOverlordCards();
+	config.lieutenants = getLieutenants();
 }
 
 function drawGrid() {
