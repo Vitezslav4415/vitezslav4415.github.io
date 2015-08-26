@@ -458,7 +458,14 @@ function clearDoor(element) {
 function updateDirection(element, value) {
 	var container = $(element).parents('.select-row');
 	container.find('.direction-title').html(value + ' ');
-	container.find('input[name="door-direction"]').attr('value',value);
+	var inputs = container.find('input[name]');
+	for (var i = 0; i < inputs.length; i++) {
+		var input = $(inputs[i]);
+		if (input.attr('name').indexOf('direction') > -1) {
+			input.attr('value',value);
+			return;
+		}
+	}
 }
 
 function clearDirection(element) {
@@ -987,6 +994,9 @@ function addLieutenantLine() {
 	lieutenant.find('.select-lieutenant ul').append(createLieutenantsSelectContent());
 	lieutenant.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
 	lieutenant.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
+	lieutenant.find('.select-lieutenant').after(createInputSelect('Select direction', 'direction-title', 'select-direction'));
+	lieutenant.append($('<input type="hidden" name="lieutenant-direction" value=""/>'));
+	lieutenant.find('.select-direction ul').append(createDirectionSelectContent());
 	lieutenant.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
 	lieutenant.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove row</button>'));
 	lieutenant.append($('<br/>'));
@@ -1349,6 +1359,7 @@ function getLieutenants() {
 		lieutenant.hp = container.find('[name="lieutenant-hp"]').val();
 		lieutenant.conditions = getConditions(container);
 		lieutenant.hasBack = container.find('img.lieutenant-image-back').css('display') != 'none';
+		lieutenant.vertical = container.find('[name="lieutenant-direction"]').val() == 'vertical';
 		lieutenant.skills = [];
 		var skillCheckboxes = container.find('input[type="checkbox"]');
 		for (var j = 0; j < skillCheckboxes.length; j++) {
@@ -1543,6 +1554,7 @@ function constructMapFromConfig() {
 		var lieutenantHp = $('<div>').addClass('hit-points');
 		lieutenantHp.html(lieutenant.hp.toString());
 		var folder = 'images/monsters_tokens/';
+		if (lieutenant.vertical != undefined && lieutenant.vertical) folder += 'vertical/';
 		lieutenantObject.css({
 			'position' : 'absolute',
 			'left' : (lieutenant.x * cellSize).toString() + 'px',
@@ -1762,11 +1774,14 @@ function constructSettingsFromConfig() {
 			var container = addLieutenantLine();
 			var lieutenant = config.lieutenants[i];
 			updateLieutenant(container.find('.select-lieutenant li')[0], lieutenant.title, lieutenant.hasBack);
-			container.find('[name="ally-x"]').val(lieutenant.x);
+			container.find('[name="lieutenant-x"]').val(lieutenant.x);
 			container.find('.x-title').html(getAlphabetChar(lieutenant.x - 1) + ' ');
-			container.find('[name="ally-y"]').val(lieutenant.y);
+			container.find('[name="lieutenant-y"]').val(lieutenant.y);
 			container.find('.y-title').html(lieutenant.y.toString() + ' ');
-			container.find('[name="ally-hp"]').val(lieutenant.hp);
+			container.find('[name="lieutenant-hp"]').val(lieutenant.hp);
+			var direction = lieutenant.vertical == undefined || !lieutenant.vertical ? 'horizontal' : 'vertical';
+			container.find('.direction-title').html(direction + ' ');
+			container.find('[name="lieutenant-direction"]').val(direction);
 			for (var j = 0; lieutenant.skills != undefined && j < lieutenant.skills.length; j++) {
 				container.find('[name="' + lieutenant.skills[j] + '"]').prop('checked', true);
 			}
