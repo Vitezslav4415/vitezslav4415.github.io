@@ -982,9 +982,24 @@ function addObjectiveLine() {
 	objective.find('.select-objective ul').append(createObjectiveSelectContent());
 	objective.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
 	objective.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
+	objective.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addHpInput(this);">Add HP</button>'));
 	objective.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove row</button>'));
 	$('#objective-container').append(objective);
 	return objective;
+}
+
+function addHpInput(element) {
+	var elementObject = $(element);
+	elementObject.before('<input type="text" name="hp" class="form-control" placeholder="Set HP" value=""/>');
+	elementObject.before('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeHpInput(this);">Remove HP</button>');
+	elementObject.remove();
+}
+
+function removeHpInput(element) {
+	var elementObject = $(element);
+	elementObject.parents('.select-row').find('input[name="hp"]').remove();
+	elementObject.before('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addHpInput(this);">Add HP</button>');
+	elementObject.remove();
 }
 
 function addLieutenantLine() {
@@ -1398,6 +1413,10 @@ function getObjectives() {
 		objective.title = container.find('[name="objective-title"]').val();
 		objective.x = container.find('[name="objective-x"]').val();
 		objective.y = container.find('[name="objective-y"]').val();
+		var objectiveHp = container.find('[name="hp"]');
+		if (objectiveHp.length > 0) {
+			objective.hp = $(objectiveHp[0]).val();
+		}
 		result.push(objective);
 	}
 	return result;
@@ -1505,6 +1524,11 @@ function constructMapFromConfig() {
 		});
 		objectiveImage.attr('src', folder + urlize(objective.title) + '.png');
 		objectiveObject.append(objectiveImage);
+		if (objective.hp != undefined) {
+			var objectiveHp = $('<div>').addClass('hit-points');
+			objectiveHp.html(objective.hp.toString());
+			objectiveObject.append(objectiveHp);
+		}
 		$('#map .map').append(objectiveObject);
 	}
 	
@@ -1809,6 +1833,10 @@ function constructSettingsFromConfig() {
 			container.find('.x-title').html(getAlphabetChar(objective.x - 1) + ' ');
 			container.find('[name="objective-y"]').val(objective.y);
 			container.find('.y-title').html(objective.y.toString() + ' ');
+			if (objective.hp != undefined) {
+				addHpInput(container.find('[onclick="addHpInput(this);"]'));
+				container.find('input[name="hp"]').val(objective.hp);
+			}
 		}
 	}
 	for (var i = 0; config.overlord != undefined && config.overlord.cards != undefined && i < config.overlord.cards.length; i++) {
