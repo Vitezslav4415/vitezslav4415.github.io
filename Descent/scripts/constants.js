@@ -699,6 +699,7 @@ FAMILIARS_LIST = [
 	'Kata',
 	'Mata',
 	'Pico',
+	'Raven',
 	'Reanimate',
 	'Shadow',
 	'Skye',
