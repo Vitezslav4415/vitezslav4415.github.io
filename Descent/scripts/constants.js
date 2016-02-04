@@ -182,7 +182,7 @@ ITEMS_LIST = [
 	['Handbow', item],
 	['Heavy Cloak', armor],
 	['Immolation', twohand],
-	['Incendiary Arrows', item]
+	['Incendiary Arrows', item],
 	['Iron Battleaxe', twohand],
 	['Iron Shield', hand],
 	['Iron Spear', hand],
