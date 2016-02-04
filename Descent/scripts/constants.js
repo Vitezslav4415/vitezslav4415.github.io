@@ -32,7 +32,7 @@ var MONSTERS_LIST = [
 	['Goblin Witcher',1,1,true],
 	['Harpy',1,1,false],
 	['Hellhound',1,2,false],
-	['Hybrid_Sentinel',1,1,false],
+	['Hybrid Sentinel',1,1,false],
 	['Ice Wyrm',2,3,false],
 	['Ironbound',1,1,false],
 	['Kobold',1,1,false],
