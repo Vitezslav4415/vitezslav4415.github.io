@@ -268,13 +268,16 @@ RELICS_LIST = [
 	['Immunity Elixir', item],
 	['Living Heart', item],
 	['Mending Talisman', item],
+	['Shadow Plotter', item],
 	['Shield Of The Dark God', hand],
+	['Spirited Scythe', twohand],
 	['Staff Of Light', twohand],
 	['Sun Stone', item],
 	['The Shadow Rune', twohand],
 	['Trueshot', twohand],
 	['Valyndras Bane', twohand],
-	['Workmans Ring', item]
+	['Workmans Ring', item],
+	['Ynfernal Rune', twohand]
 ];
 
 ITEMS = {hand : [], hand2 : [], armor : [], item : []};
