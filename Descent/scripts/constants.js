@@ -164,6 +164,7 @@ ITEMS_LIST = [
 	['Bearded Axe', twohand],
 	['Belt Of Alchemy', item],
 	['Belt Of Waterwalking', item],
+	['Blessed Shield', hand],
 	['Bloody Dagger', hand],
 	['Bone Blade', hand],
 	['Boots Of Iron', item],
@@ -203,14 +204,18 @@ ITEMS_LIST = [
 	['Ring Of Power', item],
 	['Rune Plate', armor],
 	['Scorpion Helm', item],
+	['Shadow Bracers', item],
 	['Serpent Dagger', hand],
 	['Shield Of Light', hand],
 	['Sling', hand],
+	['Staff Of Greyhaven', twohand],
 	['Steel Broadsword', hand],
 	['Sunburst', twohand],
 	['Teleportation Rune', twohand],
 	['Thiefs Vest', armor],
-	['Trident', hand]
+	['Trident', hand],
+	['Undying Skull', item],
+	['White Wolf Cloak', armor]
 ];
 
 TIER2_ITEMS_LIST = [
@@ -228,6 +233,8 @@ TIER2_ITEMS_LIST = [
 	['Glaive', twohand],
 	['Golden Mask', item],
 	['Grinding Axe', twohand],
+	['Hammer Of Doom', twohand],
+	['Heart Seeker', twohand],
 	['Heavy Steel Shield', hand],
 	['Ice Storm', twohand],
 	['Inscribed Robes', armor],
@@ -247,6 +254,7 @@ TIER2_ITEMS_LIST = [
 	['Rat-Tooth Dagger', hand],
 	['Repeating Crossbow', twohand],
 	['Rune Of Blades', twohand],
+	['Rune Of Fate', twohand],
 	['Rune Of Misery', twohand],
 	['Scalemail', armor],
 	['Shadow Tome', item],
@@ -257,7 +265,8 @@ TIER2_ITEMS_LIST = [
 	['Steel Greatsword', twohand],
 	['Stone Armor', armor],
 	['Tival Crystal', item],
-	['Vestments Of Kellos', armor]
+	['Vestments Of Kellos', armor],
+	['Winged Blade', twohand]
 ];
 
 RELICS_LIST = [
@@ -927,13 +936,41 @@ OVERLORD_CARDS_LIST = [
 	['Wicked Laughter', 'saboteur', 1],
 	['Dark Remedy', 'universal', 1],
 	['Dark Resilience', 'universal', 1],
+	['Placebo', 'universal', 1],
 	['Plan Ahead', 'universal', 1],
+	['Refresh', 'universal', 1],
 	['Schemes', 'universal', 1],
+	['Solidarity', 'universal', 1],
+	['Upgrade', 'universal', 1],
+	['Diverse Means', 'universal', 2],
 	['Blood Lust', 'warlord', 1],
 	['Blood Rage', 'warlord', 1],
 	['Dark Fortitude', 'warlord', 1],
 	['Expert Blow', 'warlord', 1],
 	['Reinforce', 'warlord', 1],
+	['Down And Out', 'rumor_reward', 1],
+	['Beneath The Shadow', 'unkindness', 1],
+	['Beware', 'unkindness', 1],
+	['Call Of The Ravens', 'unkindness', 1],
+	['Feast', 'unkindness', 1],
+	['Ill Omen', 'unkindness', 1],
+	['Imitation', 'unkindness', 2],
+	['Sudden Flurry', 'unkindness', 2],
+	['Envelop', 'unkindness', 3],
+	['Imploding Rift', 'shadowmancer', 1],
+	['Mistrust', 'shadowmancer', 1],
+	['Shadow Of Doubt', 'shadowmancer', 1],
+	['Out Of Darkness', 'shadowmancer', 1],
+	['Black Out', 'shadowmancer', 2],
+	['Shadow Walk', 'shadowmancer', 2],
+	['Treacherous Shadows', 'shadowmancer', 3],
+	['Dragonbone Pendant', 'enchanter', 1],
+	['Rings Of ZholAlam', 'enchanter', 1],
+	['Elixir Of Stone', 'enchanter', 1],
+	['Wristlet Of Wind', 'enchanter', 1],
+	['Ward Of Peace', 'enchanter', 2],
+	['Rune Of The Phoenix', 'enchanter', 2],
+	['Sign Of The Last Zenith', 'enchanter', 3]
 ];
 
 var OVERLORD_CARDS = {};
