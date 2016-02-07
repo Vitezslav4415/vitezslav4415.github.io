@@ -1620,11 +1620,12 @@ function constructMapFromConfig() {
 
 function addConditionsToImage(sourcesObject, sourceConfig) {
 	var conditions = $('<div>').addClass('conditions');
+	var interval = sourceConfig != undefined && sourceConfig.length > 3 ? Math.floor(50 / sourceConfig.length) : 20;
 	for (var j = 0; sourceConfig != undefined && j < sourceConfig.length; j++) {
 		var conditionObject = $('<img>').attr('src', 'images/conditions_tokens/' + urlize(sourceConfig[j]) + '.png');
 		if (j > 0) conditionObject.css({
 			'position' : 'absolute',
-			'top' : (20*j).toString() + 'px'
+			'top' : (interval * j).toString() + 'px'
 		});
 		conditions.append(conditionObject);
 	}
