@@ -554,7 +554,7 @@ function clearObjective(element) {
 function updateCondition(element, value) {
 	var container = $(element).parents('.select-row');
 	var id = $(element).parents('.select-condition').attr('id');
-	container.find('.condition-title').html(value + ' ');
+	container.find('#' + id + ' .condition-title').html(value + ' ');
 	container.find('#input' + id).attr('value',value);
 }
 
@@ -1614,6 +1614,8 @@ function constructMapFromConfig() {
 	addHeroToMap(config.hero2);
 	addHeroToMap(config.hero3);
 	addHeroToMap(config.hero4);
+	
+	setShortLink();
 }
 
 function addConditionsToImage(sourcesObject, sourceConfig) {
@@ -1931,3 +1933,17 @@ $(function() {
 		$(this).tab('show');
 	});
 });
+
+function setShortLink() {
+	var characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+		string = '',
+		charCnt = 20,
+		uri;
+	for (var i = 0; i < charCnt; i += 1) {
+		string += characters[Math.floor(Math.random() * characters.length)];
+	}
+	uri = 'http://tinyurl.com/create.php?source=indexpage&url=' + encodeURIComponent(location.href) + '&alias=' + string;
+	$('body').append('<img src="' + uri + '" style="height: 1px; width: 1px; position: absolute; z-index: -999; opacity: 0;" />');
+	$('#tinyUrl').html('Tiny link: http://tinyurl.com/' + string);
+	$('#tinyUrl').attr('href', 'http://tinyurl.com/' + string);
+}
