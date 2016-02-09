@@ -849,12 +849,21 @@ function rebuildMap(mapName) {
 	config.xs = mapConfig.xs;
 	clearMapControlTab();
 	constructMapControlsTabFromConfig();
+	if (mapConfig.objectives != undefined) {
+		config.objectives = mapConfig.objectives;
+		clearMiscellaneousObjectsTab();
+		constructMiscellaneousObjectsTabFromConfig();
+	}
 }
 
 function clearMapControlTab() {
 	$('#tiles-container .select-row').remove();
 	$('#doors-container .select-row').remove();
 	$('#xs-container .select-row').remove();
+}
+
+function clearMiscellaneousObjectsTab() {
+	$('#objective-container .select-row').remove();
 }
 
 function addCondition(button) {
@@ -1979,6 +1988,15 @@ function setShortLink() {
 	$('body').append('<img src="' + uri + '" style="height: 1px; width: 1px; position: absolute; z-index: -999; opacity: 0;" />');
 	$('#tinyUrl').html('Tiny link: http://tinyurl.com/' + string);
 	$('#tinyUrl').attr('href', 'http://tinyurl.com/' + string);
+}
+
+function getMapHash() {
+	var config2 = {};
+	config2.xs = config.xs;
+	config2.tiles = config.tiles;
+	config2.doors = config.doors;
+	config2.objectives = config.objectives;
+	console.log(Base64.encode(JSON.stringify(config2)));
 }
 
 $(function() {
