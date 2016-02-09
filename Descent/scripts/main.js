@@ -1027,9 +1027,9 @@ function createSkillsBlock() {
 	var html = $('<div>').addClass('showClass').addClass('skills-container');
 	html.append($('<h1>Skills</h1>'));
 	var skillsImages = $('<div>').addClass('imagescontainer');
-	for (ally in CLASSES) {
-		if (CLASSES[ally] == undefined) continue;
-		var currentClass = CLASSES[ally];
+	for (var tempoClass in CLASSES) {
+		if (CLASSES[tempoClass] == undefined) continue;
+		var currentClass = CLASSES[tempoClass];
 		for (var i = 0; i < currentClass.skills.length; i++) {
 			var skill = currentClass.skills[i];
 			if (skill[2] != undefined) continue;
@@ -1113,24 +1113,28 @@ function createItemsBlock() {
 function createOverlordCardsBlock() {
 	var html = $('<div>').addClass('overlord-cards-container');
 	var cardsImages = $('<div>').addClass('overlord-cards-images-container');
-	for (ally in OVERLORD_CARDS) {
-		if (OVERLORD_CARDS[ally] == undefined) continue;
-		var cardType = OVERLORD_CARDS[ally];
+	for (var card in OVERLORD_CARDS) {
+		if (OVERLORD_CARDS[card] == undefined) continue;
+		var cardType = OVERLORD_CARDS[card];
 		for (var i = 0; i < cardType.length; i++) {
 			var card = cardType[i];
-			if (true || ally != 'basic' && ally != 'basic2') {
+			if (true || card != 'basic' && card != 'basic2') {
 				var cardCheckbox = $('<div>').addClass('checkbox');
 				cardCheckbox.append($('<label><input type="checkbox" name="' + card.title + '" onClick="adjustOverlordCardsImages();"/> ' + card.title + '</label>'));
 				html.append(cardCheckbox);
 			}
 			for (var j = 0; j < card.number; j++) {
-				cardsImages.append($('<img>').attr('src', 'images/overlord_cards/' + ally + '/' + urlize(card.title) + '.jpg').attr('card', card.title).attr('onclick','$(this).toggleClass(\'secondary\');').css('display','none'));
+				cardsImages.append($('<img>').attr('src', 'images/overlord_cards/' + card + '/' + urlize(card.title) + '.jpg').attr('card', card.title).attr('onclick','$(this).toggleClass(\'secondary\');').css('display','none'));
 			}
 		}
 	}
 	html.prepend(cardsImages);
 	$('#overlord-container').append(html);
 	adjustOverlordCardsImages();
+}
+
+function createFullMapsBlock() {
+	var html = $('<div>').addClass('overlord-cards-container');
 }
 
 function adjustOverlordCardsImages() {
@@ -1911,11 +1915,26 @@ function adjustAct() {
 	actOne = $('[name="act"]:checked').val() == 'one';
 }
 
+function setShortLink() {
+	var characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+		string = '',
+		charCnt = 20,
+		uri;
+	for (var i = 0; i < charCnt; i += 1) {
+		string += characters[Math.floor(Math.random() * characters.length)];
+	}
+	uri = 'http://tinyurl.com/create.php?source=indexpage&url=' + encodeURIComponent(location.href) + '&alias=' + string;
+	$('body').append('<img src="' + uri + '" style="height: 1px; width: 1px; position: absolute; z-index: -999; opacity: 0;" />');
+	$('#tinyUrl').html('Tiny link: http://tinyurl.com/' + string);
+	$('#tinyUrl').attr('href', 'http://tinyurl.com/' + string);
+}
+
 $(function() {
 	addMonsterLine();
 	for (var i = 1; i <= 4; i++) {
 		addHeroLine(i);
 	}
+	createFullMapsBlock();
 	createOverlordCardsBlock();
 	drawGrid();
 	if (window.location.hash != "") {
@@ -1934,17 +1953,3 @@ $(function() {
 		$(this).tab('show');
 	});
 });
-
-function setShortLink() {
-	var characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
-		string = '',
-		charCnt = 20,
-		uri;
-	for (var i = 0; i < charCnt; i += 1) {
-		string += characters[Math.floor(Math.random() * characters.length)];
-	}
-	uri = 'http://tinyurl.com/create.php?source=indexpage&url=' + encodeURIComponent(location.href) + '&alias=' + string;
-	$('body').append('<img src="' + uri + '" style="height: 1px; width: 1px; position: absolute; z-index: -999; opacity: 0;" />');
-	$('#tinyUrl').html('Tiny link: http://tinyurl.com/' + string);
-	$('#tinyUrl').attr('href', 'http://tinyurl.com/' + string);
-}
