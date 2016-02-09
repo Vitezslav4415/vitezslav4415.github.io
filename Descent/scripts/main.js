@@ -834,6 +834,29 @@ function createLieutenantsSelectContent() {
 	return html;
 }
 
+function createMapsSelectContent() {
+	var html = '';
+	for (var i = 0; i < MAP_HASES_LIST.length; i++) {
+		html += addOption(MAP_HASES_LIST[i][0] + ' ', 'search', 'rebuildMap(\'' + MAP_HASES_LIST[i][0] + '\')');
+	}
+	return html;
+}
+
+function rebuildMap(mapName) {
+	var mapConfig = JSON.parse(Base64.decode(MAP_HASHES[mapName]));
+	config.tiles = mapConfig.tiles;
+	config.doors = mapConfig.doors;
+	config.xs = mapConfig.xs;
+	clearMapControlTab();
+	constructMapControlsTabFromConfig();
+}
+
+function clearMapControlTab() {
+	$('#tiles-container .select-row').remove();
+	$('#doors-container .select-row').remove();
+	$('#xs-container .select-row').remove();
+}
+
 function addCondition(button) {
 	var condition = $(createInputSelect('Select condition', 'condition-title', 'select-condition')).attr('id', 'condition' + conditionNumber.toString());
 	condition.find('ul').append(createConditionSelectContent());
@@ -1113,18 +1136,18 @@ function createItemsBlock() {
 function createOverlordCardsBlock() {
 	var html = $('<div>').addClass('overlord-cards-container');
 	var cardsImages = $('<div>').addClass('overlord-cards-images-container');
-	for (var card in OVERLORD_CARDS) {
-		if (OVERLORD_CARDS[card] == undefined) continue;
-		var cardType = OVERLORD_CARDS[card];
-		for (var i = 0; i < cardType.length; i++) {
-			var card = cardType[i];
-			if (true || card != 'basic' && card != 'basic2') {
+	for (var cardType in OVERLORD_CARDS) {
+		if (OVERLORD_CARDS[cardType] == undefined) continue;
+		var cardsOfType = OVERLORD_CARDS[cardType];
+		for (var i = 0; i < cardsOfType.length; i++) {
+			var card = cardsOfType[i];
+			if (true || cardType != 'basic' && cardType != 'basic2') {
 				var cardCheckbox = $('<div>').addClass('checkbox');
 				cardCheckbox.append($('<label><input type="checkbox" name="' + card.title + '" onClick="adjustOverlordCardsImages();"/> ' + card.title + '</label>'));
 				html.append(cardCheckbox);
 			}
 			for (var j = 0; j < card.number; j++) {
-				cardsImages.append($('<img>').attr('src', 'images/overlord_cards/' + card + '/' + urlize(card.title) + '.jpg').attr('card', card.title).attr('onclick','$(this).toggleClass(\'secondary\');').css('display','none'));
+				cardsImages.append($('<img>').attr('src', 'images/overlord_cards/' + cardType + '/' + urlize(card.title) + '.jpg').attr('card', card.title).attr('onclick','$(this).toggleClass(\'secondary\');').css('display','none'));
 			}
 		}
 	}
@@ -1134,7 +1157,12 @@ function createOverlordCardsBlock() {
 }
 
 function createFullMapsBlock() {
-	var html = $('<div>').addClass('overlord-cards-container');
+	var html = $('<div>').addClass('full-maps-container');
+	var select = $(createInputSelect('Remove current map with standard', 'map-title', 'select-map'));
+	var ul = select.find('ul');
+	ul.append(createMapsSelectContent());
+	html.append(select);
+	$('#full-maps-container').append(html);
 }
 
 function adjustOverlordCardsImages() {
@@ -1672,6 +1700,15 @@ function addHeroToMap(hero) {
 }
 
 function constructSettingsFromConfig() {
+	constructHeroesTabsFromConfig();
+	constructMonstersAndLieutenantsTabFromConfig();
+	constructMapControlsTabFromConfig();
+	constructAlliesAndFamiliarsTabFromConfig();
+	constructMiscellaneousObjectsTabFromConfig();
+	constructOverlordCardsTabFromConfig();
+}
+
+function constructHeroesTabsFromConfig() {
 	for (var i=1; i <= 4; i++) {
 		var heroConfig = config['hero' + i.toString()];
 		if (heroConfig.title != "" && heroConfig.title != undefined) {
@@ -1717,6 +1754,9 @@ function constructSettingsFromConfig() {
 			}
 		}
 	}
+}
+
+function constructMonstersAndLieutenantsTabFromConfig() {
 	removeMonsterRows();
 	if (config.monsters != undefined) {
 		for (var i = 0; i < config.monsters.length; i++) {
@@ -1748,6 +1788,28 @@ function constructSettingsFromConfig() {
 			}
 		}
 	}
+	if (config.lieutenants != undefined) {
+		for (var i = 0 ; i < config.lieutenants.length; i++) {
+			var container = addLieutenantLine();
+			var lieutenant = config.lieutenants[i];
+			updateLieutenant(container.find('.select-lieutenant li')[0], lieutenant.title, lieutenant.hasBack);
+			container.find('[name="lieutenant-x"]').val(lieutenant.x);
+			container.find('.x-title').html(getAlphabetChar(lieutenant.x - 1) + ' ');
+			container.find('[name="lieutenant-y"]').val(lieutenant.y);
+			container.find('.y-title').html(lieutenant.y.toString() + ' ');
+			container.find('[name="lieutenant-hp"]').val(lieutenant.hp);
+			var direction = lieutenant.vertical == undefined || !lieutenant.vertical ? 'horizontal' : 'vertical';
+			container.find('.direction-title').html(direction + ' ');
+			container.find('[name="lieutenant-direction"]').val(direction);
+			for (var j = 0; lieutenant.skills != undefined && j < lieutenant.skills.length; j++) {
+				container.find('[name="' + lieutenant.skills[j] + '"]').prop('checked', true);
+			}
+//			adjustAlliesSkillsImages(container.children()[0]);
+		}
+	}
+}
+
+function constructMapControlsTabFromConfig() {
 	if (config.tiles != undefined) {
 		for (var i = 0 ; i < config.tiles.length; i++) {
 			var container = addMapTileLine();
@@ -1784,6 +1846,9 @@ function constructSettingsFromConfig() {
 			container.find('.y-title').html(xs.y.toString() + ' ');
 		}
 	}
+}
+
+function constructAlliesAndFamiliarsTabFromConfig() {
 	if (config.allies != undefined) {
 		for (var i = 0 ; i < config.allies.length; i++) {
 			var container = addAllyLine();
@@ -1800,25 +1865,6 @@ function constructSettingsFromConfig() {
 			adjustAlliesSkillsImages(container.children()[0]);
 		}
 	}
-	if (config.lieutenants != undefined) {
-		for (var i = 0 ; i < config.lieutenants.length; i++) {
-			var container = addLieutenantLine();
-			var lieutenant = config.lieutenants[i];
-			updateLieutenant(container.find('.select-lieutenant li')[0], lieutenant.title, lieutenant.hasBack);
-			container.find('[name="lieutenant-x"]').val(lieutenant.x);
-			container.find('.x-title').html(getAlphabetChar(lieutenant.x - 1) + ' ');
-			container.find('[name="lieutenant-y"]').val(lieutenant.y);
-			container.find('.y-title').html(lieutenant.y.toString() + ' ');
-			container.find('[name="lieutenant-hp"]').val(lieutenant.hp);
-			var direction = lieutenant.vertical == undefined || !lieutenant.vertical ? 'horizontal' : 'vertical';
-			container.find('.direction-title').html(direction + ' ');
-			container.find('[name="lieutenant-direction"]').val(direction);
-			for (var j = 0; lieutenant.skills != undefined && j < lieutenant.skills.length; j++) {
-				container.find('[name="' + lieutenant.skills[j] + '"]').prop('checked', true);
-			}
-//			adjustAlliesSkillsImages(container.children()[0]);
-		}
-	}
 	if (config.familiars != undefined) {
 		for (var i = 0 ; i < config.familiars.length; i++) {
 			var container = addFamiliarLine();
@@ -1831,6 +1877,9 @@ function constructSettingsFromConfig() {
 			container.find('[name="familiar-hp"]').val(familiar.hp);
 		}
 	}
+}
+
+function constructMiscellaneousObjectsTabFromConfig() {
 	if (config.objectives != undefined) {
 		for (var i = 0 ; i < config.objectives.length; i++) {
 			var container = addObjectiveLine();
@@ -1846,6 +1895,9 @@ function constructSettingsFromConfig() {
 			}
 		}
 	}
+}
+
+function constructOverlordCardsTabFromConfig() {
 	for (var i = 0; config.overlord != undefined && config.overlord.cards != undefined && i < config.overlord.cards.length; i++) {
 		var card = config.overlord.cards[i];
 		updateOverlordCard(card.title, true);
