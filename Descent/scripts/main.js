@@ -597,11 +597,11 @@ function createItemsAndSearchSelect() {
 
 function createYSelectContent(oneCellOnly) {
 	var html = addOption('Clear', '', 'updateCoordinate(this, \'Clear\');');
-	for (var i = 0; i <= mapWidth; i++) {
+	for (var i = 0; i <= mapHeight; i++) {
 		html += addOption(i.toString(), 'oneCell', 'updateCoordinate(this, \'1' + i.toString() + '\');');
-		if (i <= mapWidth-1 && !oneCellOnly)
+		if (i <= mapHeight-1 && !oneCellOnly)
 			html += addOption(i.toString() + '-' + (i+1).toString(), 'twoCells', 'updateCoordinate(this, \'2' + i.toString() + '\');');
-		if (i <= mapWidth-2 && !oneCellOnly)
+		if (i <= mapHeight-2 && !oneCellOnly)
 			html += addOption(i.toString() + '-' + (i+2).toString(), 'threeCells', 'updateCoordinate(this, \'3' + i.toString() + '\');');
 	}
 	return html;
@@ -609,11 +609,11 @@ function createYSelectContent(oneCellOnly) {
 
 function createXSelectContent(oneCellOnly) {
 	var html = addOption('Clear', '', 'updateCoordinate(this, \'Clear\');');
-	for (var i = 1; i <= mapHeight; i++) {
+	for (var i = 1; i <= mapWidth; i++) {
 		html += addOption(getAlphabetChar(i-1), 'oneCell', 'updateCoordinate(this, \'1' + i.toString() + '\');');
-		if (i <= mapHeight-1 && !oneCellOnly)
+		if (i <= mapWidth-1 && !oneCellOnly)
 			html += addOption(getAlphabetChar(i-1) + '-' + getAlphabetChar(i), 'twoCells', 'updateCoordinate(this, \'2' + i.toString() + '\');');
-		if (i <= mapHeight-2 && !oneCellOnly)
+		if (i <= mapWidth-2 && !oneCellOnly)
 			html += addOption(getAlphabetChar(i-1) + '-' + getAlphabetChar(i+1), 'threeCells', 'updateCoordinate(this, \'3' + i.toString() + '\');');
 	}
 	return html;
