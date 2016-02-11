@@ -85,6 +85,8 @@ body {
 .checkbox.skirmisher,
 .checkbox.conjurer,
 .checkbox.shadowwalker,
+.checkbox.marshal,
+.checkbox.bountyhunter,
 .items-selects .apothecary,
 .items-selects .disciple,
 .items-selects .prophet,
@@ -104,7 +106,9 @@ body {
 .items-selects .bard,
 .items-selects .skirmisher,
 .items-selects .conjurer,
-.items-selects .shadowwalker {
+.items-selects .shadowwalker
+.items-selects.marshal,
+.items-selects.bountyhunter {
 	display: none;
 }
 
@@ -136,6 +140,8 @@ body {
 .showclass.skirmisher .checkbox.skirmisher,
 .showclass.conjurer .checkbox.conjurer,
 .showclass.shadowwalker .checkbox.shadowwalker,
+.showclass.marshal .checkbox.marshal,
+.showclass.bountyhunter .checkbox.bountyhunter,
 .showclass.apothecary.items-selects .apothecary,
 .showclass.disciple.items-selects .disciple,
 .showclass.prophet.items-selects .prophet,
@@ -156,6 +162,8 @@ body {
 .showclass.skirmisher.items-selects .skirmisher,
 .showclass.conjurer.items-selects .conjurer,
 .showclass.shadowwalker.items-selects .shadowwalker,
+.showclass.marshal.items-selects .marshal,
+.showclass.bountyhunter.items-selects .bountyhunter,
 .showclass {
 	display: block;
 }
