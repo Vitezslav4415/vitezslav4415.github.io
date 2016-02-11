@@ -307,7 +307,7 @@ for (var i = 0; i < RELICS_LIST.length; i++) {
 
 //Classes
 var apothecary = {},
-	bard = {};
+	bard = {},
 	disciple = {},
 	prophet = {},
 	spiritspeaker = {},
@@ -315,12 +315,14 @@ var apothecary = {},
 	berserker = {},
 	champion = {},
 	knight = {},
+	marshal = {},
 	skirmisher = {},
 	conjurer = {},
 	geomancer = {},
 	hexer = {},
 	necromancer = {},
 	runemaster = {},
+	bountyHunter = {},
 	stalker = {},
 	thief = {},
 	treasureHunter = {},
@@ -336,17 +338,19 @@ var apothecary = {},
 	berserker.title = 'Berserker';
 	champion.title = 'Champion';
 	knight.title = 'Knight';
+	marshal.title = 'Marshal';
 	skirmisher.title = 'Skirmisher';
 	conjurer.title = 'Conjurer';
 	geomancer.title = 'Geomancer';
 	hexer.title = 'Hexer';
 	necromancer.title = 'Necromancer';
 	runemaster.title = 'Runemaster';
+	bountyHunter.title = 'Bounty Hunter';
+	shadowwalker.title = 'Shadow Walker';
 	stalker.title = 'Stalker';
 	thief.title = 'Thief';
 	treasureHunter.title = 'Treasure Hunter';
 	wildlander.title = 'Wildlander';
-	shadowwalker.title = 'Shadow Walker';
 
 	//Skills
 	apothecary.skills = [
@@ -404,7 +408,20 @@ var apothecary = {},
 		['Chipped Greataxe', 0, twohand]              
 	];
 	
-	champion.skills = [
+	bountyHunter.skills = [
+   		['Chosen Target', 0],
+   		['Dark Iron Chains', 2],
+   		['Double Crossbow', 0, twohand],
+   		['Evil Eye', 2],
+   		['Lie In Wait', 1],
+   		['Longshot', 1],
+   		['Not So Fast', 1],
+   		['Payday', 3],
+   		['Rapid Fire', 3],
+   		['Undercover', 2]
+   	];
+   	
+   	champion.skills = [
 		['A Living Legend', 1],
 		['For The Cause', 3],
 		['Glory Of Battle', 1],
@@ -485,6 +502,20 @@ var apothecary = {},
 		['Shield Slam', 2],
 		['Stalwart', 3],
 		['Wooden Shield', 0, hand]
+	];
+	
+	marshal.skills = [
+		['By The Book', 2],
+		['Crushing Blow', 3],
+		['I Am The Law', 2],
+		['Just Reward', 1],
+		['Last Stand', 3],
+		['Retribution', 0],
+		['Shockwave', 1],
+		['Signet Ring', 0, item],
+		['Vigilant Watch', 2],
+		['War Hammer', 0, twohand],
+		['Zealous Fire', 1]
 	];
 	
 	necromancer.skills = [
@@ -634,9 +665,9 @@ var wiz = {},
 	wiz.title = 'Mage';
 	wiz.classes = [conjurer, geomancer, hexer, necromancer, runemaster];
 	war.title = 'Warrior';
-	war.classes = [beastmaster, berserker, champion, knight, skirmisher];
+	war.classes = [beastmaster, berserker, champion, knight, marshal, skirmisher];
 	rog.title = 'Scout';
-	rog.classes = [shadowwalker, stalker, thief, treasureHunter, wildlander];
+	rog.classes = [bountyHunter, shadowwalker, stalker, thief, treasureHunter, wildlander];
 	sup.title = 'Healer';
 	sup.classes = [apothecary, bard, disciple, prophet, spiritspeaker];			
 
