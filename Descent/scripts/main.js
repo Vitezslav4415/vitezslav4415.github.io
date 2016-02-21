@@ -33,6 +33,14 @@ function addOption(title, optionClass, functionCallback) {
 	return '<li class="' + optionClass + '"><a onclick="' + functionCallback + '">' + title + '</a></li>';
 }
 
+function adjustMonsterTrait(trait) {
+	if ($('#monster-traits input[name="' + trait + '"]').prop('checked')) {
+		$('#monsters-container').addClass('enabled' + trait);
+	} else {
+		$('#monsters-container').removeClass('enabled' + trait);
+	}
+}
+
 function adjustMonsterList() {
 	monsterList = new Set();
 	var monsters = $('[name="monster-title"]');
@@ -622,8 +630,13 @@ function createXSelectContent(oneCellOnly) {
 function createMonsterSelectContent() {
 	var html = '';
 	for (var i = 0; i < MONSTERS_LIST.length; i++) {
-		html += addOption(MONSTERS_LIST[i][0] + ' master', '', 'updateMonster(this, \'' + MONSTERS_LIST[i][0] + '\');');
-		html += addOption(MONSTERS_LIST[i][0] + ' minion', '', 'updateMonster(this, \'' + MONSTERS_LIST[i][0] + '\');');
+		var monsterClass = '';
+		for (var j = 0; j < MONSTERS_LIST[i][5].length; j++) {
+			if (monsterClass != '') monsterClass += ' ';
+			monsterClass += urlize(MONSTERS_LIST[i][5][j]);
+		}
+		html += addOption(MONSTERS_LIST[i][0] + ' master', monsterClass, 'updateMonster(this, \'' + MONSTERS_LIST[i][0] + '\');');
+		html += addOption(MONSTERS_LIST[i][0] + ' minion', monsterClass, 'updateMonster(this, \'' + MONSTERS_LIST[i][0] + '\');');
 	}
 	return html;
 }
@@ -1079,6 +1092,20 @@ function createSkillsBlock() {
 	}
 	html.append(skillsImages);
 	return html;
+}
+
+function createMonsterTraitsBlock() {
+	var html = $('#monster-traits');
+	for (var i = 0; i < MONSTER_TRAITS.length; i++) {
+		var monsterTrait = MONSTER_TRAITS[i];
+		var traitObject = $('<div>').addClass('checkbox');
+		traitObject.append($('<img src="images/monster_traits/' + urlize(monsterTrait) + '.jpg"/>'));
+		var traitInput = $('<input type="checkbox" name="' + urlize(monsterTrait) + '" onClick="adjustMonsterTrait(\'' + urlize(monsterTrait) + '\');" />');
+		traitInput.prop('checked', true);
+		traitObject.append($('<label></label>').append(traitInput));
+		$('#monsters-container').addClass('enabled' + urlize(monsterTrait));
+		html.append(traitObject);
+	}
 }
 
 function getAllySkillsBlock() {
@@ -2005,6 +2032,7 @@ $(function() {
 		addHeroLine(i);
 	}
 	createFullMapsBlock();
+	createMonsterTraitsBlock();
 	createOverlordCardsBlock();
 	drawGrid();
 	if (window.location.hash != "") {
