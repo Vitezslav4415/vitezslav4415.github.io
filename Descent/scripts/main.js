@@ -33,11 +33,26 @@ function addOption(title, optionClass, functionCallback) {
 	return '<li class="' + optionClass + '"><a onclick="' + functionCallback + '">' + title + '</a></li>';
 }
 
-function adjustMonsterTrait(trait) {
-	if ($('#monster-traits input[name="' + trait + '"]').prop('checked')) {
-		$('#monsters-container').addClass('enabled' + trait);
-	} else {
-		$('#monsters-container').removeClass('enabled' + trait);
+function updateMonstersVisibility() {
+	var selectedTraits = new Set();
+	var selectedExpansions = new Set();
+	var traitInputs = $('#monster-traits input');
+	var expansionInputs = $('#expansions input');
+	for (var i = 0; i < traitInputs.length; i++) {
+		if ($(traitInputs[i]).prop('checked')) {
+			selectedTraits.add($(traitInputs[i]).attr('name'));
+		}
+	}
+	for (var i = 0; i < expansionInputs.length; i++) {
+		if ($(expansionInputs[i]).prop('checked')) {
+			selectedExpansions.add($(expansionInputs[i]).attr('name'));
+		}
+	}
+	$('#monsters-container .select-monster li').css('display', 'none');
+	for (var trait of selectedTraits) {
+		for (var expansion of selectedExpansions) {
+			$('#monsters-container .' + trait + '.' + expansion).css('display', 'block');
+		}
 	}
 }
 
@@ -630,9 +645,9 @@ function createXSelectContent(oneCellOnly) {
 function createMonsterSelectContent() {
 	var html = '';
 	for (var i = 0; i < MONSTERS_LIST.length; i++) {
-		var monsterClass = '';
+		var monsterClass = folderize(MONSTERS_LIST[i][4]);
 		for (var j = 0; j < MONSTERS_LIST[i][5].length; j++) {
-			if (monsterClass != '') monsterClass += ' ';
+			monsterClass += ' ';
 			monsterClass += urlize(MONSTERS_LIST[i][5][j]);
 		}
 		html += addOption(MONSTERS_LIST[i][0] + ' master', monsterClass, 'updateMonster(this, \'' + MONSTERS_LIST[i][0] + '\');');
@@ -1100,12 +1115,24 @@ function createMonsterTraitsBlock() {
 		var monsterTrait = MONSTER_TRAITS[i];
 		var traitObject = $('<div>').addClass('checkbox');
 		traitObject.append($('<img src="images/monster_traits/' + urlize(monsterTrait) + '.jpg"/>'));
-		var traitInput = $('<input type="checkbox" name="' + urlize(monsterTrait) + '" onClick="adjustMonsterTrait(\'' + urlize(monsterTrait) + '\');" />');
+		var traitInput = $('<input type="checkbox" name="' + urlize(monsterTrait) + '" onClick="updateMonstersVisibility();" />');
 		traitInput.prop('checked', true);
 		traitObject.append($('<label></label>').append(traitInput));
-		$('#monsters-container').addClass('enabled' + urlize(monsterTrait));
 		html.append(traitObject);
 	}
+	return html;
+}
+
+function createExpansionsBlock() {
+	var html = $('#expansions');
+	for (var expansion of EXPANSIONS) {
+		var expansionObject = $('<div>').addClass('checkbox');
+		var expansionInput = $('<input type="checkbox" name="' + folderize(expansion) + '" onClick="updateMonstersVisibility();" />');
+		expansionInput.prop('checked', true);
+		expansionObject.append($('<label> ' + expansion + '</label>').prepend(expansionInput));
+		html.append(expansionObject);
+	}
+	return html;
 }
 
 function getAllySkillsBlock() {
@@ -2033,6 +2060,7 @@ $(function() {
 	}
 	createFullMapsBlock();
 	createMonsterTraitsBlock();
+	createExpansionsBlock();
 	createOverlordCardsBlock();
 	drawGrid();
 	if (window.location.hash != "") {

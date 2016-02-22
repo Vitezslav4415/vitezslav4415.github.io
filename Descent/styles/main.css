@@ -314,32 +314,6 @@ img.lieutenant-image-back {
 	cursor: pointer;
 }
 
-.building,
-.cave,
-.civilized,
-.cold,
-.cursed,
-.dark,
-.hot,
-.mountain,
-.water,
-.wilderness {
-	display: none;
-}
-
-.enabledbuilding .building,
-.enabledcave .cave,
-.enabledcivilized .civilized,
-.enabledcold .cold,
-.enabledcursed .cursed,
-.enableddark .dark,
-.enabledhot .hot,
-.enabledmountain .mountain,
-.enabledwater .water,
-.enabledwilderness .wilderness {
-	display: block;
-}
-
 #monster-traits img {
     height: 50px;
     margin-right: 15px;

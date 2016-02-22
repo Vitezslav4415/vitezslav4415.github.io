@@ -71,6 +71,12 @@ var MONSTERS_LIST = [
 	['Zombie',1,1,false,bg2e,[Cursed,Building]]
 ];
 
+var EXPANSIONS = new Set();
+
+for (var i=0; i < MONSTERS_LIST.length; i++) {
+	EXPANSIONS.add(MONSTERS_LIST[i][4]);
+}
+
 var LIEUTENANTS_LIST = [
 	['Ariad', true],
 	['Baron Zachareth', true],
