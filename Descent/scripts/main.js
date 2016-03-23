@@ -1347,15 +1347,17 @@ function hero(element) {
 	var container = $(element);
 	var hero = {};
 	hero.title = container.find('[name="hero-title"]').val();
-	hero.x = container.find('[name="hero-x"]').val();
-	hero.y = container.find('[name="hero-y"]').val();
-	hero.hp = container.find('[name="hero-hp"]').val();
-	hero.stamina = container.find('[name="hero-stamina"]').val();
-	hero.className = container.find('[name="class-title"]').val();
-	hero.skills = getSkills(container, hero.className);
-	hero.items = getItems(container);
-	hero.sack = getSackAndSearch(container);
-	hero.conditions = getConditions(container);
+	if (hero.title != "") {
+		hero.x = container.find('[name="hero-x"]').val();
+		hero.y = container.find('[name="hero-y"]').val();
+		hero.hp = container.find('[name="hero-hp"]').val();
+		hero.stamina = container.find('[name="hero-stamina"]').val();
+		hero.className = container.find('[name="class-title"]').val();
+		hero.skills = getSkills(container, hero.className);
+		hero.items = getItems(container);
+		hero.sack = getSackAndSearch(container);
+		hero.conditions = getConditions(container);
+	}
 	return hero;
 }
 
@@ -1728,6 +1730,7 @@ function addConditionsToImage(sourcesObject, sourceConfig) {
 }
 
 function addHeroToMap(hero) {
+	if (hero.title == '' || hero.title == undefined) return;
 	var heroObject = $('<div>');
 	var heroImage = $('<img>');
 	var heroHp = $('<div>').addClass('hit-points');
