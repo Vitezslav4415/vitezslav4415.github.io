@@ -1090,7 +1090,7 @@ for (var i = 0; i < MAP_HASES_LIST.length; i++) {
 	MAP_HASHES[MAP_HASES_LIST[i][0]] = MAP_HASES_LIST[i][1]; 
 }
 
-var mapWidth = 26;
+var mapWidth = 40;
 var mapHeight = 40;
 
 var monsterList = new Set();

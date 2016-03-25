@@ -5,7 +5,7 @@ body {
 .background {
 	background-color: black;
 	position: relative;
-	width: 1728px;
+	width: 2728px;
 	height: 2728px;
 	z-index: 100;
 	min-height: 600px;
