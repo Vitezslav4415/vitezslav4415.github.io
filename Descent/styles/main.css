@@ -329,3 +329,8 @@ img.lieutenant-image-back {
     text-align: center;
     padding-left: 15px;
 }
+
+#monsters-cards img {
+    margin-right: 10px;
+    margin-bottom: 25px;
+}
