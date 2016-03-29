@@ -33,7 +33,7 @@ function addOption(title, optionClass, functionCallback) {
 	return '<li class="' + optionClass + '"><a onclick="' + functionCallback + '">' + title + '</a></li>';
 }
 
-function updateMonstersVisibility() {
+/*function updateMonstersVisibility_old() {
 	var selectedTraits = new Set();
 	var selectedExpansions = new Set();
 	var traitInputs = $('#monster-traits input');
@@ -54,15 +54,48 @@ function updateMonstersVisibility() {
 			$('#monsters-container .' + trait + '.' + expansion).css('display', 'block');
 		}
 	}
+}*/
+
+function updateMonstersVisibility() {
+	var selectedTraits = [];
+	var selectedExpansions = [];
+	var traitInputs = $('#monster-traits input');
+	var expansionInputs = $('#expansions input');
+	for (var i = 0; i < traitInputs.length; i++) {
+		if ($(traitInputs[i]).prop('checked')) {
+			selectedTraits.push($(traitInputs[i]).attr('name'));
+		}
+	}
+	for (var i = 0; i < expansionInputs.length; i++) {
+		if ($(expansionInputs[i]).prop('checked')) {
+			selectedExpansions.push($(expansionInputs[i]).attr('name'));
+		}
+	}
+	$('#monsters-container .select-monster li').css('display', 'none');
+	for (var i = 0; i < selectedTraits.length; i++) {
+		for (var j = 0; j < selectedExpansions.length; j++) {
+			$('#monsters-container .' + selectedTraits[i] + '.' + selectedExpansions[j]).css('display', 'block');
+		}
+	}
 }
 
 function adjustMonsterList() {
-	monsterList = new Set();
+	monsterList = [];
 	var monsters = $('[name="monster-title"]');
 	var monsterCardsContainer = $('#monsters-cards');
 	monsterCardsContainer.html('');
 	for (var i = 0; i < monsters.length; i++) {
-		monsterList.add($(monsters[i]).val());
+		var title = $(monsters[i]).val();
+		var inSet = false; //there is not Set in old browsers - thats why such a poor code is used
+		for (var j = 0; j < monsterList.length; i++) {
+			if (monsterList[j] == title) {
+				inSet = true;
+				break;
+			}
+		}
+		if (!inSet) {
+			monsterList.push();
+		}
 	}
 	var monsterListIterator = monsterList.values();
 	var actAddition = actOne ? '_act1' : '_act2';
@@ -1137,7 +1170,8 @@ function createMonsterTraitsBlock() {
 
 function createExpansionsBlock() {
 	var html = $('#expansions');
-	for (var expansion of EXPANSIONS) {
+	for (var i = 0; i < EXPANSIONS.length; i++) {
+		var expansion = EXPANSIONS[i];
 		var expansionObject = $('<div>').addClass('checkbox');
 		var expansionInput = $('<input type="checkbox" name="' + folderize(expansion) + '" onClick="updateMonstersVisibility();" />');
 		expansionInput.prop('checked', true);

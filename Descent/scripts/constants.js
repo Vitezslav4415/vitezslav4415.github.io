@@ -71,11 +71,11 @@ var MONSTERS_LIST = [
 	['Zombie',1,1,false,bg2e,[Cursed,Building]]
 ];
 
-var EXPANSIONS = new Set();
+var EXPANSIONS = [bg2e, BoW, CoD, CotF, GoD, LoR, LoW, MoR, OotO, SoE, SoN, SotS, TF, ToC, VoD];
 
-for (var i=0; i < MONSTERS_LIST.length; i++) {
+/*for (var i=0; i < MONSTERS_LIST.length; i++) {
 	EXPANSIONS.add(MONSTERS_LIST[i][4]);
-}
+}*/
 
 var LIEUTENANTS_LIST = [
 	['Ariad', true],
@@ -1093,4 +1093,4 @@ for (var i = 0; i < MAP_HASES_LIST.length; i++) {
 var mapWidth = 40;
 var mapHeight = 40;
 
-var monsterList = new Set();
+var monsterList = [];
