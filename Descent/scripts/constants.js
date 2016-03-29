@@ -744,6 +744,7 @@ var HEROES_LIST = [
 	['Lord Howthorne',12,4,war],
 	['Ispher',10,4,sup],
 	['Master Thorn',8,4,wiz],
+	['Nanok of the Blade',12,4,war],
 	['Nara the Fang',10,4,war],
 	['Sir Valadir',12,4,war],
 	['Challara',10,4,wiz],
