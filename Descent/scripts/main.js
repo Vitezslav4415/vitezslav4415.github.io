@@ -97,12 +97,9 @@ function adjustMonsterList() {
 			monsterList.push();
 		}
 	}
-	var monsterListIterator = monsterList.values();
 	var actAddition = actOne ? '_act1' : '_act2';
-	for (var monster of monsterList) {
-		if (monster == undefined) {
-			continue;
-		}
+	for (var i = 0; i < monsterList.length; i++) {
+		var monster = monsterList[i];
 		var monsterCard = $('<img>');
 		monsterCard.attr('src', 'images/monsters_cards/' + urlize(monster) + actAddition + '.jpg');
 		monsterCardsContainer.append(monsterCard);
