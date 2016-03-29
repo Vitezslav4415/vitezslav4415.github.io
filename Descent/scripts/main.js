@@ -87,10 +87,9 @@ function adjustMonsterList() {
 	for (var i = 0; i < monsters.length; i++) {
 		var title = $(monsters[i]).val();
 		var inSet = false; //there is not Set in old browsers - thats why such a poor code is used
-		for (var j = 0; j < monsterList.length; i++) {
+		for (var j = 0; j < monsterList.length && !inSet; j++) {
 			if (monsterList[j] == title) {
 				inSet = true;
-				break;
 			}
 		}
 		if (!inSet) {
