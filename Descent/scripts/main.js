@@ -94,7 +94,7 @@ function adjustMonsterList() {
 			}
 		}
 		if (!inSet) {
-			monsterList.push();
+			monsterList.push(title);
 		}
 	}
 	var actAddition = actOne ? '_act1' : '_act2';
