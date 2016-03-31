@@ -241,7 +241,9 @@ function clearHero(element) {
 	container.children('img').attr('src', 'images/heroes_cards/default.jpg');
 	var heroId = container.parent().attr('id');
 	heroId = heroId.substring(0, 5);
-	$('[href="#' + heroId + '"]').html('Hero ' + heroId.substring(4, 5));
+	var heroMenuIcon = $('[href="#' + heroId + '"]');
+	heroMenuIcon.html('');
+	heroMenuIcon.append($('<img src="images/heroes_tokens/unknown.png"/>'));
 }
 
 function updateArchetype(element, value) {
