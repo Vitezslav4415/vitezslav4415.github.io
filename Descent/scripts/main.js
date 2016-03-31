@@ -218,7 +218,11 @@ function updateHero(element, value) {
 	container.find('input[name="hero-stamina"]').val(HEROES[value].stamina);
 	container.children('img').attr('src', 'images/heroes_cards/' + urlize(value) + '.jpg');
 	var heroId = container.parent().attr('id');
-	$('[href="#' + heroId + '"]').html(value);
+	var heroImage = $('<img>');
+	heroImage.attr('src', 'images/heroes_tokens/' + urlize(value) + '.png');
+	var heroMenuIcon = $('[href="#' + heroId + '"]');
+	heroMenuIcon.html('');
+	heroMenuIcon.append(heroImage);
 	updateArchetype(element, HEROES[value].archetype.title);
 }
 
@@ -2098,6 +2102,11 @@ function getMapHash() {
 	console.log(Base64.encode(JSON.stringify(config2)));
 }
 
+function switchToMap() {
+//	$('[href="#map"]').tab('show');
+	$('[href="#map"]').click();
+}
+
 $(function() {
 	addMonsterLine();
 	for (var i = 1; i <= 4; i++) {
@@ -2122,5 +2131,9 @@ $(function() {
 	$('.nav-tabs a').click(function (e) {
 		e.preventDefault();
 		$(this).tab('show');
+	});
+	$('.tab-pane').append($('<div class="close" onclick="switchToMap();">x</div>'));
+	$('#map').click(function() {
+		switchToMap();
 	});
 });

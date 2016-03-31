@@ -11,21 +11,21 @@
 	</head>
 	<body>
 		<div role="tabpanel">
-			<ul class="nav nav-tabs" role="tablist">
-				<li role="presentation" class="active"><a href="#map" aria-controls="home" role="tab" data-toggle="tab" onclick="populate();">Map</a></li>
-				<li role="presentation"><a href="#map-controls" aria-controls="home" role="tab" data-toggle="tab">Map Controls</a></li>
-				<li role="presentation"><a href="#monsters" aria-controls="profile" role="tab" data-toggle="tab">Monsters and lieutenants</a></li>
+			<ul class="nav nav-tabs" role="tablist" id="tabs">
+				<li role="presentation" class="active map-icon-container"><a href="#map" aria-controls="home" role="tab" data-toggle="tab" onclick="populate();">Map</a></li>
+				<li role="presentation"><a href="#map-controls" aria-controls="home" role="tab" data-toggle="tab"><img src="images/map_tiles/ExitA.png" height="64px"/></a></li>
+				<li role="presentation"><a href="#monsters" aria-controls="profile" role="tab" data-toggle="tab"><img src="images/monsters_tokens/baron_zachareth.png"/></a></li>
 				<li role="presentation"><a href="#hero1" aria-controls="messages" role="tab" data-toggle="tab">Hero 1</a></li>
 				<li role="presentation"><a href="#hero2" aria-controls="messages" role="tab" data-toggle="tab">Hero 2</a></li>
 				<li role="presentation"><a href="#hero3" aria-controls="messages" role="tab" data-toggle="tab">Hero 3</a></li>
 				<li role="presentation"><a href="#hero4" aria-controls="messages" role="tab" data-toggle="tab">Hero 4</a></li>
-				<li role="presentation"><a href="#familiars" aria-controls="messages" role="tab" data-toggle="tab">Allies and familiars</a></li>
-				<li role="presentation"><a href="#overlord" aria-controls="messages" role="tab" data-toggle="tab">Overlord cards</a></li>
-				<li role="presentation"><a href="#misc" aria-controls="settings" role="tab" data-toggle="tab">Miscellaneous objects</a></li>
-				<li role="presentation"><a href="#" aria-controls="settings" role="tab" id="tinyUrl" style="pointer-events: none;">Place for tiny link</a></li>
+				<li role="presentation" class="no-border-radius"><a href="#familiars" aria-controls="messages" role="tab" data-toggle="tab""><img src="images/familiars_tokens/reanimate.png"/></a></li>
+				<li role="presentation" class="no-border-radius"><a href="#overlord" aria-controls="messages" role="tab" data-toggle="tab"><img src="images/overlord_cards/overlord_back.jpg" height="64px"/></a></li>
+				<li role="presentation"><a href="#misc" aria-controls="settings" role="tab" data-toggle="tab"><img src="images/misc/unknown.png"/></a></li>
 			</ul>
 			
-			<div class="tab-content">
+			<div id="tinyUrl">Place for tiny link</div>
+			<div class="tab-content" id="content">
 				<div role="tabpanel" class="tab-pane active" id="map">
 					<div class="background">
 						<div class="map"></div>
