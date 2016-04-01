@@ -1073,6 +1073,7 @@ function addFamiliarLine() {
 	addUnitLine(familiar, 'Familiar');
 	
 	familiar.find('.select-familiar ul').append(createFamiliarsSelectContent());
+	familiar.find('[name="familiar-hp"]').attr('name', 'hp');
 	familiar.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
 	familiar.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
 	familiar.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
@@ -1542,7 +1543,7 @@ function getFamiliars() {
 		familiar.title = container.find('[name="familiar-title"]').val();
 		familiar.x = container.find('[name="familiar-x"]').val();
 		familiar.y = container.find('[name="familiar-y"]').val();
-		familiar.hp = container.find('[name="familiar-hp"]').val();
+		familiar.hp = container.find('[name="hp"]').val();
 		familiar.conditions = getConditions(container);
 		result.push(familiar);
 	}
@@ -1740,8 +1741,6 @@ function constructMapFromConfig() {
 		var familiar = config.familiars[i];
 		var familiarObject = $('<div>');
 		var familiarImage = $('<img>');
-		var familiarHp = $('<div>').addClass('hit-points');
-		familiarHp.html(familiar.hp.toString());
 		var folder = 'images/familiars_tokens/';
 		familiarObject.css({
 			'position' : 'absolute',
@@ -1750,7 +1749,11 @@ function constructMapFromConfig() {
 		});
 		familiarImage.attr('src', folder + urlize(familiar.title) + '.png');
 		familiarObject.append(familiarImage);
-		familiarObject.append(familiarHp);
+		if (familiar.hp != undefined && familiar.hp != '') {
+			var familiarHp = $('<div>').addClass('hit-points');
+			familiarHp.html(familiar.hp.toString());
+			familiarObject.append(familiarHp);
+		}
 		addConditionsToImage(familiarObject, familiar.conditions);
 		$('#map .figures').append(familiarObject);
 	}
