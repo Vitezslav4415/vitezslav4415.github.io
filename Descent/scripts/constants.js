@@ -789,8 +789,9 @@ FAMILIARS_LIST = [
 	'Reanimate',
 	'Shadow',
 	'Skye',
+	'Summoned Stone',
+	'Trap',
 	'Wolf',
-	'Stone',
 	'Villager Female',
 	'Villager Male'
 ];
