@@ -1678,6 +1678,27 @@ function constructMapFromConfig() {
 		$('#map .map').append(objectiveObject);
 	}
 	
+	for (var i = 0; config.familiars != undefined && i < config.familiars.length; i++) {
+		var familiar = config.familiars[i];
+		var familiarObject = $('<div>');
+		var familiarImage = $('<img>');
+		var folder = 'images/familiars_tokens/';
+		familiarObject.css({
+			'position' : 'absolute',
+			'left' : (familiar.x * cellSize).toString() + 'px',
+			'top' : (familiar.y * cellSize).toString() + 'px'
+		});
+		familiarImage.attr('src', folder + urlize(familiar.title) + '.png');
+		familiarObject.append(familiarImage);
+		if (familiar.hp != undefined && familiar.hp != '') {
+			var familiarHp = $('<div>').addClass('hit-points');
+			familiarHp.html(familiar.hp.toString());
+			familiarObject.append(familiarHp);
+		}
+		addConditionsToImage(familiarObject, familiar.conditions);
+		$('#map .figures').append(familiarObject);
+	}
+	
 	for (var i = 0; config.monsters != undefined && i < config.monsters.length; i++) {
 		var monster = config.monsters[i];
 		var monsterObject = $('<div>');
@@ -1735,27 +1756,6 @@ function constructMapFromConfig() {
 		lieutenantObject.append(lieutenantHp);
 		addConditionsToImage(lieutenantObject, lieutenant.conditions);
 		$('#map .figures').append(lieutenantObject);
-	}
-	
-	for (var i = 0; config.familiars != undefined && i < config.familiars.length; i++) {
-		var familiar = config.familiars[i];
-		var familiarObject = $('<div>');
-		var familiarImage = $('<img>');
-		var folder = 'images/familiars_tokens/';
-		familiarObject.css({
-			'position' : 'absolute',
-			'left' : (familiar.x * cellSize).toString() + 'px',
-			'top' : (familiar.y * cellSize).toString() + 'px'
-		});
-		familiarImage.attr('src', folder + urlize(familiar.title) + '.png');
-		familiarObject.append(familiarImage);
-		if (familiar.hp != undefined && familiar.hp != '') {
-			var familiarHp = $('<div>').addClass('hit-points');
-			familiarHp.html(familiar.hp.toString());
-			familiarObject.append(familiarHp);
-		}
-		addConditionsToImage(familiarObject, familiar.conditions);
-		$('#map .figures').append(familiarObject);
 	}
 	
 	addHeroToMap(config.hero1);
