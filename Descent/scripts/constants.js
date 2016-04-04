@@ -1096,3 +1096,4 @@ var mapWidth = 40;
 var mapHeight = 40;
 
 var monsterList = [];
+var mapObjects = [];

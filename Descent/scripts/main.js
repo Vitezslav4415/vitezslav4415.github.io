@@ -1590,10 +1590,19 @@ function populate() {
 	constructMapFromConfig();
 }
 
+function addMapObject(xCoordinate, yCoordinate, object, priority) {
+	var coordinateObjects = mapObjects[[xCoordinate, yCoordinate]];
+	if (coordinateObjects == undefined) {
+		coordinateObjects = mapObjects[[xCoordinate, yCoordinate]] = [];
+	}
+	coordinateObjects.push({"object":object, "priority": priority});
+}
+
 function constructMapFromConfig() {
 	/*under construction*/;
 	$('#map .map').html('');
 	$('#map .figures').html('');
+	mapObjects = [];
 	
 	for (var i = 0; config.tiles != undefined && i < config.tiles.length; i++) {
 		var tile = config.tiles[i];
@@ -1663,10 +1672,12 @@ function constructMapFromConfig() {
 		var objectiveObject = $('<div>');
 		var objectiveImage = $('<img>');
 		var folder = 'images/misc/';
+		var z_index = 0;
 		objectiveObject.css({
 			'position' : 'absolute',
 			'left' : (objective.x * cellSize).toString() + 'px',
-			'top' : (objective.y * cellSize).toString() + 'px'
+			'top' : (objective.y * cellSize).toString() + 'px',
+			'z-index' : z_index
 		});
 		objectiveImage.attr('src', folder + urlize(objective.title) + '.png');
 		objectiveObject.append(objectiveImage);
@@ -1675,6 +1686,7 @@ function constructMapFromConfig() {
 			objectiveHp.html(objective.hp.toString());
 			objectiveObject.append(objectiveHp);
 		}
+		addMapObject(objective.x, objective.y, objectiveObject, z_index);
 		$('#map .map').append(objectiveObject);
 	}
 	
@@ -1683,10 +1695,12 @@ function constructMapFromConfig() {
 		var familiarObject = $('<div>');
 		var familiarImage = $('<img>');
 		var folder = 'images/familiars_tokens/';
+		var z_index = 1;
 		familiarObject.css({
 			'position' : 'absolute',
 			'left' : (familiar.x * cellSize).toString() + 'px',
-			'top' : (familiar.y * cellSize).toString() + 'px'
+			'top' : (familiar.y * cellSize).toString() + 'px',
+			'z-index' : z_index
 		});
 		familiarImage.attr('src', folder + urlize(familiar.title) + '.png');
 		familiarObject.append(familiarImage);
@@ -1696,6 +1710,7 @@ function constructMapFromConfig() {
 			familiarObject.append(familiarHp);
 		}
 		addConditionsToImage(familiarObject, familiar.conditions);
+		addMapObject(familiar.x, familiar.y, familiarObject, z_index);
 		$('#map .figures').append(familiarObject);
 	}
 	
@@ -1704,18 +1719,21 @@ function constructMapFromConfig() {
 		var monsterObject = $('<div>');
 		var monsterImage = $('<img>');
 		var monsterHp = $('<div>').addClass('hit-points');
+		var z_index = 2;
 		monsterHp.html(monster.hp == undefined ? '' : monster.hp.toString());
 		var folder = 'images/monsters_tokens/';
 		if (monster.vertical) folder += 'vertical/';
 		monsterObject.css({
 			'position' : 'absolute',
 			'left' : (monster.x * cellSize).toString() + 'px',
-			'top' : (monster.y * cellSize).toString() + 'px'
+			'top' : (monster.y * cellSize).toString() + 'px',
+			'z-index' : z_index
 		});
 		monsterImage.attr('src', folder + urlize(monster.title) + (monster.master ? '_master.png' : '.png'));
 		monsterObject.append(monsterImage);
 		monsterObject.append(monsterHp);
 		addConditionsToImage(monsterObject, monster.conditions);
+		addMapObject(monster.x, monster.y, monsterObject, z_index);
 		$('#map .figures').append(monsterObject);
 	}
 	
@@ -1726,15 +1744,18 @@ function constructMapFromConfig() {
 		var allyHp = $('<div>').addClass('hit-points');
 		allyHp.html(ally.hp.toString());
 		var folder = 'images/allies_tokens/';
+		var z_index = 2;
 		allyObject.css({
 			'position' : 'absolute',
 			'left' : (ally.x * cellSize).toString() + 'px',
-			'top' : (ally.y * cellSize).toString() + 'px'
+			'top' : (ally.y * cellSize).toString() + 'px',
+			'z-index' : z_index
 		});
 		allyImage.attr('src', folder + urlize(ally.title) + '.png');
 		allyObject.append(allyImage);
 		allyObject.append(allyHp);
 		addConditionsToImage(allyObject, ally.conditions);
+		addMapObject(ally.x, ally.y, allyObject, z_index);
 		$('#map .figures').append(allyObject);
 	}
 	
@@ -1745,16 +1766,19 @@ function constructMapFromConfig() {
 		var lieutenantHp = $('<div>').addClass('hit-points');
 		lieutenantHp.html(lieutenant.hp.toString());
 		var folder = 'images/monsters_tokens/';
+		var z_index = 2;
 		if (lieutenant.vertical != undefined && lieutenant.vertical) folder += 'vertical/';
 		lieutenantObject.css({
 			'position' : 'absolute',
 			'left' : (lieutenant.x * cellSize).toString() + 'px',
-			'top' : (lieutenant.y * cellSize).toString() + 'px'
+			'top' : (lieutenant.y * cellSize).toString() + 'px',
+			'z-index' : z_index
 		});
 		lieutenantImage.attr('src', folder + urlize(lieutenant.title) + '.png');
 		lieutenantObject.append(lieutenantImage);
 		lieutenantObject.append(lieutenantHp);
 		addConditionsToImage(lieutenantObject, lieutenant.conditions);
+		addMapObject(lieutenant.x, lieutenant.y, lieutenantObject, z_index);
 		$('#map .figures').append(lieutenantObject);
 	}
 	
@@ -1762,6 +1786,8 @@ function constructMapFromConfig() {
 	addHeroToMap(config.hero2);
 	addHeroToMap(config.hero3);
 	addHeroToMap(config.hero4);
+	
+	adjustOverlappingImages();
 	
 	setShortLink();
 }
@@ -1784,6 +1810,7 @@ function addHeroToMap(hero) {
 	if (hero.title == '' || hero.title == undefined) return;
 	var heroObject = $('<div>');
 	var heroImage = $('<img>');
+	var z_index = 2;
 	var heroHp = $('<div>').addClass('hit-points');
 	heroHp.html(hero.hp.toString());
 	var heroStamina = $('<div>').addClass('stamina');
@@ -1792,7 +1819,8 @@ function addHeroToMap(hero) {
 	heroObject.css({
 		'position' : 'absolute',
 		'left' : (hero.x * cellSize).toString() + 'px',
-		'top' : (hero.y * cellSize).toString() + 'px'
+		'top' : (hero.y * cellSize).toString() + 'px',
+		'z-index' : z_index
 	});
 	heroImage.attr('src', folder + urlize(hero.title) + '.png');
 	if (hero.title == 'Leoric of the book') {
@@ -1813,7 +1841,27 @@ function addHeroToMap(hero) {
 	heroObject.append(heroStamina);
 	if (hero.hp == 0) heroObject.addClass('secondary');
 	addConditionsToImage(heroObject, hero.conditions);
+	addMapObject(hero.x, hero.y, heroObject, z_index);
 	$('#map .figures').append(heroObject);
+}
+
+function adjustOverlappingImages() {
+	for (var coordinate in mapObjects) {
+		var tileObjects = mapObjects[coordinate];
+		if (tileObjects == undefined || tileObjects.length == undefined || tileObjects.length <= 1) {
+			continue;
+		}
+		tileObjects.sort(function (a, b) {
+			  return a.priority - b.priority;
+			});
+		for (var i = 0; i < tileObjects.length; i++) {
+			var offset = 10 * (tileObjects.length - i - 1);
+			var leftString = tileObjects[i].object.css('left');
+			tileObjects[i].object.css('left', (parseInt(leftString.substring(0,leftString.length - 2)) + offset).toString() + "px");
+			var topString = tileObjects[i].object.css('top');
+			tileObjects[i].object.css('top', (parseInt(topString.substring(0,topString.length - 2)) + offset).toString() + "px");
+		}
+	}
 }
 
 function constructSettingsFromConfig() {
