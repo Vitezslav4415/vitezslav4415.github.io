@@ -1991,7 +1991,7 @@ function constructAlliesAndFamiliarsTabFromConfig() {
 			container.find('.x-title').html(getAlphabetChar(familiar.x - 1) + ' ');
 			container.find('[name="familiar-y"]').val(familiar.y);
 			container.find('.y-title').html(familiar.y.toString() + ' ');
-			container.find('[name="familiar-hp"]').val(familiar.hp);
+			container.find('[name="hp"]').val(familiar.hp);
 		}
 	}
 }
