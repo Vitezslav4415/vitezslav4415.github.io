@@ -941,6 +941,15 @@ function clearMiscellaneousObjectsTab() {
 	$('#objective-container .select-row').remove();
 }
 
+function clearHeroesSackAndSearchItems() {
+	$('.sack-container img').remove();
+}
+
+function clearFamiliarsAndAllies() {
+	$('#familiars-container .select-row').remove();
+	$('#allies-container .select-row').remove();
+}
+
 function addCondition(button) {
 	var condition = $(createInputSelect('Select condition', 'condition-title', 'select-condition')).attr('id', 'condition' + conditionNumber.toString());
 	condition.find('ul').append(createConditionSelectContent());
@@ -2180,6 +2189,8 @@ function moveObjectsOnMap(right, down) {
 	constructMapFromConfig();
 	clearMapControlTab();
 	clearMiscellaneousObjectsTab();
+	clearHeroesSackAndSearchItems();
+	clearFamiliarsAndAllies();
 	constructSettingsFromConfig();
 	updateConfig();
 }
