@@ -2160,6 +2160,34 @@ function switchToMap() {
 	$('[href="#map"]').click();
 }
 
+function moveObjectsOnMap(right, down) {
+	for (var n in config) {
+		var configPart = config[n];
+		if (configPart == undefined) continue;
+		if (configPart.x != undefined) {
+			configPart.x = (parseInt(configPart.x) + right).toString();
+			configPart.y = (parseInt(configPart.y) + down).toString();
+		} else {
+			for (var i = 0; i < configPart.length && configPart.length != undefined; i++) {
+				if (configPart[i].x != undefined) {
+					configPart[i].x = (parseInt(configPart[i].x) + right).toString();
+					configPart[i].y = (parseInt(configPart[i].y) + down).toString();;
+				}
+			}
+			
+		}
+	}
+	constructMapFromConfig();
+	clearMapControlTab();
+	clearMiscellaneousObjectsTab();
+	constructSettingsFromConfig();
+	updateConfig();
+}
+
+function toggleMapControls() {
+	$('#map-transformation div').toggle();
+}
+
 $(function() {
 	addMonsterLine();
 	for (var i = 1; i <= 4; i++) {

@@ -25,6 +25,15 @@
 			</ul>
 			
 			<div id="tinyUrl">Place for tiny link</div>
+			<div id="map-transformation">
+				<button type="button" class="btn btn-link" aria-expanded="false" onclick="toggleMapControls();">Show/hide map controls</button>
+				<div class="btn-group" style="display: none;">
+					<button type="button" class="btn" aria-expanded="false" onclick="moveObjectsOnMap(1,0);">Move map right</button>
+					<button type="button" class="btn" aria-expanded="false" onclick="moveObjectsOnMap(-1,0);">Move map left</button>
+					<button type="button" class="btn" aria-expanded="false" onclick="moveObjectsOnMap(0,1);">Move map down</button>
+					<button type="button" class="btn" aria-expanded="false" onclick="moveObjectsOnMap(0,-1);">Move map up</button>
+				</div>
+			</div>
 			<div class="tab-content" id="content">
 				<div role="tabpanel" class="tab-pane active" id="map">
 					<div class="background">

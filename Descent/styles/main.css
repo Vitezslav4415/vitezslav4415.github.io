@@ -338,7 +338,16 @@ img.lieutenant-image-back {
 #tinyUrl {
 	pointer-events: none;
 	color: white;
+}
+
+#tinyUrl, #map-transformation {
+	display: inline-block;
     padding-left: 20px;
+}
+
+#map-transformation .btn-link {
+	color: white;
+	outline: none;
 }
 
 #tabs .map-icon-container {
