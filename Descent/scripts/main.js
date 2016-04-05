@@ -945,6 +945,15 @@ function clearHeroesSackAndSearchItems() {
 	$('.sack-container img').remove();
 }
 
+function clearHeroesConditions() {
+	$('.select-condition').remove();
+	$('[name="condition-title"]').remove();
+}
+
+function clearLieutenants() {
+	$('#lieutenants-container .select-row').remove();
+}
+
 function clearFamiliarsAndAllies() {
 	$('#familiars-container .select-row').remove();
 	$('#allies-container .select-row').remove();
@@ -2190,6 +2199,8 @@ function moveObjectsOnMap(right, down) {
 	clearMapControlTab();
 	clearMiscellaneousObjectsTab();
 	clearHeroesSackAndSearchItems();
+	clearHeroesConditions();
+	clearLieutenants();
 	clearFamiliarsAndAllies();
 	constructSettingsFromConfig();
 	updateConfig();
