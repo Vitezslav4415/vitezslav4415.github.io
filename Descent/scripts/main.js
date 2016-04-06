@@ -2178,6 +2178,15 @@ function switchToMap() {
 	$('[href="#map"]').click();
 }
 
+function clearAdditionalElements() {
+	clearMapControlTab();
+	clearMiscellaneousObjectsTab();
+	clearHeroesSackAndSearchItems();
+	clearHeroesConditions();
+	clearLieutenants();
+	clearFamiliarsAndAllies();
+}
+
 function moveObjectsOnMap(right, down) {
 	for (var n in config) {
 		var configPart = config[n];
@@ -2196,14 +2205,191 @@ function moveObjectsOnMap(right, down) {
 		}
 	}
 	constructMapFromConfig();
-	clearMapControlTab();
-	clearMiscellaneousObjectsTab();
-	clearHeroesSackAndSearchItems();
-	clearHeroesConditions();
-	clearLieutenants();
-	clearFamiliarsAndAllies();
+	clearAdditionalElements();
 	constructSettingsFromConfig();
 	updateConfig();
+}
+
+function rotateMap(clockwise) {
+	var realWidth = 0;
+	var realHeight = 0; 
+	for (var i = 0; i < config.tiles.length; i++) {
+		var tile = config.tiles[i];
+		var rightSide, bottomSide;
+		if (tile.angle == 90 || tile.angle == 270) {
+			rightSide = parseInt(tile.x) + MAP_TILES_SIZES[tile.title].height - 1;
+			bottomSide = parseInt(tile.y) + MAP_TILES_SIZES[tile.title].width - 1 + 1; //+1 for the nubering is starting from 0
+		} else {
+			rightSide = parseInt(tile.x) + MAP_TILES_SIZES[tile.title].width - 1;
+			bottomSide = parseInt(tile.y) + MAP_TILES_SIZES[tile.title].height - 1 + 1;
+		}
+		if (rightSide > realWidth) realWidth = rightSide;
+		if (bottomSide > realHeight) realHeight = bottomSide;
+	}
+	rotateTiles(clockwise, realWidth, realHeight);
+	rotateDoors(clockwise, realWidth, realHeight);
+	rotateMonsters(clockwise, realWidth, realHeight);
+	rotateLieutenants(clockwise, realWidth, realHeight);
+	rotateHeroes(clockwise, realWidth, realHeight);
+	rotateAllies(clockwise, realWidth, realHeight);
+	rotateFamiliars(clockwise, realWidth, realHeight);
+	rotateObjectives(clockwise, realWidth, realHeight);
+	constructMapFromConfig();
+	clearAdditionalElements();
+	constructSettingsFromConfig();
+	updateConfig();
+}
+
+function rotateTiles(clockwise, realWidth, realHeight) {
+	if (clockwise) {
+		for (var i = 0; i < config.tiles.length; i++) {
+			var tile = config.tiles[i];
+			var tileHeight;
+			if (tile.angle == 270 || tile.angle == 90) {
+				tileHeight = MAP_TILES_SIZES[tile.title].width;
+			} else {
+				tileHeight = MAP_TILES_SIZES[tile.title].height;
+			}
+			if (tile.angle == 270) {
+				tile.angle = "0";
+			} else {
+				tile.angle = (parseInt(tile.angle) + 90).toString();
+			}
+			rotateObjectClockwise(tile, tileHeight, realHeight);
+		}
+	} else {
+		for (var i = 0; i < config.tiles.length; i++) {
+			var tile = config.tiles[i];
+			var tileWidth;
+			if (tile.angle == 270 || tile.angle == 90) {
+				tileWidth = MAP_TILES_SIZES[tile.title].height;
+			} else {
+				tileWidth = MAP_TILES_SIZES[tile.title].width;
+			}
+			if (tile.angle == 0) {
+				tile.angle = "270";
+			} else {
+				tile.angle = (parseInt(tile.angle) - 90).toString();
+			}
+			rotateObjectCounterClockwise(tile, tileWidth, realWidth);
+		}
+	}
+}
+
+function rotateDoors(clockwise, realWidth, realHeight) {
+	for (var i = 0; i < config.doors.length; i++) {
+		var door = config.doors[i];
+		var height, width;
+		if (door.vertical) {
+			height = 4;
+			width = 2;
+		} else {
+			height = 2;
+			width = 4;
+		}
+		door.vertical = !door.vertical;
+		rotateObject(clockwise, door, height, width, realHeight, realWidth);
+	}
+}
+
+function rotateXs(clockwise, realWidth, realHeight) {
+	for (var i = 0; i < config.doors.length; i++) {
+		var x = config.doors[i];
+		var height, width;
+		height = parseInt(x.title.substring(0,1));
+		width = height;
+		rotateObject(clockwise, x, height, width, realHeight, realWidth);
+	}
+}
+
+function rotateMonsters(clockwise, realWidth, realHeight) {
+	for (var i = 0; i < config.monsters.length; i++) {
+		var monster = config.monsters[i];
+		var height, width;
+		if (monster.vertical) {
+			height = MONSTERS[monster.title].width;
+			width = MONSTERS[monster.title].height;
+		} else {
+			height = MONSTERS[monster.title].height;
+			width = MONSTERS[monster.title].width;
+		}
+		monster.vertical = !monster.vertical;
+		rotateObject(clockwise, monster, height, width, realHeight, realWidth);
+	}
+}
+
+function rotateLieutenants(clockwise, realWidth, realHeight) {
+	if (config.lieutenants == undefined) {
+		return;
+	}
+	for (var i = 0; i < config.lieutenants.length; i++) {
+		var lieutenant = config.lieutenants[i];
+		var height, width;
+		if (lieutenant.vertical) {
+			height = LIEUTENANTS[lieutenant.title].width;
+			width = LIEUTENANTS[lieutenant.title].height;
+		} else {
+			height = LIEUTENANTS[lieutenant.title].height;
+			width = LIEUTENANTS[lieutenant.title].width;
+		}
+		lieutenant.vertical = !lieutenant.vertical;
+		rotateObject(clockwise, lieutenant, height, width, realHeight, realWidth);
+	}
+}
+
+function rotateHeroes(clockwise, realWidth, realHeight) {
+	for (var i = 0; i < 4; i++) {
+		var hero = config['hero' + (i+1).toString()];
+		if (config.hero4.title == '') {
+			continue;
+		}
+		var height = 1, width = 1;
+		rotateObject(clockwise, hero, height, width, realHeight, realWidth);
+	}
+}
+
+function rotateAllies(clockwise, realWidth, realHeight) {
+	for (var i = 0; i < config.allies.length; i++) {
+		var ally = config.allies[i];
+		var height = 1, width = 1;
+		rotateObject(clockwise, ally, height, width, realHeight, realWidth);
+	}
+}
+
+function rotateFamiliars(clockwise, realWidth, realHeight) {
+	for (var i = 0; i < config.familiars.length; i++) {
+		var familiar = config.familiars[i];
+		var height = 1, width = 1;
+		rotateObject(clockwise, familiar, height, width, realHeight, realWidth);
+	}
+}
+
+function rotateObjectives(clockwise, realWidth, realHeight) {
+	for (var i = 0; i < config.objectives.length; i++) {
+		var objective = config.objectives[i];
+		var height = 1, width = 1;
+		rotateObject(clockwise, objective, height, width, realHeight, realWidth);
+	}
+}
+
+function rotateObjectClockwise(object, height, canvasHeight) {
+	var newX = (canvasHeight - parseInt(object.y) + 1 - height).toString(); //+1 and -1 lower are made becays numbering on x starts width 1 and on y - with 0 
+	object.y = (parseInt(object.x) - 1).toString();
+	object.x = newX;
+}
+
+function rotateObjectCounterClockwise(object, width, canvasWidth) {
+	var newY = (canvasWidth - parseInt(object.x) - width + 1).toString(); 
+	object.x = (parseInt(object.y) + 1).toString();
+	object.y = newY;
+}
+
+function rotateObject(clockwise, object, height, width, canvasHeight, canvasWidth) {
+	if (clockwise) {
+		rotateObjectClockwise(object, height, canvasHeight);
+	} else {
+		rotateObjectCounterClockwise(object, width, canvasWidth);
+	}
 }
 
 function toggleMapControls() {
