@@ -336,7 +336,7 @@ img.lieutenant-image-back {
 }
 
 #tinyUrl {
-	pointer-events: none;
+/* 	pointer-events: none; */
 	color: white;
 }
 
