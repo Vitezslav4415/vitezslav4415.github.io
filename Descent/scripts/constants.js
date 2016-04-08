@@ -929,6 +929,7 @@ OBJECTIVES_LIST = [
 ];
 
 MISCELLANEOUS_LIST = [
+	'Challenge',
 	'Search',
 	'Secret Entrance Indoors',
 	'Secret Entrance Outdoors',
