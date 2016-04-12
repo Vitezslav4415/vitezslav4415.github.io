@@ -388,17 +388,28 @@ ul#tabs > li > a {
 
 #content {
 	z-index: 10000;
+	padding-top: 25px;
 }
 
 #content .tab-pane {
     width: 80%;
+    height: 90%;
+    overflow: auto;
     float: right;
-    position: relative;
+    position: fixed;
+    right: 35px;
     z-index: 10020;
     background: white;
     margin-right: 80px;
     border-radius: 10px;
     border: solid 1px #777;
+}
+
+.top-controls {
+	position: fixed;
+	z-index: 10020;
+	background: black;
+    border-radius: 10px;
 }
 
 #content #map {
@@ -409,6 +420,7 @@ ul#tabs > li > a {
     margin-right: 0;
     border-radius: 0;
     border: none;
+    right: inherit;
 }
 
 #tabs .no-border-radius {
