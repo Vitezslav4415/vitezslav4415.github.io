@@ -1883,6 +1883,7 @@ function adjustOverlappingImages() {
 }
 
 function constructSettingsFromConfig() {
+	updateAct(config.actOne);
 	constructHeroesTabsFromConfig();
 	constructMonstersAndLieutenantsTabFromConfig();
 	constructMapControlsTabFromConfig();
@@ -2121,6 +2122,7 @@ function collectData() {
 	config.overlord = {};
 	config.overlord.cards = getOverlordCards();
 	config.lieutenants = getLieutenants();
+	config.actOne = actOne; 
 }
 
 function drawGrid() {
@@ -2144,6 +2146,12 @@ function drawGrid() {
 		});
 		$('.grid').append(element);
 	}
+}
+
+function updateAct(actOne) {
+	var isActOne = actOne == undefined || actOne; 
+	$(isActOne ? '#actOne' : '#actTwo').prop('checked', true);
+	adjustAct();
 }
 
 function adjustAct() {
@@ -2408,13 +2416,13 @@ $(function() {
 	drawGrid();
 	if (window.location.hash != "") {
 		decodeConfig();
-		constructMapFromConfig();
 		constructSettingsFromConfig();
+		constructMapFromConfig();
 	} else {
 		//TEST
 		config = JSON.parse(Base64.decode(defaultConfig));
-		constructMapFromConfig();
 		constructSettingsFromConfig();
+		constructMapFromConfig();
 	}
 
 	$('.nav-tabs a').click(function (e) {
