@@ -436,3 +436,17 @@ ul#tabs > li > a {
     top: 10px;
     right: 17px;
 }
+
+.exhausted {
+    transform: rotate(90deg);
+}
+
+.imagescontainer .exhausted {
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.items-container .exhausted {
+    margin-left: 30px;
+    margin-right: 50px;
+}

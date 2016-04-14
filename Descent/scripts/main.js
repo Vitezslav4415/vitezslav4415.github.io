@@ -1168,7 +1168,7 @@ function createSkillsBlock() {
 				skillObject.find('input').attr('disabled', '');
 			}
 			html.append(skillObject);
-			skillsImages.append($('<img>').attr('src', 'images/classes_cards/' + classUpdatedTitle + '/' + urlize(skill[0]) + '.jpg').attr('skill', skill[0]));
+			skillsImages.append($('<img>').attr('src', 'images/classes_cards/' + classUpdatedTitle + '/' + urlize(skill[0]) + '.jpg').attr('skill', skill[0]).attr('onclick',"$(this).toggleClass('exhausted');"));
 		}
 	}
 	html.append(skillsImages);
@@ -1226,11 +1226,11 @@ function createItemsBlock() {
 	var html = $('<div>').addClass('items-block');
 	var itemsContainer = $('<div>').addClass('items-container');
 	itemsContainer.append($('<h1>Items</h1>'));
-	itemsContainer.append($('<img src="images/misc/hand.png">').addClass('hand'));
-	itemsContainer.append($('<img src="images/misc/hand2.png">').addClass('hand2'));
-	itemsContainer.append($('<img src="images/misc/armor.png">').addClass('armor'));
-	itemsContainer.append($('<img src="images/misc/item.png">').addClass('item'));
-	itemsContainer.append($('<img src="images/misc/item.png">').addClass('item2'));
+	itemsContainer.append($('<img src="images/misc/hand.png">').addClass('hand').attr('onclick', "$(this).toggleClass('exhausted')"));
+	itemsContainer.append($('<img src="images/misc/hand2.png">').addClass('hand2').attr('onclick', "$(this).toggleClass('exhausted')"));
+	itemsContainer.append($('<img src="images/misc/armor.png">').addClass('armor').attr('onclick', "$(this).toggleClass('exhausted')"));
+	itemsContainer.append($('<img src="images/misc/item.png">').addClass('item').attr('onclick', "$(this).toggleClass('exhausted')"));
+	itemsContainer.append($('<img src="images/misc/item.png">').addClass('item2').attr('onclick', "$(this).toggleClass('exhausted')"));
 	html.append(itemsContainer);
 	
 	var itemsSelects = $('<div>').addClass('items-selects showclass');
