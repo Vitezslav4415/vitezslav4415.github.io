@@ -645,7 +645,7 @@ function removeMonsterRows() {
 
 function getAlphabetChar(number) {
 	result = '';
-	if (number > 26) {
+	if (number >= 26) {
 		result += ALPHABET.charAt(Math.floor(number/26) - 1);
 	}
 	return result += ALPHABET.charAt(number%26);
@@ -2128,7 +2128,7 @@ function collectData() {
 function drawGrid() {
 	for (var i = 0; i < mapWidth; i++) {
 		var element = $('<div>');
-		element.html(ALPHABET.charAt(i));
+		element.html(getAlphabetChar(i));
 		element.css({
 				'position' : 'absolute',
 				'left' : ((1 + i) * cellSize).toString() + 'px',
