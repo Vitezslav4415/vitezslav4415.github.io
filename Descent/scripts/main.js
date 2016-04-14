@@ -2156,6 +2156,7 @@ function updateAct(actOne) {
 
 function adjustAct() {
 	actOne = $('[name="act"]:checked').val() == 'one';
+	adjustMonsterList();
 }
 
 function setShortLink() {
