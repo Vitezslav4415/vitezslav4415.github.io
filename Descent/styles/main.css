@@ -454,3 +454,7 @@ ul#tabs > li > a {
 .condition {
 	height: 300px;
 }
+
+#map-transformation input {
+    width: 50px;
+}

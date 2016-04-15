@@ -1920,6 +1920,16 @@ function constructSettingsFromConfig() {
 	constructAlliesAndFamiliarsTabFromConfig();
 	constructMiscellaneousObjectsTabFromConfig();
 	constructOverlordCardsTabFromConfig();
+	constructMapSize();
+}
+
+function constructMapSize() {
+	if (config.mapWidth != undefined) {
+		mapWidth = config.mapWidth;
+	}
+	if (config.mapHeight != undefined) {
+		mapHeight = config.mapHeight;
+	}
 }
 
 function constructHeroesTabsFromConfig() {
@@ -2152,7 +2162,9 @@ function collectData() {
 	config.overlord = {};
 	config.overlord.cards = getOverlordCards();
 	config.lieutenants = getLieutenants();
-	config.actOne = actOne; 
+	config.actOne = actOne;
+	config.mapWidth = mapWidth;
+	config.mapHeight = mapHeight;
 }
 
 function drawGrid() {
@@ -2431,6 +2443,16 @@ function rotateObject(clockwise, object, height, width, canvasHeight, canvasWidt
 	}
 }
 
+function updateMapSize() {
+	mapWidth = $('[name="map-width"]').val();
+	mapHeight = $('[name="map-height"]').val();
+}
+
+function setMapSizeFromConfig() {
+	$('[name="map-width"]').val(mapWidth);
+	$('[name="map-height"]').val(mapHeight);
+}
+
 function toggleMapControls() {
 	$('#map-transformation div').toggle();
 }
@@ -2444,7 +2466,6 @@ $(function() {
 	createMonsterTraitsBlock();
 	createExpansionsBlock();
 	createOverlordCardsBlock();
-	drawGrid();
 	if (window.location.hash != "") {
 		decodeConfig();
 		constructSettingsFromConfig();
@@ -2455,7 +2476,9 @@ $(function() {
 		constructSettingsFromConfig();
 		constructMapFromConfig();
 	}
-
+	drawGrid();
+	setMapSizeFromConfig();
+	
 	$('.nav-tabs a').click(function (e) {
 		e.preventDefault();
 		$(this).tab('show');
