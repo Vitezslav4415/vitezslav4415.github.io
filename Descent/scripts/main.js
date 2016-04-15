@@ -343,7 +343,11 @@ function clearClass(element) {
 function updateSkills(element, skillValues) {
 	var container = $(element).parents('.select-row');
 	for (var i = 0; i < skillValues.length; i++) {
-		container.find('input[name="' + skillValues[i][0] + '"]').prop('checked', skillValues[i][1]);
+		var skill = container.find('input[name="' + skillValues[i][0] + '"]');
+		skill.prop('checked', skillValues[i][1]);
+		if (skillValues[i][2] != undefined && skillValues[i][2]) {
+			skill.addClass('card-exhausted');
+		}
 	}
 }
 
@@ -359,18 +363,18 @@ function adjustItems(element, value) {
 
 function adjustSkillsImages(element) {
 	var container = $(element).parents('.select-row');
-	var checkedSkills = [];
 	var className = container.find('input[name="class-title"]').attr('value');
 	var skills = $(container).find('.checkbox.' + folderize(className) + ' input');
+	container.find('.imagescontainer img').removeClass('showimage');
 	for (var i = 0; i < skills.length; i++) {
 		var currentSkill = $(skills[i]);
 		if (currentSkill.prop('checked')) {
-			checkedSkills.push(currentSkill.attr('name'));
+			var skill = container.find('[skill="' + currentSkill.attr('name') + '"]');
+			skill.addClass('showimage');
+			if (currentSkill.hasClass('card-exhausted')) {
+				skill.addClass('exhausted');
+			}
 		}
-	}
-	container.find('.imagescontainer img').removeClass('showimage');
-	for (var i = 0; i < checkedSkills.length; i++) {
-		container.find('[skill="' + checkedSkills[i] + '"]').addClass('showimage');
 	}
 }
 
@@ -1198,11 +1202,17 @@ function createSkillsBlock() {
 				skillObject.find('input').attr('disabled', '');
 			}
 			html.append(skillObject);
-			skillsImages.append($('<img>').attr('src', 'images/classes_cards/' + classUpdatedTitle + '/' + urlize(skill[0]) + '.jpg').attr('skill', skill[0]).attr('onclick',"$(this).toggleClass('exhausted');"));
+			skillsImages.append($('<img>').attr('src', 'images/classes_cards/' + classUpdatedTitle + '/' + urlize(skill[0]) + '.jpg').attr('skill', skill[0]).attr('onclick',"exhaustSkill(this);"));
 		}
 	}
 	html.append(skillsImages);
 	return html;
+}
+
+function exhaustSkill(image) {
+	$(image).toggleClass('exhausted');
+	var container = $(image).parents('.select-row');
+	container.find('[name="' + $(image).attr('skill') + '"]').toggleClass('card-exhausted');
 }
 
 function createMonsterTraitsBlock() {
@@ -1463,7 +1473,7 @@ function getSkills(container, className) {
 	var skills = $(container).find('.checkbox.' + folderize(className) + ' input');
 	for (var i = 0; i < skills.length; i++) {
 		var currentSkill = $(skills[i]); 
-		result.push([currentSkill.attr('name'), currentSkill.prop('checked')]);
+		result.push([currentSkill.attr('name'), currentSkill.prop('checked'), currentSkill.hasClass('card-exhausted')]);
 	}
 	return result;
 }
