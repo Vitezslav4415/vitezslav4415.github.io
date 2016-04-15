@@ -103,6 +103,27 @@ function adjustMonsterList() {
 		monsterCard.attr('src', 'images/monsters_cards/' + urlize(monster) + actAddition + '.jpg');
 		monsterCardsContainer.append(monsterCard);
 	}
+	addConditions(getConditions($('#monsters')), monsterCardsContainer);
+}
+
+function addConditions(conditions, container) {
+	for (var i in conditions) {
+		var condition = conditions[i];
+		if (condition == undefined || !CONDITIONS[condition].hasConditionCard) continue;
+		var conditionImage = $('<img>');
+		conditionImage.attr('src', 'images/conditions_cards/' + urlize(condition) + '.jpg').addClass('condition');
+		container.append(conditionImage);
+	}
+}
+
+function getConditions(container) {
+	var conditions = $(container).find('[name="condition-title"]');
+	var conditionsObject = {};
+	for (var i = 0; i < conditions.length; i++) {
+		var condition = $(conditions[i]).val();
+		conditionsObject[condition] = true;
+	}
+	return conditionsObject;
 }
 
 function updateMonster(element, value) {
@@ -626,6 +647,9 @@ function updateCondition(element, value) {
 	var id = $(element).parents('.select-condition').attr('id');
 	container.find('#' + id + ' .condition-title').html(value + ' ');
 	container.find('#input' + id).attr('value',value);
+	var conditionsContainer = container.find('.conditions-container');
+	conditionsContainer.html('');
+	addConditions(getConditions(container), conditionsContainer);
 }
 
 function removeCondition(element) {
@@ -1013,6 +1037,7 @@ function addHeroLine(number) {
 	heroLine.find('.select-class ul').addClass(ARCHETYPE_CLASSES + ' showarch').append(createClassSelectContent());
 	heroLine.append($('<input type="hidden" name="class-title" value=""/>'));
 	heroLine.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
+	heroLine.append(createConditionsBlock());
 	heroLine.append(createSkillsBlock());
 	heroLine.append(createItemsBlock());
 	heroLine.append(createSackAndSearchBlock());
@@ -1147,6 +1172,11 @@ function addLieutenantLine() {
 //	lieutenant.append(getAllySkillsBlock());
 	$('#lieutenants-container').append(lieutenant);
 	return lieutenant;
+}
+
+function createConditionsBlock() {
+	var html = $('<div>').addClass('conditions-container');
+	return html;
 }
 
 function createSkillsBlock() {

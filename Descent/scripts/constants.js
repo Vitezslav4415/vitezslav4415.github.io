@@ -936,22 +936,30 @@ MISCELLANEOUS_LIST = [
 	'Sun Stone'
 ];
 
-CONDITIONS_LIST = [
-	'Bleeding',
-	'Burning',
-	'Cursed',
-	'Diseased',
-	'Doomed',
-	'Hexed',
-	'Immobilized',
-	'Poisoned',
-	'Stunned',
-	'Weakened',
-	'Elixir',
-	'Infected',
-	'Insight',
-	'Marked'
+CONDITIONS_INITIAL = [
+	['Bleeding',false],
+	['Burning',true],
+	['Cursed',true],
+	['Diseased',true],
+	['Doomed',true],
+	['Hexed',false],
+	['Immobilized',true],
+	['Poisoned',true],
+	['Stunned',true],
+	['Weakened',true],
+	['Elixir',false],
+	['Infected',false],
+	['Insight',false],
+	['Marked',false]
 ];
+
+var CONDITIONS = {};
+var CONDITIONS_LIST = [];
+
+for (var i = 0; i < CONDITIONS_INITIAL.length; i++) {
+	CONDITIONS_LIST.push(CONDITIONS_INITIAL[i][0]);
+	CONDITIONS[CONDITIONS_INITIAL[i][0]] = {'hasConditionCard' : CONDITIONS_INITIAL[i][1]};
+}
 
 OVERLORD_CARDS_LIST = [
 	['Critical Blow', 'basic', 1],
@@ -1112,3 +1120,4 @@ var mapHeight = 50;
 
 var monsterList = [];
 var mapObjects = [];
+var conditionsToShow = {};

@@ -450,3 +450,7 @@ ul#tabs > li > a {
     margin-left: 30px;
     margin-right: 50px;
 }
+
+.condition {
+	height: 300px;
+}
