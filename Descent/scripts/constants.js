@@ -946,6 +946,7 @@ CONDITIONS_INITIAL = [
 	['Immobilized',true],
 	['Poisoned',true],
 	['Stunned',true],
+	['Terrified',true],
 	['Weakened',true],
 	['Elixir',false],
 	['Infected',false],
