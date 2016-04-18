@@ -473,7 +473,11 @@ ul#tabs > li > a {
 	margin-top: 100px;
 }
 
-.imagescontainer .fakeimg {
+.fakeimg {
+	display: none;
+}
+
+.bard .imagescontainer .fakeimg {
 	width: 200px;
 	height: 300px;
 	display: inline-block;
