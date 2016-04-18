@@ -951,7 +951,8 @@ CONDITIONS_INITIAL = [
 	['Hexed',false],
 	['Infected',false],
 	['Insight',false],
-	['Marked',false]
+	['Marked',false],
+	['Valor',false]
 ];
 
 var CONDITIONS = {};
