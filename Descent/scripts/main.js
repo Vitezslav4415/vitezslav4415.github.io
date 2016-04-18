@@ -343,10 +343,17 @@ function clearClass(element) {
 function updateSkills(element, skillValues) {
 	var container = $(element).parents('.select-row');
 	for (var i = 0; i < skillValues.length; i++) {
-		var skill = container.find('input[name="' + skillValues[i][0] + '"]');
+		var skillTitle = skillValues[i][0];
+		var skill = container.find('input[name="' + skillTitle + '"]');
 		skill.prop('checked', skillValues[i][1]);
 		if (skillValues[i][2] != undefined && skillValues[i][2]) {
 			skill.addClass('card-exhausted');
+		}
+		if (skillValues[i][3] != undefined && skillValues[i][3]) {
+			dropToken(container.find('img[skill="' + skillTitle + '"]'), 'melody');
+		}
+		if (skillValues[i][4] != undefined && skillValues[i][4]) {
+			dropToken(container.find('img[skill="' + skillTitle + '"]'), 'harmony');
 		}
 	}
 }
@@ -375,6 +382,9 @@ function adjustSkillsImages(element) {
 				skill.addClass('exhausted');
 			}
 		}
+	}
+	if (className == 'Bard') {
+		container.find('#harmony,#melody').addClass('showimage');
 	}
 }
 
@@ -1202,7 +1212,12 @@ function createSkillsBlock() {
 				skillObject.find('input').attr('disabled', '');
 			}
 			html.append(skillObject);
-			skillsImages.append($('<img>').attr('src', 'images/classes_cards/' + classUpdatedTitle + '/' + urlize(skill[0]) + '.jpg').attr('skill', skill[0]).attr('onclick',"exhaustSkill(this);"));
+			skillsImages.append($('<img>').attr('src', 'images/classes_cards/' + classUpdatedTitle + '/' + urlize(skill[0]) + '.jpg').attr('skill', skill[0]).attr('onclick',"exhaustSkill(this);").attr('ondragover',"allowDrop(event)").attr('ondrop',"drop(event)"));
+		}
+		if (currentClass.title == 'Bard') {
+			skillsImages.append($('<div>').attr('class','fakeimg').attr('ondragover',"allowDrop(event)").attr('ondrop',"drop(event)"));
+			skillsImages.append($('<img>').attr('src', 'images/skills_tokens/melody.png').attr('id', 'melody').attr('draggable', 'true').attr('ondragstart',"drag(event)"));
+			skillsImages.append($('<img>').attr('src', 'images/skills_tokens/harmony.png').attr('id', 'harmony').attr('draggable', 'true').attr('ondragstart',"drag(event)"));
 		}
 	}
 	html.append(skillsImages);
@@ -1473,7 +1488,8 @@ function getSkills(container, className) {
 	var skills = $(container).find('.checkbox.' + folderize(className) + ' input');
 	for (var i = 0; i < skills.length; i++) {
 		var currentSkill = $(skills[i]); 
-		result.push([currentSkill.attr('name'), currentSkill.prop('checked'), currentSkill.hasClass('card-exhausted')]);
+		var image = container.find('img[skill="' + currentSkill.attr('name') + '"]');
+		result.push([currentSkill.attr('name'), currentSkill.prop('checked'), currentSkill.hasClass('card-exhausted'), image.hasClass('hasmelody'), image.hasClass('hasharmony')]);
 	}
 	return result;
 }
@@ -2465,6 +2481,28 @@ function setMapSizeFromConfig() {
 
 function toggleMapControls() {
 	$('#map-transformation div').toggle();
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    var target = $(ev.target);
+    dropToken(target, data);
+}
+
+function dropToken(target, data) {
+	var container = target.parents('.select-row');
+    target.after($('#' + data));
+    container.find('.imagescontainer img').removeClass('has' + data);
+    target.addClass('has' + data);
 }
 
 $(function() {

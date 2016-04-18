@@ -458,3 +458,24 @@ ul#tabs > li > a {
 #map-transformation input {
     width: 50px;
 }
+
+#melody, #harmony {
+	width: 90px;
+    margin-left: -150px;
+    margin-right: 60px;
+}
+
+#melody {
+	margin-top: -30px;
+}
+
+#harmony {
+	margin-top: 100px;
+}
+
+.imagescontainer .fakeimg {
+	width: 200px;
+	height: 300px;
+	display: inline-block;
+    vertical-align: bottom;
+}
