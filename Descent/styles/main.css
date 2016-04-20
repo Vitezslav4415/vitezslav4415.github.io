@@ -483,3 +483,7 @@ ul#tabs > li > a {
 	display: inline-block;
     vertical-align: bottom;
 }
+
+.feat-used {
+	border-bottom-right-radius: 90%;
+}

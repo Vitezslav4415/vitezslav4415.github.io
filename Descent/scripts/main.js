@@ -1055,7 +1055,7 @@ function addHeroLine(number) {
 	heroLine.append(createSkillsBlock());
 	heroLine.append(createItemsBlock());
 	heroLine.append(createSackAndSearchBlock());
-	heroLine.append($('<img>').attr('src', ''));
+	heroLine.append($('<img>').attr('src', '').attr('onclick',"$(this).toggleClass('feat-used')"));
 	$('#hero' + number.toString()).append(heroLine);
 }
 
@@ -1475,6 +1475,7 @@ function hero(element) {
 		hero.hp = container.find('[name="hero-hp"]').val();
 		hero.stamina = container.find('[name="hero-stamina"]').val();
 		hero.className = container.find('[name="class-title"]').val();
+		hero.featUsed = container.children('img').hasClass('feat-used');
 		hero.skills = getSkills(container, hero.className);
 		hero.items = getItems(container);
 		hero.sack = getSackAndSearch(container);
@@ -1997,6 +1998,9 @@ function constructHeroesTabsFromConfig() {
 					var sackAttribute = addToSack($(heroSelector + ' .sack-container button'));
 					updateSackItem($(heroSelector + ' [sack="' + sackAttribute + '"] [onclick="updateSackItem(this, \'' + heroConfig.sack[j] + '\')"]'), heroConfig.sack[j]);
 				}
+			}
+			if (heroConfig.featUsed != undefined && heroConfig.featUsed) {
+				$(heroSelector + '> .select-row > img').addClass('feat-used');
 			}
 			for (var j = 0; heroConfig.conditions != undefined && j < heroConfig.conditions.length; j++) {
 				var condition = addCondition($(heroSelector).find('.btn-warning'));
