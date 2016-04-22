@@ -455,6 +455,10 @@ ul#tabs > li > a {
 	height: 300px;
 }
 
+.select-row .condition {
+	display: inline-block;
+}
+
 #map-transformation input {
     width: 50px;
 }

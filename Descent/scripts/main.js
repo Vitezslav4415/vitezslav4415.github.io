@@ -107,8 +107,7 @@ function adjustMonsterList() {
 }
 
 function addConditions(conditions, container) {
-	for (var i in conditions) {
-		var condition = conditions[i];
+	for (var condition in conditions) {
 		if (condition == undefined || !CONDITIONS[condition].hasConditionCard) continue;
 		var conditionImage = $('<img>');
 		conditionImage.attr('src', 'images/conditions_cards/' + urlize(condition) + '.jpg').addClass('condition');
@@ -662,8 +661,12 @@ function updateCondition(element, value) {
 	container.find('#' + id + ' .condition-title').html(value + ' ');
 	container.find('#input' + id).attr('value',value);
 	var conditionsContainer = container.find('.conditions-container');
-	conditionsContainer.html('');
-	addConditions(getConditions(container), conditionsContainer);
+	if (container.parents('#monsters').length > 0) {
+		adjustMonsterList();
+	} else {
+		conditionsContainer.html('');
+		addConditions(getConditions(container), conditionsContainer);
+	}
 }
 
 function removeCondition(element) {
@@ -1454,15 +1457,6 @@ function monster(element) {
 	monster.hp = container.find('[name="monster-hp"]').val();
 	monster.conditions = getConditions(container);
 	return monster;
-}
-
-function getConditions(container) {
-	var conditions = container.find('[name="condition-title"]');
-	var result = [];
-	for (var i = 0; i < conditions.length; i++) {
-		result.push($(conditions[i]).val());
-	}
-	return result;
 }
 
 function hero(element) {
