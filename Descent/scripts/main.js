@@ -120,7 +120,11 @@ function getConditions(container) {
 	var conditionsObject = {};
 	for (var i = 0; i < conditions.length; i++) {
 		var condition = $(conditions[i]).val();
-		conditionsObject[condition] = true;
+		if (conditionsObject[condition] == undefined) {
+			conditionsObject[condition] = 1;
+		} else {
+			conditionsObject[condition] += 1;
+		}
 	}
 	return conditionsObject;
 }
@@ -670,10 +674,17 @@ function updateCondition(element, value) {
 }
 
 function removeCondition(element) {
+	var container = $(element).parents('.select-row');
 	var conditionSelect = $(element).parents('.select-condition'); 
 	var id = conditionSelect.attr('id'); 
 	conditionSelect.remove();
 	$('#input' + id).remove();
+	if (container.parents('#monsters').length > 0) {
+		adjustMonsterList();
+	} else {
+		conditionsContainer.html('');
+		addConditions(getConditions(container), conditionsContainer);
+	}
 }
 
 function removeRow(element) {
@@ -1863,9 +1874,20 @@ function constructMapFromConfig() {
 
 function addConditionsToImage(sourcesObject, sourceConfig) {
 	var conditions = $('<div>').addClass('conditions');
-	var interval = sourceConfig != undefined && sourceConfig.length > 3 ? Math.floor(50 / sourceConfig.length) : 20;
-	for (var j = 0; sourceConfig != undefined && j < sourceConfig.length; j++) {
-		var conditionObject = $('<img>').attr('src', 'images/conditions_tokens/' + urlize(sourceConfig[j]) + '.png');
+	var updatedSourceConfig = [];
+	if (sourceConfig.length == undefined) {
+		for (var condition in sourceConfig) {
+			if (condition == undefined) continue;
+			for (var i = 0; i < sourceConfig[condition] && (i == 0 || !CONDITIONS[condition].hasConditionCard); i++) {
+				updatedSourceConfig.push(condition);
+			}
+		}
+	} else {
+		updatedSourceConfig = sourceConfig;
+	}
+	var interval = updatedSourceConfig != undefined && updatedSourceConfig.length > 3 ? Math.floor(50 / updatedSourceConfig.length) : 20;
+	for (var j = 0; updatedSourceConfig != undefined && j < updatedSourceConfig.length; j++) {
+		var conditionObject = $('<img>').attr('src', 'images/conditions_tokens/' + urlize(updatedSourceConfig[j]) + '.png');
 		if (j > 0) conditionObject.css({
 			'position' : 'absolute',
 			'top' : (interval * j).toString() + 'px'
@@ -1996,9 +2018,11 @@ function constructHeroesTabsFromConfig() {
 			if (heroConfig.featUsed != undefined && heroConfig.featUsed) {
 				$(heroSelector + '> .select-row > img').addClass('feat-used');
 			}
-			for (var j = 0; heroConfig.conditions != undefined && j < heroConfig.conditions.length; j++) {
-				var condition = addCondition($(heroSelector).find('.btn-warning'));
-				updateCondition(condition.find('li')[0], heroConfig.conditions[j]);
+			if (heroConfig.conditions != undefined) {
+				for (var condition in heroConfig.conditions) {
+					if (condition == undefined) continue;
+					updateCondition(addCondition($(heroSelector).find('.btn-warning')).find('li')[0], condition);
+				}
 			}
 		}
 	}
@@ -2029,9 +2053,11 @@ function constructMonstersAndLieutenantsTabFromConfig() {
 				var yValue = height.toString() + monster.y.toString();
 				updateCoordinate(monsterLine.find('.select-y [onclick="updateCoordinate(this, \'' + yValue + '\');"]'), yValue);
 				monsterLine.find('input[name="monster-hp"]').val(monster.hp);
-				for (var j = 0; monster.conditions != undefined && j < monster.conditions.length; j++) {
-					var condition = addCondition(monsterLine.find('.btn-warning'));
-					updateCondition(condition.find('li')[0], monster.conditions[j]);
+				if (monster.conditions != undefined) {
+					for (var condition in monster.conditions) {
+						if (condition == undefined) continue;
+						updateCondition(addCondition(monsterLine.find('.btn-warning')).find('li')[0], condition);
+					}
 				}
 			}
 		}
@@ -2051,6 +2077,12 @@ function constructMonstersAndLieutenantsTabFromConfig() {
 			container.find('[name="lieutenant-direction"]').val(direction);
 			for (var j = 0; lieutenant.skills != undefined && j < lieutenant.skills.length; j++) {
 				container.find('[name="' + lieutenant.skills[j] + '"]').prop('checked', true);
+			}
+			if (lieutenant.conditions != undefined) {
+				for (var condition in lieutenant.conditions) {
+					if (condition == undefined) continue;
+					updateCondition(addCondition(container.find('.btn-warning')).find('li')[0], condition);
+				}
 			}
 //			adjustAlliesSkillsImages(container.children()[0]);
 		}
@@ -2110,6 +2142,12 @@ function constructAlliesAndFamiliarsTabFromConfig() {
 			for (var j = 0; ally.skills != undefined && j < ally.skills.length; j++) {
 				container.find('[name="' + ally.skills[j] + '"]').prop('checked', true);
 			}
+			if (ally.conditions != undefined) {
+				for (var condition in ally.conditions) {
+					if (condition == undefined) continue;
+					updateCondition(addCondition(container.find('.btn-warning')).find('li')[0], condition);
+				}
+			}
 			adjustAlliesSkillsImages(container.children()[0]);
 		}
 	}
@@ -2123,6 +2161,12 @@ function constructAlliesAndFamiliarsTabFromConfig() {
 			container.find('[name="familiar-y"]').val(familiar.y);
 			container.find('.y-title').html(familiar.y.toString() + ' ');
 			container.find('[name="hp"]').val(familiar.hp);
+			if (familiar.conditions != undefined) {
+				for (var condition in familiar.conditions) {
+					if (condition == undefined) continue;
+					updateCondition(addCondition(container.find('.btn-warning')).find('li')[0], condition);
+				}
+			}
 		}
 	}
 }
