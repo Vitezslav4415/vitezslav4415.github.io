@@ -892,10 +892,17 @@ MAP_TILES_LIST_COMPLETE = [
 	['S1',4,4],
 	['S2',4,3],
 	['End',2,1],
+	['Nerekhall end',2,1],
+	['Manor end',2,1],
+	['Nerekhall extension 1x2',2,1],
+	['Nerekhall connection 1x2',2,1],
 	['Entrance',2,2],
 	['Exit',2,2],
+	['Nerekhall exit',2,2],
 	['Extension1x2',2,1],
-	['Extension2x2',2,2]
+	['Extension2x2',2,2],
+	['Portal Extension 2x2',2,2],
+	['Cobble-stone Extension 2x2',2,2]
 ];
 
 MAP_TILES_LIST = [];

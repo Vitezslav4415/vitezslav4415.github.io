@@ -18,6 +18,10 @@ function somethingize(value, replacement) {
 	return value.replace(new RegExp(" ",'g'), replacement).toLowerCase();
 }
 
+function mapTilize(value) {
+	return value.replace(new RegExp(" ",'g'), '');
+}
+
 function createSelect(title) {
 	html = '<div class="btn-group select-x showOneCell showTwoCells"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">' + title + ' <span class="caret"></span></button><ul class="dropdown-menu" role="menu"></ul></div>';
 	
@@ -1704,7 +1708,7 @@ function constructMapFromConfig() {
 		    '-webkit-transform' : 'rotate(' + angle + 'deg)',
 		    'transform' : 'rotate(' + angle + 'deg)'
 		});
-		tileImage.attr('src', folder + tile.title + tile.side + '.png');
+		tileImage.attr('src', folder + mapTilize(tile.title) + tile.side + '.png');
 		tileObject.append(tileImage);
 		$('#map .map').append(tileObject);
 	}
