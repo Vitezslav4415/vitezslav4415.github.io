@@ -1872,19 +1872,24 @@ function constructMapFromConfig() {
 	setShortLink();
 }
 
-function addConditionsToImage(sourcesObject, sourceConfig) {
-	var conditions = $('<div>').addClass('conditions');
-	var updatedSourceConfig = [];
-	if (sourceConfig.length == undefined) {
-		for (var condition in sourceConfig) {
+function getConditionsArrayFromObjectOrArray(conditions) {
+	var result = [];
+	if (conditions.length == undefined) {
+		for (var condition in conditions) {
 			if (condition == undefined) continue;
-			for (var i = 0; i < sourceConfig[condition] && (i == 0 || !CONDITIONS[condition].hasConditionCard); i++) {
-				updatedSourceConfig.push(condition);
+			for (var i = 0; i < conditions[condition] && (i == 0 || !CONDITIONS[condition].hasConditionCard); i++) {
+				result.push(condition);
 			}
 		}
 	} else {
-		updatedSourceConfig = sourceConfig;
+		result = conditions;
 	}
+	return result;
+}
+
+function addConditionsToImage(sourcesObject, sourceConfig) {
+	var conditions = $('<div>').addClass('conditions');
+	var updatedSourceConfig = getConditionsArrayFromObjectOrArray(sourceConfig);
 	var interval = updatedSourceConfig != undefined && updatedSourceConfig.length > 3 ? Math.floor(50 / updatedSourceConfig.length) : 20;
 	for (var j = 0; updatedSourceConfig != undefined && j < updatedSourceConfig.length; j++) {
 		var conditionObject = $('<img>').attr('src', 'images/conditions_tokens/' + urlize(updatedSourceConfig[j]) + '.png');
@@ -2018,13 +2023,16 @@ function constructHeroesTabsFromConfig() {
 			if (heroConfig.featUsed != undefined && heroConfig.featUsed) {
 				$(heroSelector + '> .select-row > img').addClass('feat-used');
 			}
-			if (heroConfig.conditions != undefined) {
-				for (var condition in heroConfig.conditions) {
-					if (condition == undefined) continue;
-					updateCondition(addCondition($(heroSelector).find('.btn-warning')).find('li')[0], condition);
-				}
-			}
+			updateConditionsInSettings(heroConfig.conditions, $(heroSelector));
 		}
+	}
+}
+
+function updateConditionsInSettings(conditions, container) {
+	var conditionsArray = getConditionsArrayFromObjectOrArray(conditions);
+	for (var i = 0; i < conditionsArray.length; i++) {
+		var condition = conditionsArray[i];
+		updateCondition(addCondition(container.find('.btn-warning')).find('li')[0], condition);
 	}
 }
 
@@ -2053,12 +2061,7 @@ function constructMonstersAndLieutenantsTabFromConfig() {
 				var yValue = height.toString() + monster.y.toString();
 				updateCoordinate(monsterLine.find('.select-y [onclick="updateCoordinate(this, \'' + yValue + '\');"]'), yValue);
 				monsterLine.find('input[name="monster-hp"]').val(monster.hp);
-				if (monster.conditions != undefined) {
-					for (var condition in monster.conditions) {
-						if (condition == undefined) continue;
-						updateCondition(addCondition(monsterLine.find('.btn-warning')).find('li')[0], condition);
-					}
-				}
+				updateConditionsInSettings(monster.conditions, monsterLine);
 			}
 		}
 	}
@@ -2078,12 +2081,7 @@ function constructMonstersAndLieutenantsTabFromConfig() {
 			for (var j = 0; lieutenant.skills != undefined && j < lieutenant.skills.length; j++) {
 				container.find('[name="' + lieutenant.skills[j] + '"]').prop('checked', true);
 			}
-			if (lieutenant.conditions != undefined) {
-				for (var condition in lieutenant.conditions) {
-					if (condition == undefined) continue;
-					updateCondition(addCondition(container.find('.btn-warning')).find('li')[0], condition);
-				}
-			}
+			updateConditionsInSettings(lieutenant.conditions, container);
 //			adjustAlliesSkillsImages(container.children()[0]);
 		}
 	}
@@ -2142,12 +2140,7 @@ function constructAlliesAndFamiliarsTabFromConfig() {
 			for (var j = 0; ally.skills != undefined && j < ally.skills.length; j++) {
 				container.find('[name="' + ally.skills[j] + '"]').prop('checked', true);
 			}
-			if (ally.conditions != undefined) {
-				for (var condition in ally.conditions) {
-					if (condition == undefined) continue;
-					updateCondition(addCondition(container.find('.btn-warning')).find('li')[0], condition);
-				}
-			}
+			updateConditionsInSettings(ally.conditions, container);
 			adjustAlliesSkillsImages(container.children()[0]);
 		}
 	}
@@ -2161,12 +2154,7 @@ function constructAlliesAndFamiliarsTabFromConfig() {
 			container.find('[name="familiar-y"]').val(familiar.y);
 			container.find('.y-title').html(familiar.y.toString() + ' ');
 			container.find('[name="hp"]').val(familiar.hp);
-			if (familiar.conditions != undefined) {
-				for (var condition in familiar.conditions) {
-					if (condition == undefined) continue;
-					updateCondition(addCondition(container.find('.btn-warning')).find('li')[0], condition);
-				}
-			}
+			updateConditionsInSettings(familiar.conditions, container);
 		}
 	}
 }
