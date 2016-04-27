@@ -1550,6 +1550,15 @@ function getAura(container) {
 	return aura;
 }
 
+function populateQuestObjectives() {
+	var questObjectives = {};
+	questObjectives.heroesVictory = $('#heroes-victory').val();
+	questObjectives.ovelordVictory = $('#overlord-victory').val();
+	questObjectives.currentStatus = $('#current-status').val();
+	questObjectives.reinforcements = $('#reinforcements').val();
+	return questObjectives;
+}
+
 function getMapTiles() {
 	var result = [];
 	var tiles = $('#tiles-container .select-row');
@@ -1995,6 +2004,7 @@ function adjustOverlappingImages() {
 
 function constructSettingsFromConfig() {
 	updateAct(config.actOne);
+	constructQuestObjectives();
 	constructHeroesTabsFromConfig();
 	constructMonstersAndLieutenantsTabFromConfig();
 	constructMapControlsTabFromConfig();
@@ -2002,6 +2012,16 @@ function constructSettingsFromConfig() {
 	constructMiscellaneousObjectsTabFromConfig();
 	constructOverlordCardsTabFromConfig();
 	constructMapSize();
+}
+
+function constructQuestObjectives() {
+	var questObjectives = config.questObjectives;
+	if (questObjectives != undefined) {
+		$('#heroes-victory').val(questObjectives.heroesVictory);
+		$('#overlord-victory').val(questObjectives.ovelordVictory);
+		$('#current-status').val(questObjectives.currentStatus);
+		$('#reinforcements').val(questObjectives.reinforcements);
+	}
 }
 
 function constructMapSize() {
@@ -2243,6 +2263,7 @@ function collectData() {
 	for (var i = 0; i < monsterRows.length; i++) {
 		config.monsters.push(monster(monsterRows[i]));
 	}
+	config.questObjectives = populateQuestObjectives();
 	config.hero1 = hero($('#hero1 .select-row'));
 	config.hero2 = hero($('#hero2 .select-row'));
 	config.hero3 = hero($('#hero3 .select-row'));

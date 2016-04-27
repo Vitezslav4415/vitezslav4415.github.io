@@ -13,6 +13,7 @@
 		<div role="tabpanel">
 			<ul class="nav nav-tabs" role="tablist" id="tabs">
 				<li role="presentation" class="active map-icon-container"><a href="#map" aria-controls="home" role="tab" data-toggle="tab" onclick="populate();">Map</a></li>
+				<li role="presentation"><a href="#quest-objectives" aria-controls="home" role="tab" data-toggle="tab"><img src="images/quest_objectives_icon.jpg" height="64px"/></a></li>
 				<li role="presentation"><a href="#map-controls" aria-controls="home" role="tab" data-toggle="tab"><img src="images/map_tiles/ExitA.png" height="64px"/></a></li>
 				<li role="presentation"><a href="#monsters" aria-controls="profile" role="tab" data-toggle="tab"><img src="images/monsters_tokens/baron_zachareth.png"/></a></li>
 				<li role="presentation"><a href="#hero1" aria-controls="messages" role="tab" data-toggle="tab"><img src="images/heroes_tokens/unknown.png"/></a></li>
@@ -48,6 +49,16 @@
 						<div class="grid"></div>
 						<div class="figures"></div>
 					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="quest-objectives">
+					<label for="heroes-victory">Heroes victory conditions:</label>
+					<textarea class="form-control" rows="5" id="heroes-victory"></textarea>
+					<label for="overlord-victory">Overlord victory conditions:</label>
+					<textarea class="form-control" rows="5" id="overlord-victory"></textarea>
+					<label for="current-status">Current quest status:</label>
+					<textarea class="form-control" rows="5" id="current-status"></textarea>
+					<label for="reinforcements">Reinforcements:</label>
+					<textarea class="form-control" rows="5" id="reinforcements"></textarea>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="map-controls">
 					<div id="full-maps-container"><h1>Full maps</h1></div>
