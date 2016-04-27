@@ -1025,6 +1025,22 @@ function addCondition(button) {
 	return condition;
 }
 
+function addAura(button) {
+	var aura = $('<div>').addClass('aura');
+	aura.append($('<input type="text" name="aura-radius" class="form-control" placeholder="Aura radius" value="">'));
+	aura.append($('<input type="text" name="aura-color" class="form-control" placeholder="Aura color" value="">'));
+	aura.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeAura(this);">Remove aura</button>'));
+	$(button).after(aura);
+	$(button).remove();
+	return aura;
+}
+
+function removeAura(button) {
+	var container = $(button).parents('.aura');
+	container.after($('<button type="button" class="btn btn-default" aria-expanded="false" onclick="addAura(this);">Add aura</button>'));
+	container.remove();
+}
+
 function addUnitLine(line, title) {
 	line.addClass('select-row');
 	line.append(createInputSelect('Select ' + title, title.toLowerCase() + '-title', 'select-' + title.toLowerCase()));
@@ -1069,6 +1085,7 @@ function addHeroLine(number) {
 	heroLine.find('.select-class ul').addClass(ARCHETYPE_CLASSES + ' showarch').append(createClassSelectContent());
 	heroLine.append($('<input type="hidden" name="class-title" value=""/>'));
 	heroLine.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
+	heroLine.append($('<button type="button" class="btn btn-default" aria-expanded="false" onclick="addAura(this);">Add aura</button>'));
 	heroLine.append(createConditionsBlock());
 	heroLine.append(createSkillsBlock());
 	heroLine.append(createItemsBlock());
@@ -1489,6 +1506,7 @@ function hero(element) {
 		hero.items = getItems(container);
 		hero.sack = getSackAndSearch(container);
 		hero.conditions = getConditions(container);
+		hero.aura = getAura(container);
 	}
 	return hero;
 }
@@ -1521,6 +1539,15 @@ function getSackAndSearch(container) {
 		result.push($(sack[i]).attr('item'));
 	}
 	return result;
+}
+
+function getAura(container) {
+	var aura = {};
+	var auraContainer = $(container).find('.aura');
+	if (auraContainer.length == 0) return undefined;
+	aura.radius = auraContainer.find('[name="aura-radius"]').val();
+	aura.color = auraContainer.find('[name="aura-color"]').val();
+	return aura;
 }
 
 function getMapTiles() {
@@ -1923,15 +1950,17 @@ function addHeroToMap(hero) {
 		'z-index' : z_index
 	});
 	heroImage.attr('src', folder + urlize(hero.title) + '.png');
-	if (hero.title == 'Leoric of the book') {
+	if (hero.aura != undefined) {
 		var aura = $('<div>');
+		var auraRadius = parseInt(hero.aura.radius);
 		aura.css({
 			'position' : 'absolute',
-			'left' : '-' + (3 * cellSize).toString() + 'px',
-			'top' : '-' + (3 * cellSize).toString() + 'px',
-			'width' : (7 * cellSize).toString() + 'px',
-			'height' : (7 * cellSize).toString() + 'px',
-			'border' : '2px dashed gold',
+			'left' : '-' + (auraRadius * cellSize).toString() + 'px',
+			'top' : '-' + (auraRadius * cellSize).toString() + 'px',
+			'width' : ((2 * auraRadius + 1) * cellSize).toString() + 'px',
+			'height' : ((2 * auraRadius + 1) * cellSize).toString() + 'px',
+			'background' : hero.aura.color,
+			'opacity' : '0.2',
 			'border-radius' : (cellSize / 2).toString() + 'px'
 		});
 		heroObject.append(aura);
@@ -2028,6 +2057,11 @@ function constructHeroesTabsFromConfig() {
 				$(heroSelector + '> .select-row > img').addClass('feat-used');
 			}
 			updateConditionsInSettings(heroConfig.conditions, $(heroSelector));
+			if (heroConfig.aura != undefined) {
+				var aura = addAura($(heroSelector + ' [onclick="addAura(this);"]'));
+				aura.find('[name="aura-radius"]').val(heroConfig.aura.radius);
+				aura.find('[name="aura-color"]').val(heroConfig.aura.color);
+			}
 		}
 	}
 }

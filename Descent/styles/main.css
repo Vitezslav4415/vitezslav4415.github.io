@@ -491,3 +491,14 @@ ul#tabs > li > a {
 .feat-used {
 	border-bottom-right-radius: 90%;
 }
+
+.aura {
+    display: inline-block;
+}
+
+.aura .form-control {
+    width: 100px;
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: bottom;
+}
