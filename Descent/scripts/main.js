@@ -691,6 +691,28 @@ function removeCondition(element) {
 	}
 }
 
+function updateOverlordRelic(element, value) {
+	var container = $(element).parents('.select-row');
+	var relicContainer = $(element).parents('.select-relic');
+	var relicNumber = relicContainer.attr('id').replace('relic-select-', '');
+	relicContainer.find('.relic-title').html(value + ' ');
+	$('#relic' + relicNumber.toString()).val(value);
+	var relicImage = $('#relic-image-' + relicNumber.toString());
+	if (relicImage.length == 0) {
+		relicImage = $('<img>').addClass('relic-image').attr('id', 'relic-image-' + relicNumber.toString());
+		container.append(relicImage);
+	}
+	relicImage.attr('src', 'images/items_cards/relic/overlord/' + urlize(value) + '.jpg');
+}
+
+function removeOverlordRelic(element) {
+	var relicContainer = $(element).parents('.select-relic');
+	var relicNumber = relicContainer.attr('id').replace('relic-select-', '');
+	$('#relic' + relicNumber.toString()).remove();
+	$('#relic-image-' + relicNumber.toString()).remove();
+	relicContainer.remove();
+}
+
 function removeRow(element) {
 	$(element).parents('.select-row').remove();
 }
@@ -957,6 +979,14 @@ function createConditionSelectContent() {
 	return html;
 }
 
+function createOverlordRelicsSelectContent() {
+	var html = addOption('Remove relic', '', 'removeOverlordRelic(this);');
+	for (var i = 0; i < OVERLORD_RELICS_LIST.length; i++) {
+		html += addOption(OVERLORD_RELICS_LIST[i] + ' ', '', 'updateOverlordRelic(this, \'' + OVERLORD_RELICS_LIST[i] + '\')');
+	}
+	return html;
+}
+
 function createLieutenantsSelectContent() {
 	var html = addOption('Clear', '', 'clearLieutenant(this);');
 	for (var i = 0; i < LIEUTENANTS_LIST.length; i++) {
@@ -1023,6 +1053,17 @@ function addCondition(button) {
 	buttonObject.before('<input type="hidden" name="condition-title" id="inputcondition' + conditionNumber.toString() + '" value=""/>');
 	conditionNumber += 1;
 	return condition;
+}
+
+function addRelic(button) {
+	var relicNumber = overlordRelicNumber += 1;
+	var relic = $(createInputSelect('Select relic', 'relic-title', 'select-relic'));
+	relic.attr('id', 'relic-select-' + relicNumber.toString());
+	relic.find('ul').append(createOverlordRelicsSelectContent());
+	var buttonObject = $(button);
+	buttonObject.before(relic);
+	buttonObject.before('<input type="hidden" name="relic-title" id="relic' + relicNumber.toString() + '" value=""/>');
+	return relic;
 }
 
 function addAura(button) {
@@ -1212,13 +1253,12 @@ function addLieutenantLine() {
 	lieutenant.find('.select-lieutenant').after(createInputSelect('Select direction', 'direction-title', 'select-direction'));
 	lieutenant.append($('<input type="hidden" name="lieutenant-direction" value=""/>'));
 	lieutenant.find('.select-direction ul').append(createDirectionSelectContent());
+	lieutenant.append($('<button type="button" class="btn btn-info" aria-expanded="false" onclick="addRelic(this);">Add relic</button>'));
 	lieutenant.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
 	lieutenant.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove row</button>'));
 	lieutenant.append($('<br/>'));
 	lieutenant.append($('<img src="" style="display: none;">').addClass('lieutenant-image'));
 	lieutenant.append($('<img src="" style="display: none;">').addClass('lieutenant-image-back'));
-	lieutenant.append($('<br/>'));
-//	lieutenant.append(getAllySkillsBlock());
 	$('#lieutenants-container').append(lieutenant);
 	return lieutenant;
 }
@@ -1641,10 +1681,15 @@ function getLieutenants() {
 		lieutenant.conditions = getConditions(container);
 		lieutenant.hasBack = container.find('img.lieutenant-image-back').css('display') != 'none';
 		lieutenant.vertical = container.find('[name="lieutenant-direction"]').val() == 'vertical';
+		lieutenant.relics = [];
+		var relics = container.find('[name="relic-title"]');
+		for (var j = 0; j < relics.length; j++) {
+			lieutenant.relics.push($(relics[j]).val());
+		}
 		lieutenant.skills = [];
 		var skillCheckboxes = container.find('input[type="checkbox"]');
-		for (var j = 0; j < skillCheckboxes.length; j++) {
-			var skillCheckbox = $(skillCheckboxes[j]);
+		for (var k = 0; k < skillCheckboxes.length; k++) {
+			var skillCheckbox = $(skillCheckboxes[k]);
 			if (skillCheckbox.prop('checked')) {
 				lieutenant.skills.push(skillCheckbox.attr('name'));
 			}
@@ -2140,6 +2185,10 @@ function constructMonstersAndLieutenantsTabFromConfig() {
 				container.find('[name="' + lieutenant.skills[j] + '"]').prop('checked', true);
 			}
 			updateConditionsInSettings(lieutenant.conditions, container);
+			for (var k = 0; k < lieutenant.relics.length; k++) {
+				var relicContainer = addRelic(container.find('[onclick="addRelic(this);"]'));
+				updateOverlordRelic(relicContainer.find('li')[0], lieutenant.relics[k]);
+			}
 //			adjustAlliesSkillsImages(container.children()[0]);
 		}
 	}

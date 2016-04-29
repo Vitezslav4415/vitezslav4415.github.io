@@ -316,6 +316,26 @@ RELICS_LIST = [
 	['Ynfernal Rune', twohand]
 ];
 
+OVERLORD_RELICS_LIST = [
+	'Bones Of Woe',
+	'Curative Vial',
+	'Duskblade',
+	'Fallen Heart',
+	'Gauntlets Of Spite',
+	'Her Majestys Malice',
+	'Omen Of Blight',
+	'Scorpions Kiss',
+	'Shadow Plotter',
+	'Shield Of Zoreks Favor',
+	'Soulless Scythe',
+	'Staff Of Shadows',
+	'Suns Fury',
+	'Taskmasters Ring',
+	'The Shadow Rune',
+	'Valyndras Gift',
+	'Ynfernal Rune'
+];
+
 ITEMS = {hand : [], hand2 : [], armor : [], item : []};
 ITEMS2 = {hand : [], hand2 : [], armor : [], item : []};
 ITEMSR = {hand : [], hand2 : [], armor : [], item : []};
@@ -945,7 +965,7 @@ MISCELLANEOUS_LIST = [
 ];
 
 CONDITIONS_INITIAL = [
-	['Bleeding',false],
+	['Bleeding',true],
 	['Burning',true],
 	['Cursed',true],
 	['Diseased',true],
@@ -1122,3 +1142,5 @@ var mapHeight = 50;
 var monsterList = [];
 var mapObjects = [];
 var conditionsToShow = {};
+
+var overlordRelicNumber = 0;

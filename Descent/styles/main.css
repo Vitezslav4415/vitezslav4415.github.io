@@ -301,9 +301,11 @@ html body {
 img.ally-image,
 img.ally-image-back,
 img.lieutenant-image,
-img.lieutenant-image-back {
+img.lieutenant-image-back,
+img.relic-image {
 	margin: 10px 10px 10px 0;
 	width: 200px;
+	display: inline-block;
 }
 
 .overlord-cards-images-container img {
