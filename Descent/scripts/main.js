@@ -112,7 +112,7 @@ function adjustMonsterList() {
 
 function addConditions(conditions, container) {
 	for (var condition in conditions) {
-		if (condition == undefined || !CONDITIONS[condition].hasConditionCard) continue;
+		if (condition == undefined || condition == '' || !CONDITIONS[condition].hasConditionCard) continue;
 		var conditionImage = $('<img>');
 		conditionImage.attr('src', 'images/conditions_cards/' + urlize(condition) + '.jpg').addClass('condition');
 		container.append(conditionImage);
