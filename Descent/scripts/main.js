@@ -2185,7 +2185,7 @@ function constructMonstersAndLieutenantsTabFromConfig() {
 				container.find('[name="' + lieutenant.skills[j] + '"]').prop('checked', true);
 			}
 			updateConditionsInSettings(lieutenant.conditions, container);
-			for (var k = 0; k < lieutenant.relics.length; k++) {
+			for (var k = 0; lieutenant.relics != undefined && k < lieutenant.relics.length; k++) {
 				var relicContainer = addRelic(container.find('[onclick="addRelic(this);"]'));
 				updateOverlordRelic(relicContainer.find('li')[0], lieutenant.relics[k]);
 			}
