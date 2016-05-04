@@ -335,6 +335,7 @@ img.relic-image {
 #monsters-cards img {
     margin-right: 10px;
     margin-bottom: 25px;
+    max-height: 300px;
 }
 
 #tinyUrl {
