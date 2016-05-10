@@ -466,17 +466,26 @@ ul#tabs > li > a {
     width: 50px;
 }
 
-#melody, #harmony {
+#melody1, #harmony1,
+#melody2, #harmony2,
+#melody3, #harmony3,
+#melody4, #harmony4 {
 	width: 90px;
     margin-left: -150px;
     margin-right: 60px;
 }
 
-#melody {
+#melody1,
+#melody2,
+#melody3,
+#melody4 {
 	margin-top: -30px;
 }
 
-#harmony {
+#harmony1,
+#harmony2,
+#harmony3,
+#harmony4 {
 	margin-top: 100px;
 }
 

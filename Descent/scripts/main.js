@@ -347,7 +347,7 @@ function clearClass(element) {
 	container.find('input[name="class-title"]').attr('value','');
 }
 
-function updateSkills(element, skillValues) {
+function updateSkills(element, skillValues, heroNumber) {
 	var container = $(element).parents('.select-row');
 	for (var i = 0; i < skillValues.length; i++) {
 		var skillTitle = skillValues[i][0];
@@ -357,10 +357,10 @@ function updateSkills(element, skillValues) {
 			skill.addClass('card-exhausted');
 		}
 		if (skillValues[i][3] != undefined && skillValues[i][3]) {
-			dropToken(container.find('img[skill="' + skillTitle + '"]'), 'melody');
+			dropToken(container.find('img[skill="' + skillTitle + '"]'), 'melody' + heroNumber.toString());
 		}
 		if (skillValues[i][4] != undefined && skillValues[i][4]) {
-			dropToken(container.find('img[skill="' + skillTitle + '"]'), 'harmony');
+			dropToken(container.find('img[skill="' + skillTitle + '"]'), 'harmony' + heroNumber.toString());
 		}
 	}
 }
@@ -391,7 +391,7 @@ function adjustSkillsImages(element) {
 		}
 	}
 	if (className == 'Bard') {
-		container.find('#harmony,#melody').addClass('showimage');
+		container.find('#harmony1,#melody1,#harmony2,#melody2,#harmony3,#melody3,#harmony4,#melody4').addClass('showimage');
 	}
 }
 
@@ -1128,7 +1128,7 @@ function addHeroLine(number) {
 	heroLine.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
 	heroLine.append($('<button type="button" class="btn btn-default" aria-expanded="false" onclick="addAura(this);">Add aura</button>'));
 	heroLine.append(createConditionsBlock());
-	heroLine.append(createSkillsBlock());
+	heroLine.append(createSkillsBlock(number));
 	heroLine.append(createItemsBlock());
 	heroLine.append(createSackAndSearchBlock());
 	heroLine.append($('<img>').attr('src', '').attr('onclick',"$(this).toggleClass('feat-used')"));
@@ -1268,7 +1268,7 @@ function createConditionsBlock() {
 	return html;
 }
 
-function createSkillsBlock() {
+function createSkillsBlock(heroNumber) {
 	var html = $('<div>').addClass('showClass').addClass('skills-container');
 	html.append($('<h1>Skills</h1>'));
 	var skillsImages = $('<div>').addClass('imagescontainer');
@@ -1291,8 +1291,8 @@ function createSkillsBlock() {
 		}
 		if (currentClass.title == 'Bard') {
 			skillsImages.append($('<div>').attr('class','fakeimg').attr('ondragover',"allowDrop(event)").attr('ondrop',"drop(event)"));
-			skillsImages.append($('<img>').attr('src', 'images/skills_tokens/melody.png').attr('id', 'melody').attr('draggable', 'true').attr('ondragstart',"drag(event)"));
-			skillsImages.append($('<img>').attr('src', 'images/skills_tokens/harmony.png').attr('id', 'harmony').attr('draggable', 'true').attr('ondragstart',"drag(event)"));
+			skillsImages.append($('<img>').attr('src', 'images/skills_tokens/melody.png').attr('id', 'melody' + heroNumber.toString()).attr('draggable', 'true').attr('ondragstart',"drag(event)"));
+			skillsImages.append($('<img>').attr('src', 'images/skills_tokens/harmony.png').attr('id', 'harmony' + heroNumber.toString()).attr('draggable', 'true').attr('ondragstart',"drag(event)"));
 		}
 	}
 	html.append(skillsImages);
@@ -2094,7 +2094,7 @@ function constructHeroesTabsFromConfig() {
 				updateClass($(heroSelector + ' .select-class li')[0], heroConfig.className.toString(), true);
 			}
 			if (heroConfig.skills != undefined) {
-				updateSkills($(heroSelector + ' .skills-container'), heroConfig.skills);
+				updateSkills($(heroSelector + ' .skills-container'), heroConfig.skills, i);
 				adjustSkillsImages($(heroSelector + ' .skills-container'));
 			}
 			if (heroConfig.items != undefined && heroConfig.items.hand != undefined && heroConfig.items.hand != '') {
@@ -2638,9 +2638,10 @@ function drop(ev) {
 
 function dropToken(target, data) {
 	var container = target.parents('.select-row');
+	var dataWithoutHeroNumber = data.substring(0,data.length-1);
     target.after($('#' + data));
-    container.find('.imagescontainer img').removeClass('has' + data);
-    target.addClass('has' + data);
+    container.find('.imagescontainer img').removeClass('has' + dataWithoutHeroNumber);
+    target.addClass('has' + dataWithoutHeroNumber);
 }
 
 $(function() {
