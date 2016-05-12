@@ -375,6 +375,7 @@ var apothecary = {},
 	conjurer = {},
 	geomancer = {},
 	hexer = {},
+	monk = {},
 	necromancer = {},
 	runemaster = {},
 	bountyHunter = {},
@@ -398,6 +399,8 @@ var apothecary = {},
 	conjurer.title = 'Conjurer';
 	geomancer.title = 'Geomancer';
 	hexer.title = 'Hexer';
+	monk.title = 'Monk';
+	monk.allowHybrid = true;
 	necromancer.title = 'Necromancer';
 	runemaster.title = 'Runemaster';
 	bountyHunter.title = 'Bounty Hunter';
@@ -573,6 +576,13 @@ var apothecary = {},
 		['Zealous Fire', 1]
 	];
 	
+	monk.skills = [
+	    ['Greater calling', 0],
+	    ['Inner Balance', 1],
+	    ['Openhanded', 2],
+	    ['Vow Of Freedom', 3]
+	];
+	
 	necromancer.skills = [
 		['Army Of Death', 3],
 		['Corpse Blast', 1],
@@ -722,7 +732,7 @@ var wiz = {},
 	war.title = 'Warrior';
 	war.classes = [beastmaster, berserker, champion, knight, marshal, skirmisher];
 	rog.title = 'Scout';
-	rog.classes = [bountyHunter, shadowwalker, stalker, thief, treasureHunter, wildlander];
+	rog.classes = [bountyHunter, monk, shadowwalker, stalker, thief, treasureHunter, wildlander];
 	sup.title = 'Healer';
 	sup.classes = [apothecary, bard, disciple, prophet, spiritspeaker];			
 

@@ -295,15 +295,18 @@ function clearArchetype(element) {
 	adjustClass(element, ARCHETYPE_CLASSES);
 }
 
-function updateClass(element, value, skipItems) {
+function updateClass(element, value, skipItems, hybrid) {
+	if (hybrid == undefined) hybrid = false;
 	var container = $(element).parents('.select-row');
-	container.find('.class-title').html(value + ' ');
-	container.find('input[name="class-title"]').attr('value',value);
+	container.find(hybrid ? '.hybrid-class-title' : '.class-title').html(value + ' ');
+	container.find(hybrid ? 'input[name="hybrid-class-title"]' : 'input[name="class-title"]').attr('value',value);
 	var currentClass = CLASSES[value];
-	adjustArchetype(element, currentClass.archetype.title);
-	adjustSkills(element, value);
-	adjustSkillsImages(element);
-	adjustItems(element, value);
+	if (hybrid == undefined || !hybrid) {
+		adjustArchetype(element, currentClass.archetype.title);
+	}
+	adjustSkills(element, value, hybrid);
+	adjustSkillsImages(element, hybrid);
+	adjustItems(element, value, hybrid);
 	if (skipItems == undefined || !skipItems) {
 		var handUsed = false;
 		var itemUsed = false;
@@ -341,10 +344,10 @@ function adjustClass(element, archetype) {
 	}
 }
 
-function clearClass(element) {
+function clearClass(element, hyrbid) {
 	var container = $(element).parents('.select-row');
-	container.find('.class-title').html('Select class ');
-	container.find('input[name="class-title"]').attr('value','');
+	container.find(hyrbid ? '.hybrid-class-title' : '.class-title').html('Select class ');
+	container.find('input[name="hybrid-class-title"]').attr('value','');
 }
 
 function updateSkills(element, skillValues, heroNumber) {
@@ -365,21 +368,31 @@ function updateSkills(element, skillValues, heroNumber) {
 	}
 }
 
-function adjustSkills(element, value) {
+function adjustSkills(element, value, hybrid) {
 	var container = $(element).parents('.select-row');
-	container.find('.skills-container').attr("class", "showclass skills-container " + folderize(value));
+	if (hybrid == undefined || !hybrid) {
+		container.find('.skills-container').attr("class", "showclass skills-container " + folderize(value));
+	} else {
+		container.find('.skills-container').addClass(folderize(value));
+	}
 }
 
-function adjustItems(element, value) {
+function adjustItems(element, value, hybrid) {
 	var container = $(element).parents('.select-row');
-	container.find('.items-selects').attr("class", "showclass items-selects " + folderize(value));
+	if (hybrid == undefined || !hybrid) {
+		container.find('.items-selects').attr("class", "showclass items-selects " + folderize(value));
+	} else {
+		container.find('.items-selects').addClass(folderize(value));
+	}
 }
 
-function adjustSkillsImages(element) {
+function adjustSkillsImages(element, hybrid) {
 	var container = $(element).parents('.select-row');
-	var className = container.find('input[name="class-title"]').attr('value');
+	var className = container.find(hybrid ? 'input[name="hybrid-class-title"]' : 'input[name="class-title"]').attr('value');
 	var skills = $(container).find('.checkbox.' + folderize(className) + ' input');
-	container.find('.imagescontainer img').removeClass('showimage');
+	if (hybrid == undefined || !hybrid) {
+		container.find('.imagescontainer img').removeClass('showimage');
+	}
 	for (var i = 0; i < skills.length; i++) {
 		var currentSkill = $(skills[i]);
 		if (currentSkill.prop('checked')) {
@@ -789,12 +802,12 @@ function createHeroSelectContent() {
 	return html;
 }
 
-function createClassSelectContent() {
-	var html = addOption('Clear', '', 'clearClass(this);');
+function createClassSelectContent(hybrid) {
+	var html = addOption('Clear', '', 'clearClass(this, ' + hybrid.toString() + ');');
 	for (var i = 0; i < ARCHETYPES_LIST.length; i++) {
 		for (var j = 0; j < ARCHETYPES_LIST[i].classes.length; j++) {
 			var title = ARCHETYPES_LIST[i].classes[j].title;
-			html += addOption(title + ' ', ARCHETYPES_LIST[i].title, 'updateClass(this, \'' + title + '\');');
+			html += addOption(title + ' ', ARCHETYPES_LIST[i].title, 'updateClass(this, \'' + title + '\', false, ' + hybrid.toString() + ');');
 		}
 	}
 	return html;
@@ -1123,7 +1136,7 @@ function addHeroLine(number) {
 	heroLine.find('.select-archetype ul').addClass(ARCHETYPE_CLASSES + ' showarch').append(createArchetypeSelectContent());
 	heroLine.append($('<input type="hidden" name="archetype-title" value=""/>'));
 	heroLine.append(createInputSelect('Select Class ', 'class-title', 'select-class'));
-	heroLine.find('.select-class ul').addClass(ARCHETYPE_CLASSES + ' showarch').append(createClassSelectContent());
+	heroLine.find('.select-class ul').addClass(ARCHETYPE_CLASSES + ' showarch').append(createClassSelectContent(false));
 	heroLine.append($('<input type="hidden" name="class-title" value=""/>'));
 	heroLine.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
 	heroLine.append($('<button type="button" class="btn btn-default" aria-expanded="false" onclick="addAura(this);">Add aura</button>'));
@@ -1271,6 +1284,10 @@ function createConditionsBlock() {
 function createSkillsBlock(heroNumber) {
 	var html = $('<div>').addClass('showClass').addClass('skills-container');
 	html.append($('<h1>Skills</h1>'));
+	//added hybrid class select for Monk
+	html.append(createInputSelect('Select Class ', 'hybrid-class-title', 'select-hybrid-class monk'));
+	html.find('.select-hybrid-class ul').addClass('healer showarch').append(createClassSelectContent(true));
+	html.append($('<input type="hidden" name="hybrid-class-title" value=""/>'));
 	var skillsImages = $('<div>').addClass('imagescontainer');
 	for (var tempoClass in CLASSES) {
 		if (CLASSES[tempoClass] == undefined) continue;
@@ -1541,6 +1558,7 @@ function hero(element) {
 		hero.hp = container.find('[name="hero-hp"]').val();
 		hero.stamina = container.find('[name="hero-stamina"]').val();
 		hero.className = container.find('[name="class-title"]').val();
+		if (CLASSES[hero.className].allowHybrid) hero.hybridClassName = container.find('[name="hybrid-class-title"]').val(); 
 		hero.featUsed = container.children('img').hasClass('feat-used');
 		hero.skills = getSkills(container, hero.className);
 		hero.items = getItems(container);
@@ -2091,11 +2109,17 @@ function constructHeroesTabsFromConfig() {
 			$(heroSelector + ' [name="hero-y"]').val(heroConfig.y);
 			$(heroSelector + ' .y-title').html(heroConfig.y.toString() + ' ');
 			if (heroConfig.className != undefined) {
-				updateClass($(heroSelector + ' .select-class li')[0], heroConfig.className.toString(), true);
+				updateClass($(heroSelector + ' .select-class li')[0], heroConfig.className.toString(), true, false);
+			}
+			if (heroConfig.hybridClassName != undefined) {
+				updateClass($(heroSelector + ' .select-hybrid-class li')[0], heroConfig.hybridClassName.toString(), true, true);
 			}
 			if (heroConfig.skills != undefined) {
 				updateSkills($(heroSelector + ' .skills-container'), heroConfig.skills, i);
 				adjustSkillsImages($(heroSelector + ' .skills-container'));
+				if (heroConfig.hybridClassName != undefined) {
+					adjustSkillsImages($(heroSelector + ' .skills-container'), true);
+				}
 			}
 			if (heroConfig.items != undefined && heroConfig.items.hand != undefined && heroConfig.items.hand != '') {
 				updateHand($(heroSelector + ' .select-weapon:not(.second-select) [onclick="updateHand(this, \'' + heroConfig.items.hand + '\')"]'), heroConfig.items.hand);

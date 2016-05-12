@@ -75,6 +75,7 @@ html body {
 .checkbox.knight,
 .checkbox.geomancer,
 .checkbox.hexer,
+.checkbox.monk,
 .checkbox.necromancer,
 .checkbox.runemaster,
 .checkbox.stalker,
@@ -87,6 +88,7 @@ html body {
 .checkbox.shadowwalker,
 .checkbox.marshal,
 .checkbox.bountyhunter,
+.skills-container .select-hybrid-class.monk,
 .items-selects .apothecary,
 .items-selects .disciple,
 .items-selects .prophet,
@@ -97,6 +99,7 @@ html body {
 .items-selects .knight,
 .items-selects .geomancer,
 .items-selects .hexer,
+.items-selects .monk,
 .items-selects .necromancer,
 .items-selects .runemaster,
 .items-selects .stalker,
@@ -137,6 +140,8 @@ html body {
 .showclass.treasurehunter .checkbox.treasurehunter,
 .showclass.wildlander .checkbox.wildlander,
 .showclass.bard .checkbox.bard,
+.showclass.monk .checkbox.monk,
+.showclass.monk.skills-container .select-hybrid-class.monk,
 .showclass.skirmisher .checkbox.skirmisher,
 .showclass.conjurer .checkbox.conjurer,
 .showclass.shadowwalker .checkbox.shadowwalker,
@@ -159,6 +164,7 @@ html body {
 .showclass.treasurehunter.items-selects .treasurehunter,
 .showclass.wildlander.items-selects .wildlander,
 .showclass.bard.items-selects .bard,
+.showclass.monk.items-selects .monk,
 .showclass.skirmisher.items-selects .skirmisher,
 .showclass.conjurer.items-selects .conjurer,
 .showclass.shadowwalker.items-selects .shadowwalker,
@@ -513,4 +519,12 @@ ul#tabs > li > a {
     display: inline-block;
     margin-right: 10px;
     vertical-align: bottom;
+}
+
+.select-hybrid-class {
+    margin-bottom: 10px;
+}
+
+#content .select-hybrid-class .btn {
+    float: none;
 }
