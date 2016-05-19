@@ -103,9 +103,15 @@ function adjustMonsterList() {
 	var actAddition = actOne ? '_act1' : '_act2';
 	for (var i = 0; i < monsterList.length; i++) {
 		var monster = monsterList[i];
+		if (monster == '') continue;
 		var monsterCard = $('<img>');
 		monsterCard.attr('src', 'images/monsters_cards/' + urlize(monster) + actAddition + '.jpg');
 		monsterCardsContainer.append(monsterCard);
+		if (MONSTERS[monster].hasBack) {
+			var monsterCardBack = $('<img>');
+			monsterCardBack.attr('src', 'images/monsters_cards/' + urlize(monster) + '_back' + actAddition + '.jpg');
+			monsterCardsContainer.append(monsterCardBack);
+		}
 	}
 	addConditions(getConditions($('#monsters')), monsterCardsContainer);
 }

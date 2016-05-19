@@ -10,7 +10,7 @@ function listsort(a, b) {
 var bg2e = 'Second Edition Base Game', BoW = 'Bonds of the Wild', CoD = 'Crown of Destiny', CotF = 'Crusade of the Forgotten', GoD = 'Guardians of Deephall',
 	LoR = 'Labyrinth of Ruin', LoW = 'Lair of the Wyrm', MoR = 'Manor of Ravens', OotO = 'Oath of the Outcast', 
 	SoE = 'Shards of Everdark', SoN = 'Shadow of Narekhall', SotS = 'Stewards of the Secret', TF = 'The Trollfens', ToC = 'Treaty of Champions',
-	VoD = 'Visions of Dawn';
+	VoD = 'Visions of Dawn', CK = 'Conversion Kit';
 var Building = 'Building',
 	Cave = 'Cave',
 	Civilized = 'Civilized',
@@ -37,7 +37,8 @@ var MONSTERS_LIST = [
 	['Crypt Dragon',2,3,true,GoD,[Dark,Cursed]],
 //	['Crow Hag',1,2,true,ToC,[Dark,Civilized]],
 	['Dark Priest',1,1,true,GoD,[Civilized,Cursed]],
-	['Deep Elf',1,1,false,BoW,[Dark,Cave]],
+	['Deep Elf',1,1,false,BoW,[Dark,Cave],true],
+	['Deep Elf CK',1,1,false,CK,[Dark,Cave]],
 	['Demon Lord',2,2,false,ToC,[Hot,Cursed]],
 	['Elemental',2,2,true,bg2e,[Cold,Hot]],
 	['Ettin',2,2,false,bg2e,[Mountain,Cave]],
@@ -49,11 +50,13 @@ var MONSTERS_LIST = [
 	['Goblin Witcher',1,1,true,LoR,[Building,Cursed]],
 	['Golem',1,1,false,CotF,[Mountain,Building]],
 	['Harpy',1,1,false,TF,[Wilderness,Mountain]],
-	['Hellhound',1,2,false,BoW,[Hot,Cursed]],
+	['Hellhound',1,2,false,BoW,[Hot,Cursed],true],
+	['Hellhound CK',1,2,false,CK,[Hot,Cursed]],
 	['Hybrid Sentinel',1,1,false,LoW,[Mountain,Cave]],
 	['Ice Wyrm',2,3,false,SoE,[Cold,Cave]],
 	['Ironbound',1,1,false,SoN,[Civilized,Building]],
-	['Kobold',1,1,false,BoW,[Building,Cave]],
+	['Kobold',1,1,false,BoW,[Building,Cave],true],
+	['Kobold CK',1,1,false,CK,[Building,Cave]],
 	['Lava Beetle',1,1,true,CoD,[Hot,Cave]],
 	['Manticore',2,2,true,VoD,[Wilderness,Dark]],
 	['Medusa',1,1,true,CotF,[Cursed,Building]],
@@ -75,7 +78,7 @@ var MONSTERS_LIST = [
 	['Zombie',1,1,false,bg2e,[Cursed,Building]]
 ];
 
-var EXPANSIONS = [bg2e, BoW, CoD, CotF, GoD, LoR, LoW, MoR, OotO, SoE, SoN, SotS, TF, ToC, VoD];
+var EXPANSIONS = [bg2e, BoW, CoD, CotF, GoD, LoR, LoW, MoR, OotO, SoE, SoN, SotS, TF, ToC, VoD, CK];
 
 /*for (var i=0; i < MONSTERS_LIST.length; i++) {
 	EXPANSIONS.add(MONSTERS_LIST[i][4]);
@@ -122,6 +125,7 @@ var MONSTERS_HP = [
 //	['Crow Hag',5,7,7,9],
 	['Dark Priest',2,5,7,9],
 	['Deep Elf',7,9,8,10],
+	['Deep Elf CK',7,9,8,10],
 	['Demon Lord',6,9,8,12],
 	['Elemental',4,6,8,10],
 	['Ettin',5,8,7,9],
@@ -133,11 +137,13 @@ var MONSTERS_HP = [
 	['Goblin Witcher',3,5,6,8],
 	['Golem',8,10,10,12],
 	['Harpy',3,5,4,6],
-	['Hellhound',3,6,5,8],
+	['Hellhound',4,6,6,8],
+	['Hellhound CK',3,6,5,8],
 	['Hybrid Sentinel',5,8,6,9],
 	['Ice Wyrm',7,9,11,14],
 	['Ironbound',8,10,10,12],
-	['Kobold',2,4,4,6],
+	['Kobold',2,5,4,7],
+	['Kobold CK',2,4,4,6],
 	['Lava Beetle',3,5,5,7],
 	['Manticore',5,7,7,9],
 	['Medusa',4,6,6,9],
@@ -167,6 +173,7 @@ for (var i = 0; i < MONSTERS_LIST.length; i++) {
 	monster.width = MONSTERS_LIST[i][1];
 	monster.height = MONSTERS_LIST[i][2];
 	monster.ranged = MONSTERS_LIST[i][3];
+	monster.hasBack = MONSTERS_LIST[i][6];
 	monster.minionHpActOne = MONSTERS_HP[i][1];
 	monster.masterHpActOne = MONSTERS_HP[i][2];
 	monster.minionHpActTwo = MONSTERS_HP[i][3];
