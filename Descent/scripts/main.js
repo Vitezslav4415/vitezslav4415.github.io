@@ -37,29 +37,6 @@ function addOption(title, optionClass, functionCallback) {
 	return '<li class="' + optionClass + '"><a onclick="' + functionCallback + '">' + title + '</a></li>';
 }
 
-/*function updateMonstersVisibility_old() {
-	var selectedTraits = new Set();
-	var selectedExpansions = new Set();
-	var traitInputs = $('#monster-traits input');
-	var expansionInputs = $('#expansions input');
-	for (var i = 0; i < traitInputs.length; i++) {
-		if ($(traitInputs[i]).prop('checked')) {
-			selectedTraits.add($(traitInputs[i]).attr('name'));
-		}
-	}
-	for (var i = 0; i < expansionInputs.length; i++) {
-		if ($(expansionInputs[i]).prop('checked')) {
-			selectedExpansions.add($(expansionInputs[i]).attr('name'));
-		}
-	}
-	$('#monsters-container .select-monster li').css('display', 'none');
-	for (var trait of selectedTraits) {
-		for (var expansion of selectedExpansions) {
-			$('#monsters-container .' + trait + '.' + expansion).css('display', 'block');
-		}
-	}
-}*/
-
 function updateMonstersVisibility() {
 	var selectedTraits = [];
 	var selectedExpansions = [];

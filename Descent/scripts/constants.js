@@ -10,7 +10,7 @@ function listsort(a, b) {
 var bg2e = 'Second Edition Base Game', BoW = 'Bonds of the Wild', CoD = 'Crown of Destiny', CotF = 'Crusade of the Forgotten', GoD = 'Guardians of Deephall',
 	LoR = 'Labyrinth of Ruin', LoW = 'Lair of the Wyrm', MoR = 'Manor of Ravens', OotO = 'Oath of the Outcast', 
 	SoE = 'Shards of Everdark', SoN = 'Shadow of Narekhall', SotS = 'Stewards of the Secret', TF = 'The Trollfens', ToC = 'Treaty of Champions',
-	VoD = 'Visions of Dawn', CK = 'Conversion Kit';
+	VoD = 'Visions of Dawn', CK = 'Conversion Kit', MoB = 'Mists of Bilehall';
 var Building = 'Building',
 	Cave = 'Cave',
 	Civilized = 'Civilized',
@@ -30,6 +30,8 @@ var MONSTERS_LIST = [
 	['Barghest',1,2,false,bg2e,[Wilderness,Dark]],
 	['Beastman',1,1,false,OotO,[Mountain,Wilderness]],
 	['Blood Ape',1,2,false,SotS,[Hot,Cave]],
+	['Bone Horror',1,1,false,MoB,[Cave,Cursed],true],
+	['Broodwalker',1,1,false,MoB,[Dark,Building],true],
 	['Carrion Drake',1,1,false,LoR,[Water,Dark]],
 	['Cave Spider',1,1,false,bg2e,[Wilderness,Cave]],
 	['Changeling',1,1,false,SoN,[Civilized,Cursed]],
@@ -66,6 +68,7 @@ var MONSTERS_LIST = [
 	['Plague Worm',1,2,false,TF,[Water,Cave]],
 	['Rat Swarm',1,2,false,SoN,[Building,Dark]],
 	['Razorwing',1,1,false,OotO,[Wilderness,Cave]],
+	['Reanimate',1,1,false,MoB,[Civilized,Cursed],true],
 	['Shade',1,1,false,SoE,[Dark,Cursed]],
 	['Shadow Dragon',2,3,false,bg2e,[Dark,Cave]],
 	['Skeleton Archer',1,1,true,ToC,[Cursed,Civilized]],
@@ -78,7 +81,7 @@ var MONSTERS_LIST = [
 	['Zombie',1,1,false,bg2e,[Cursed,Building]]
 ];
 
-var EXPANSIONS = [bg2e, BoW, CoD, CotF, GoD, LoR, LoW, MoR, OotO, SoE, SoN, SotS, TF, ToC, VoD, CK];
+var EXPANSIONS = [bg2e, BoW, CoD, CotF, GoD, LoR, LoW, MoR, OotO, SoE, SoN, SotS, TF, ToC, VoD, CK, MoB];
 
 /*for (var i=0; i < MONSTERS_LIST.length; i++) {
 	EXPANSIONS.add(MONSTERS_LIST[i][4]);
@@ -117,6 +120,8 @@ var MONSTERS_HP = [
 	['Barghest',4,6,6,8],
 	['Beastman',4,5,5,6],
 	['Blood Ape',5,7,7,9],
+	['Bone Horror',5,7,6,9],
+	['Broodwalker',7,10,8,12],
 	['Carrion Drake',6,8,7,10],
 	['Cave Spider',3,5,5,7],
 	['Changeling',4,6,6,8],
@@ -153,6 +158,7 @@ var MONSTERS_HP = [
 	['Plague Worm',5,7,6,9],
 	['Rat Swarm',4,5,5,6],
 	['Razorwing',4,6,7,9],
+	['Reanimate',3,5,5,8],
 	['Shade',2,4,4,6],
 	['Shadow Dragon',6,9,8,10],
 	['Skeleton Archer',2,5,4,8],
@@ -203,10 +209,12 @@ var item = {className : 'item'};
 ITEMS_LIST = [
 	['Archaic Scroll', item],
 	['Barons Cloak', armor],
+	['Battle Tome', hand],
 	['Bearded Axe', twohand],
 	['Belt Of Alchemy', item],
 	['Belt Of Waterwalking', item],
 	['Blessed Shield', hand],
+	['Bloodscript Ring', item],
 	['Bloody Dagger', hand],
 	['Bone Blade', hand],
 	['Boots Of Iron', item],
@@ -214,6 +222,7 @@ ITEMS_LIST = [
 	['Chainmail', armor],
 	['City Guards Bow', twohand],
 	['Cloak Of Mists', armor],
+	['Corpsebug Brooch', item],
 	['Crossbow', hand],
 	['Deflecting Shield', hand],
 	['Dire Flail', twohand],
@@ -241,6 +250,8 @@ ITEMS_LIST = [
 	['Magma Blast', twohand],
 	['Mana Weave', item],
 	['Mapstone', item],
+	['Marsh Cloak', armor],
+	['Mist Bane', hand],
 	['Phoenix Pendant', item],
 	['Poisoned Blowgun', hand],
 	['Ring Of Power', item],
@@ -250,6 +261,8 @@ ITEMS_LIST = [
 	['Serpent Dagger', hand],
 	['Shield Of Light', hand],
 	['Sling', hand],
+	['Soulbound Sword', twohand],
+	['Soulstone', twohand],
 	['Staff Of Greyhaven', twohand],
 	['Steel Broadsword', hand],
 	['Sunburst', twohand],
@@ -257,7 +270,8 @@ ITEMS_LIST = [
 	['Thiefs Vest', armor],
 	['Trident', hand],
 	['Undying Skull', item],
-	['White Wolf Cloak', armor]
+	['White Wolf Cloak', armor],
+	['Witch Hazel Bow', twohand]
 ];
 
 TIER2_ITEMS_LIST = [
@@ -314,6 +328,7 @@ TIER2_ITEMS_LIST = [
 RELICS_LIST = [
 	['Aurium Mail', armor],
 	['Dawnblade', hand],
+	['Fear Eater', twohand],
 	['Fortunas Dice', item],
 	['Gauntlets Of Power', item],
 	['Immunity Elixir', item],
@@ -325,13 +340,16 @@ RELICS_LIST = [
 	['Staff Of Light', twohand],
 	['Sun Stone', item],
 	['The Shadow Rune', twohand],
+	['The White Crown', item],
 	['Trueshot', twohand],
+	['Undertakers Coat', armor],
 	['Valyndras Bane', twohand],
 	['Workmans Ring', item],
 	['Ynfernal Rune', twohand]
 ];
 
 OVERLORD_RELICS_LIST = [
+    'Blade Of Brivala',
 	'Bones Of Woe',
 	'Curative Vial',
 	'Duskblade',
@@ -347,7 +365,9 @@ OVERLORD_RELICS_LIST = [
 	'Suns Fury',
 	'Taskmasters Ring',
 	'The Shadow Rune',
+	'Undertakers Coat',
 	'Valyndras Gift',
+	'Waiqars Favor',
 	'Ynfernal Rune'
 ];
 
