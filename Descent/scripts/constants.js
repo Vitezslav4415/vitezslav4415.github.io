@@ -22,6 +22,10 @@ var Building = 'Building',
 	Water = 'Water',
 	Wilderness = 'Wilderness';
 var MONSTER_TRAITS = [Building,Cave,Civilized,Cold,Cursed,Dark,Hot,Mountain,Water,Wilderness];
+var monsterTraits = {};
+for (var i=0; i < MONSTER_TRAITS.length; i++) {
+	monsterTraits[urlize(MONSTER_TRAITS[i])] = urlize(MONSTER_TRAITS[i]); 
+}
 
 var MONSTERS_LIST = [
 	['Arachyura',2,2,false,LoR,[Wilderness,Cursed]],
@@ -82,10 +86,10 @@ var MONSTERS_LIST = [
 ];
 
 var EXPANSIONS = [bg2e, BoW, CoD, CotF, GoD, LoR, LoW, MoR, OotO, SoE, SoN, SotS, TF, ToC, VoD, CK, MoB];
-
-/*for (var i=0; i < MONSTERS_LIST.length; i++) {
-	EXPANSIONS.add(MONSTERS_LIST[i][4]);
-}*/
+var selectedExpansions = {};
+for (var i=0; i < EXPANSIONS.length; i++) {
+	selectedExpansions[folderize(EXPANSIONS[i])] = folderize(EXPANSIONS[i]);
+}
 
 var LIEUTENANTS_LIST = [
 	['Ariad', true, 1, 1],
@@ -173,12 +177,23 @@ var MONSTERS_HP = [
 
 MONSTERS = {};
 
+function getMonsterTraits(i) {
+	var traitsArray = MONSTERS_LIST[i][5];
+	var result = [];
+	for (var j = 0; j < traitsArray.length; j++) {
+		result.push(urlize(traitsArray[j]));
+	}
+	return result;
+}
+
 for (var i = 0; i < MONSTERS_LIST.length; i++) {
 	var monster = {};
 	monster.title = MONSTERS_LIST[i][0];
 	monster.width = MONSTERS_LIST[i][1];
 	monster.height = MONSTERS_LIST[i][2];
 	monster.ranged = MONSTERS_LIST[i][3];
+	monster.expansion = folderize(MONSTERS_LIST[i][4]);
+	monster.traits = getMonsterTraits(i);
 	monster.hasBack = MONSTERS_LIST[i][6];
 	monster.minionHpActOne = MONSTERS_HP[i][1];
 	monster.masterHpActOne = MONSTERS_HP[i][2];

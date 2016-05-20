@@ -1,27 +1,3 @@
-function toggleMenu() {
-	$('.menu').toggleClass('active');
-}
-
-function urlize(value) {
-	return somethingize(value, '_'); 
-}
-
-function folderize(value) {
-	return somethingize(value, '');
-}
-
-function somethingize(value, replacement) {
-	if (value == undefined) {
-		condole.log('somethingize value is undefined');
-		return '';
-	}
-	return value.replace(new RegExp(" ",'g'), replacement).toLowerCase();
-}
-
-function mapTilize(value) {
-	return value.replace(new RegExp(" ",'g'), '');
-}
-
 function createSelect(title) {
 	html = '<div class="btn-group select-x showOneCell showTwoCells"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">' + title + ' <span class="caret"></span></button><ul class="dropdown-menu" role="menu"></ul></div>';
 	
@@ -38,24 +14,27 @@ function addOption(title, optionClass, functionCallback) {
 }
 
 function updateMonstersVisibility() {
-	var selectedTraits = [];
-	var selectedExpansions = [];
+	monsterTraits = {};
+	selectedExpansions = {};
 	var traitInputs = $('#monster-traits input');
 	var expansionInputs = $('#expansions input');
 	for (var i = 0; i < traitInputs.length; i++) {
 		if ($(traitInputs[i]).prop('checked')) {
-			selectedTraits.push($(traitInputs[i]).attr('name'));
+			var checkedTrait = $(traitInputs[i]).attr('name');
+			monsterTraits[checkedTrait] = checkedTrait;
 		}
 	}
 	for (var i = 0; i < expansionInputs.length; i++) {
 		if ($(expansionInputs[i]).prop('checked')) {
-			selectedExpansions.push($(expansionInputs[i]).attr('name'));
+			var selectedExpansion = $(expansionInputs[i]).attr('name');
+			selectedExpansions[selectedExpansion] = selectedExpansion;
 		}
 	}
 	$('#monsters-container .select-monster li').css('display', 'none');
-	for (var i = 0; i < selectedTraits.length; i++) {
-		for (var j = 0; j < selectedExpansions.length; j++) {
-			$('#monsters-container .' + selectedTraits[i] + '.' + selectedExpansions[j]).css('display', 'block');
+	for (var monsterTrait in monsterTraits) {
+		for (var selectedExpansion in selectedExpansions) {
+			if (monsterTraits[monsterTrait] == undefined || selectedExpansions[selectedExpansion] == undefined) continue;
+			$('#monsters-container .' + monsterTrait + '.' + selectedExpansion).css('display', 'block');
 		}
 	}
 }
@@ -771,8 +750,14 @@ function createMonsterSelectContent() {
 			monsterClass += ' ';
 			monsterClass += urlize(MONSTERS_LIST[i][5][j]);
 		}
-		html += addOption(MONSTERS_LIST[i][0] + ' master', monsterClass, 'updateMonster(this, \'' + MONSTERS_LIST[i][0] + '\');');
-		html += addOption(MONSTERS_LIST[i][0] + ' minion', monsterClass, 'updateMonster(this, \'' + MONSTERS_LIST[i][0] + '\');');
+		var monsterTitle = MONSTERS_LIST[i][0];
+		var monsterVisible = (monsterTraits[MONSTERS[monsterTitle].traits[0]] != undefined || monsterTraits[MONSTERS[monsterTitle].traits[1]] != undefined) && selectedExpansions[MONSTERS[monsterTitle].expansion] != undefined;
+		var option = $(addOption(monsterTitle + ' master', monsterClass, 'updateMonster(this, \'' + monsterTitle + '\');'));
+		option.css('display', monsterVisible ? 'block' : 'none');
+		html += option[0].outerHTML;
+		option = $(addOption(monsterTitle + ' minion', monsterClass, 'updateMonster(this, \'' + monsterTitle + '\');'));
+		option.css('display', monsterVisible ? 'block' : 'none');
+		html += option[0].outerHTML;
 	}
 	return html;
 }
@@ -2050,6 +2035,7 @@ function adjustOverlappingImages() {
 
 function constructSettingsFromConfig() {
 	updateAct(config.actOne);
+	updateTraitsAndExpansions();
 	constructQuestObjectives();
 	constructHeroesTabsFromConfig();
 	constructMonstersAndLieutenantsTabFromConfig();
@@ -2058,6 +2044,33 @@ function constructSettingsFromConfig() {
 	constructMiscellaneousObjectsTabFromConfig();
 	constructOverlordCardsTabFromConfig();
 	constructMapSize();
+}
+
+function updateTraitsAndExpansions() {
+	if (config.monsterTraits != undefined) {
+		monsterTraits = config.monsterTraits;
+		updateTraits();
+	}
+	if (config.expansions != undefined) {
+		selectedExpansions = config.expansions;
+		updateExpansions();
+	}
+}
+
+function updateTraits() {
+	$('#monster-traits input').prop('checked',false);
+	for (var monsterTrait in monsterTraits) {
+		if (monsterTraits[monsterTrait] == undefined) continue;
+		$('[name="' + urlize(monsterTrait) + '"]').prop('checked',true);
+	}
+}
+
+function updateExpansions() {
+	$('#expansions input').prop('checked',false);
+	for (var selectedExpansion in selectedExpansions) {
+		if (selectedExpansions[selectedExpansion] == undefined) continue;
+		$('[name="' + urlize(selectedExpansion) + '"]').prop('checked',true);
+	}
 }
 
 function constructQuestObjectives() {
@@ -2336,6 +2349,8 @@ function collectData() {
 	config.actOne = actOne;
 	config.mapWidth = mapWidth;
 	config.mapHeight = mapHeight;
+	config.monsterTraits = monsterTraits;
+	config.expansions = selectedExpansions;
 }
 
 function drawGrid() {
