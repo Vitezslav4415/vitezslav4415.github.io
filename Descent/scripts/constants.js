@@ -41,7 +41,7 @@ var MONSTERS_LIST = [
 	['Changeling',1,1,false,SoN,[Civilized,Cursed]],
 	['Chaos Beast',1,2,false,CoD,[Dark,Cursed]],
 	['Crypt Dragon',2,3,true,GoD,[Dark,Cursed]],
-//	['Crow Hag',1,2,true,ToC,[Dark,Civilized]],
+//	['Crow Hag',1,2,true,ToC,[Dark,Civilized],true],
 	['Dark Priest',1,1,true,GoD,[Civilized,Cursed]],
 	['Deep Elf',1,1,false,BoW,[Dark,Cave],true],
 	['Deep Elf CK',1,1,false,CK,[Dark,Cave]],
