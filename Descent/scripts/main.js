@@ -331,8 +331,9 @@ function updateSkills(element, skillValues, heroNumber) {
 }
 
 function adjustSkills(element, value, hybrid) {
+	if (hybrid == undefined) hybrid = false;
 	var container = $(element).parents('.select-row');
-	if (hybrid == undefined || !hybrid) {
+	if (!hybrid) {
 		container.find('.skills-container').attr("class", "showclass skills-container " + folderize(value));
 	} else {
 		container.find('.skills-container').addClass(folderize(value));
@@ -349,10 +350,12 @@ function adjustItems(element, value, hybrid) {
 }
 
 function adjustSkillsImages(element, hybrid) {
+	if (hybrid == undefined) hybrid = false;
 	var container = $(element).parents('.select-row');
 	var className = container.find(hybrid ? 'input[name="hybrid-class-title"]' : 'input[name="class-title"]').attr('value');
+	if (className == '') return;
 	var skills = $(container).find('.checkbox.' + folderize(className) + ' input');
-	if (hybrid == undefined || !hybrid) {
+	if (!hybrid) {
 		container.find('.imagescontainer img').removeClass('showimage');
 	}
 	for (var i = 0; i < skills.length; i++) {
@@ -367,6 +370,9 @@ function adjustSkillsImages(element, hybrid) {
 	}
 	if (className == 'Bard') {
 		container.find('#harmony1,#melody1,#harmony2,#melody2,#harmony3,#melody3,#harmony4,#melody4').addClass('showimage');
+	}
+	if (CLASSES[className].allowHybrid && !hybrid) {
+		adjustSkillsImages(element, true);
 	}
 }
 
