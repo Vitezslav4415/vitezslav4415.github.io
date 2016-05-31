@@ -70,7 +70,7 @@ var MONSTERS_LIST = [
 	['Naga',2,2,true,SotS,[Water,Cave]],
 	['Ogre',2,2,false,VoD,[Building,Cave]],
 	['Plague Worm',1,2,false,TF,[Water,Cave]],
-	['Rat Swarm',1,2,false,SoN,[Building,Dark]],
+	['Rat Swarm',1,2,false,SoN,[Building,Dark],true],
 	['Razorwing',1,1,false,OotO,[Wilderness,Cave]],
 	['Reanimate',1,1,false,MoB,[Civilized,Cursed],true],
 	['Shade',1,1,false,SoE,[Dark,Cursed]],
