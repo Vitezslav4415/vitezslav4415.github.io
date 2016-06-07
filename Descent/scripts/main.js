@@ -206,7 +206,7 @@ function updateHero(element, value) {
 	container.find('input[name="hero-y"]').attr('value','');
 	container.find('input[name="hero-hp"]').val(HEROES[value].hp);
 	container.find('input[name="hero-stamina"]').val(HEROES[value].stamina);
-	container.children('img').attr('src', 'images/heroes_cards/' + urlize(value) + '.jpg');
+	container.find('.hero-image-container').children('img').attr('src', 'images/heroes_cards/' + urlize(value) + '.jpg');
 	var heroId = container.parent().attr('id');
 	var heroImage = $('<img>');
 	heroImage.attr('src', 'images/heroes_tokens/' + urlize(value) + '.png');
@@ -1118,8 +1118,18 @@ function addHeroLine(number) {
 	heroLine.append(createSkillsBlock(number));
 	heroLine.append(createItemsBlock());
 	heroLine.append(createSackAndSearchBlock());
-	heroLine.append($('<img>').attr('src', '').attr('onclick',"$(this).toggleClass('feat-used')"));
+	heroLine.append(getHeroImage());
 	$('#hero' + number.toString()).append(heroLine);
+}
+
+function getHeroImage() {
+	var heroImage = $('<img>');
+	var heroImageFeat = $('<div>').addClass('hero-image-feat');
+	var heroImageContainer = $('<div>').addClass('hero-image-container'); 
+	heroImageContainer.append(heroImage);
+	heroImageContainer.append(heroImageFeat);
+	heroImage.attr('src', '').attr('onclick',"$(this).parent().toggleClass('feat-used')");
+	return heroImageContainer;
 }
 
 function addMapTileLine() {
@@ -1533,7 +1543,7 @@ function hero(element) {
 		hero.stamina = container.find('[name="hero-stamina"]').val();
 		hero.className = container.find('[name="class-title"]').val();
 		if (CLASSES[hero.className].allowHybrid) hero.hybridClassName = container.find('[name="hybrid-class-title"]').val(); 
-		hero.featUsed = container.children('img').hasClass('feat-used');
+		hero.featUsed = container.children('img').parent().hasClass('feat-used');
 		hero.skills = getSkills(container, hero.className);
 		hero.items = getItems(container);
 		hero.sack = getSackAndSearch(container);
@@ -2145,7 +2155,7 @@ function constructHeroesTabsFromConfig() {
 				}
 			}
 			if (heroConfig.featUsed != undefined && heroConfig.featUsed) {
-				$(heroSelector + '> .select-row > img').addClass('feat-used');
+				$(heroSelector + '> .select-row > img').parent().addClass('feat-used');
 			}
 			updateConditionsInSettings(heroConfig.conditions, $(heroSelector));
 			if (heroConfig.aura != undefined) {

@@ -506,10 +506,6 @@ ul#tabs > li > a {
     vertical-align: bottom;
 }
 
-.feat-used {
-	border-bottom-right-radius: 90%;
-}
-
 .aura {
     display: inline-block;
 }
@@ -527,4 +523,31 @@ ul#tabs > li > a {
 
 #content .select-hybrid-class .btn {
     float: none;
+}
+
+.hero-image-container {
+	position: relative;
+	display: inline-block;
+    padding: 20px 0;
+}
+
+.hero-image-container img {
+	margin: 0;
+}
+
+.hero-image-feat {
+	display: none;
+    position: absolute;
+    width: 40%;
+    height: 36%;
+    bottom: 52px;
+    right: 14px;
+    background: #FAF1C6;
+    opacity: 0.9;
+    border-radius: 65px;
+    border-top-left-radius: 100px;
+}
+
+.feat-used .hero-image-feat {
+	display: block;	
 }
