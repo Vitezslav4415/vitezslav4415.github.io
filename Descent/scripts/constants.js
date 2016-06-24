@@ -833,6 +833,7 @@ var HEROES_LIST = [
 	['Nanok of the Blade',12,4,war],
 	['Nara the Fang',10,4,war],
 	['Sir Valadir',12,4,war],
+	['Sir Valadir CK',12,3,war],
 	['Challara',10,4,wiz],
 	['High mage Quellen',10,4,wiz],
 	['Reynhart the worthy',12,4,war],
