@@ -1543,7 +1543,7 @@ function hero(element) {
 		hero.stamina = container.find('[name="hero-stamina"]').val();
 		hero.className = container.find('[name="class-title"]').val();
 		if (CLASSES[hero.className].allowHybrid) hero.hybridClassName = container.find('[name="hybrid-class-title"]').val(); 
-		hero.featUsed = container.children('img').parent().hasClass('feat-used');
+		hero.featUsed = container.find('.hero-image-container img').parent().hasClass('feat-used');
 		hero.skills = getSkills(container, hero.className);
 		hero.items = getItems(container);
 		hero.sack = getSackAndSearch(container);
@@ -2155,7 +2155,7 @@ function constructHeroesTabsFromConfig() {
 				}
 			}
 			if (heroConfig.featUsed != undefined && heroConfig.featUsed) {
-				$(heroSelector + '> .select-row > img').parent().addClass('feat-used');
+				$(heroSelector + '> .select-row > .hero-image-container > img').parent().addClass('feat-used');
 			}
 			updateConditionsInSettings(heroConfig.conditions, $(heroSelector));
 			if (heroConfig.aura != undefined) {
