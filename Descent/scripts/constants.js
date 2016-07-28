@@ -475,7 +475,7 @@ var apothecary = {},
 		['Peaceful Rest', 1],
 		['Rehersal', 2],
 		['Song Of Mending', 0],
-		['Traveler\'S Blade', 0, hand],
+		['Travelers Blade', 0, hand],
 		['Understudy', 1],
 		['Wayfarer', 3]
 	];
