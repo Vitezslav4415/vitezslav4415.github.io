@@ -1269,8 +1269,21 @@ function createSkillsBlock(heroNumber) {
 	var html = $('<div>').addClass('showClass').addClass('skills-container');
 	html.append($('<h1>Skills</h1>'));
 	//added hybrid class select for Monk
-	html.append(createInputSelect('Select Class ', 'hybrid-class-title', 'select-hybrid-class monk'));
-	html.find('.select-hybrid-class ul').addClass('healer showarch').append(createClassSelectContent(true));
+	var monkInput = createInputSelect('Select Class ', 'hybrid-class-title', 'select-hybrid-class monk');
+	html.append(monkInput);
+	monkInput.find('ul').addClass('healer showarch').append(createClassSelectContent(true));
+	//added hybrid class select for Watchman
+	var watchmanInput = createInputSelect('Select Class ', 'hybrid-class-title', 'select-hybrid-class watchman');
+	html.append(watchmanInput);
+	watchmanInput.find('ul').addClass('scout showarch').append(createClassSelectContent(true));
+	//added hybrid class select for Battlemage
+	var battlemageInput = createInputSelect('Select Class ', 'hybrid-class-title', 'select-hybrid-class battlemage');
+	html.append(battlemageInput);
+	battlemageInput.find('ul').addClass('warrior showarch').append(createClassSelectContent(true));
+	//added hybrid class select for Steelcaster
+	var steelcasterInput = createInputSelect('Select Class ', 'hybrid-class-title', 'select-hybrid-class steelcaster');
+	html.append(steelcasterInput);
+	steelcasterInput.find('ul').addClass('mage showarch').append(createClassSelectContent(true));
 	html.append($('<input type="hidden" name="hybrid-class-title" value=""/>'));
 	var skillsImages = $('<div>').addClass('imagescontainer');
 	for (var tempoClass in CLASSES) {

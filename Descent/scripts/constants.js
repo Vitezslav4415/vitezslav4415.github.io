@@ -408,19 +408,22 @@ var apothecary = {},
 	disciple = {},
 	prophet = {},
 	spiritspeaker = {},
+	watchman = {}
 	beastmaster = {},
 	berserker = {},
 	champion = {},
 	knight = {},
 	marshal = {},
 	skirmisher = {},
+	steelcaster = {},
+	battlemage = {},
 	conjurer = {},
 	geomancer = {},
 	hexer = {},
-	monk = {},
 	necromancer = {},
 	runemaster = {},
 	bountyHunter = {},
+	monk = {},
 	stalker = {},
 	thief = {},
 	treasureHunter = {},
@@ -432,21 +435,27 @@ var apothecary = {},
 	disciple.title = 'Disciple';
 	prophet.title = 'Prophet';
 	spiritspeaker.title = 'Spiritspeaker';
+	watchman.title = 'Watchman';
+	watchman.allowHybrid = true;
 	beastmaster.title = 'Beastmaster';
 	berserker.title = 'Berserker';
 	champion.title = 'Champion';
 	knight.title = 'Knight';
 	marshal.title = 'Marshal';
 	skirmisher.title = 'Skirmisher';
+	steelcaster.title= 'Steelcaster';
+	steelcaster.allowHybrid = true;
+	battlemage.title= 'Battlemage';
+	battlemage.allowHybrid = true;
 	conjurer.title = 'Conjurer';
 	geomancer.title = 'Geomancer';
 	hexer.title = 'Hexer';
-	monk.title = 'Monk';
-	monk.allowHybrid = true;
 	necromancer.title = 'Necromancer';
 	runemaster.title = 'Runemaster';
 	bountyHunter.title = 'Bounty Hunter';
 	shadowwalker.title = 'Shadow Walker';
+	monk.title = 'Monk';
+	monk.allowHybrid = true;
 	stalker.title = 'Stalker';
 	thief.title = 'Thief';
 	treasureHunter.title = 'Treasure Hunter';
@@ -478,6 +487,13 @@ var apothecary = {},
 		['Travelers Blade', 0,hand],
 		['Understudy', 1],
 		['Wayfarer', 3]
+	];
+	
+	battlemage.skills = [
+		['Arcane Veteran', 0],
+		['Death Siphon', 3],
+		['Planar Weapon', 1],
+		['Runic Weave', 2]
 	];
 	
 	beastmaster.skills = [
@@ -722,6 +738,13 @@ var apothecary = {},
 		['Upper Hand', 3]
 	];
 	
+	steelcaster.skills = [
+	    ['Iron Blooded', 3],
+	    ['Rune Grafting', 1],
+	    ['Runeguard', 0],
+	    ['Shield Mage', 2]
+	];
+	
 	thief.skills = [
 		['Appraisal', 1],
 		['Bushwack', 3],
@@ -750,6 +773,13 @@ var apothecary = {},
 		['Trail Of Riches', 3]
 	];
 	
+	watchman.skills = [
+		['Quick Recovery', 1],
+		['Trailblazer', 2],
+		['Unity', 3],
+		['Vigilance', 0]
+	];
+	
 	wildlander.skills = [
 		['Accurate', 1],
 		['Black Arrow', 3],
@@ -770,13 +800,13 @@ var wiz = {},
 	sup = {};
 
 	wiz.title = 'Mage';
-	wiz.classes = [conjurer, geomancer, hexer, necromancer, runemaster];
+	wiz.classes = [battlemage, conjurer, geomancer, hexer, necromancer, runemaster];
 	war.title = 'Warrior';
-	war.classes = [beastmaster, berserker, champion, knight, marshal, skirmisher];
+	war.classes = [beastmaster, berserker, champion, knight, marshal, skirmisher, steelcaster];
 	rog.title = 'Scout';
 	rog.classes = [bountyHunter, monk, shadowwalker, stalker, thief, treasureHunter, wildlander];
 	sup.title = 'Healer';
-	sup.classes = [apothecary, bard, disciple, prophet, spiritspeaker];			
+	sup.classes = [apothecary, bard, disciple, prophet, spiritspeaker, watchman];			
 
 var ARCHETYPE_CLASSES = 'mage warrior scout healer';
 var ARCHETYPES_LIST = [wiz, war, rog, sup];
