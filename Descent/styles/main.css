@@ -51,7 +51,12 @@ html body {
 }
 
 .grid {
-	z-index: 150;
+	z-index: 250;
+	position: fixed;
+}
+
+.grid > div {
+	background: black;
 }
 
 .figures {
