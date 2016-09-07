@@ -12,7 +12,7 @@ function folderize(value) {
 
 function somethingize(value, replacement) {
 	if (value == undefined) {
-		condole.log('somethingize value is undefined');
+		console.log('somethingize value is undefined');
 		return '';
 	}
 	return value.replace(new RegExp(" ",'g'), replacement).toLowerCase();
