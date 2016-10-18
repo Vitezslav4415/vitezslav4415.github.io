@@ -124,9 +124,16 @@ html body {
 .items-selects .skirmisher,
 .items-selects .conjurer,
 .items-selects .shadowwalker
-.items-selects.marshal,
-.items-selects.bountyhunter {
+.items-selects .marshal,
+.items-selects .bountyhunter {
 	display: none;
+}
+
+.skills-container.monk [xp-cost="3"]:not(.monk),
+.skills-container.battlemage [xp-cost="3"]:not(.battlemage),
+.skills-container.watchman [xp-cost="3"]:not(.watchman),
+.skills-container.steelcaster [xp-cost="3"]:not(.steelcaster) {
+	display: none !important;
 }
 
 .showOneCell .oneCell,

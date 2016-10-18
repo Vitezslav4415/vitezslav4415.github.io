@@ -833,6 +833,13 @@ for (var i = 0; i < ARCHETYPES_LIST.length; i++) {
 	ARCHETYPES[ARCHETYPES_LIST[i].title] = ARCHETYPES_LIST[i];
 }
 
+// Hybrid classes options
+monk.newArchetype = sup;
+watchman.newArchetype = rog;
+steelcaster.newArchetype = wiz;
+battlemage.newArchetype = war;
+var HYBRID_CLASSES = [monk, steelcaster, battlemage, watchman];
+
 var HEROES_LIST = [
 	['Ashrian',10,4,sup],
 	['Grisban the thirsty',14,4,war],

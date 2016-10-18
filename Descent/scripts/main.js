@@ -8,9 +8,9 @@ function addOptionOld(title, value, optionClass) {
 	return '<option class="' + optionClass + '" value="' + value + '">' + title + '</option>';
 }
 
-function addOption(title, optionClass, functionCallback) {
+function addOption(title, optionClass, functionCallback, additionalAttribute, attributeValue) {
 	//return '<li class="' + optionClass + '"><a href="#" onclick="' + functionCallback + '">' + title + '</a></li>';
-	return '<li class="' + optionClass + '"><a onclick="' + functionCallback + '">' + title + '</a></li>';
+	return '<li class="' + optionClass + '"' + (additionalAttribute != undefined ? ' ' + additionalAttribute + '="' + attributeValue + '"' : '') + '><a onclick="' + functionCallback + '">' + title + '</a></li>';
 }
 
 function updateMonstersVisibility() {
@@ -1268,22 +1268,14 @@ function createConditionsBlock() {
 function createSkillsBlock(heroNumber) {
 	var html = $('<div>').addClass('showClass').addClass('skills-container');
 	html.append($('<h1>Skills</h1>'));
-	//added hybrid class select for Monk
-	var monkInput = createInputSelect('Select Class ', 'hybrid-class-title', 'select-hybrid-class monk');
-	html.append(monkInput);
-	monkInput.find('ul').addClass('healer showarch').append(createClassSelectContent(true));
-	//added hybrid class select for Watchman
-	var watchmanInput = createInputSelect('Select Class ', 'hybrid-class-title', 'select-hybrid-class watchman');
-	html.append(watchmanInput);
-	watchmanInput.find('ul').addClass('scout showarch').append(createClassSelectContent(true));
-	//added hybrid class select for Battlemage
-	var battlemageInput = createInputSelect('Select Class ', 'hybrid-class-title', 'select-hybrid-class battlemage');
-	html.append(battlemageInput);
-	battlemageInput.find('ul').addClass('warrior showarch').append(createClassSelectContent(true));
-	//added hybrid class select for Steelcaster
-	var steelcasterInput = createInputSelect('Select Class ', 'hybrid-class-title', 'select-hybrid-class steelcaster');
-	html.append(steelcasterInput);
-	steelcasterInput.find('ul').addClass('mage showarch').append(createClassSelectContent(true));
+	
+	for (var i = 0; i < HYBRID_CLASSES.length; i++) {
+		hc = HYBRID_CLASSES[i];
+		var hybridInput = createInputSelect('Select Class ', 'hybrid-class-title', 'select-hybrid-class ' + folderize(hc.title));
+		html.append(hybridInput);
+		hybridInput.find('ul').addClass(folderize(hc.newArchetype.title) + ' showarch').append(createClassSelectContent(true));
+	}
+	
 	html.append($('<input type="hidden" name="hybrid-class-title" value=""/>'));
 	var skillsImages = $('<div>').addClass('imagescontainer');
 	for (var tempoClass in CLASSES) {
@@ -1294,6 +1286,7 @@ function createSkillsBlock(heroNumber) {
 			if (skill[2] != undefined) continue;
 			var classUpdatedTitle = folderize(currentClass.title);
 			var skillObject = $('<div>').addClass('checkbox').addClass(classUpdatedTitle);
+			skillObject.attr('xp-cost', skill[1]);
 			skillObject.append($('<label><input type="checkbox" name="' + skill[0] + '" onClick="adjustSkillsImages(this);"/> ' + skill[0] + '</label>'));
 			if (skill[1] == 0) {
 				skillObject.addClass('disabled');
