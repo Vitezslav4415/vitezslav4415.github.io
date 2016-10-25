@@ -2445,7 +2445,6 @@ function constructOverlordCardsTabFromConfig() {
 function constructPlotDeckTabFromConfig() {
 	if (config.plot != undefined) {
 		if (config.plot.title != undefined) {
-			updatePlotDeck($('#plot .select-plot-deck li a')[0], config.plot.title);
 			for (var i = 0; i < config.plot.cards.length; i++) {
 				var card = config.plot.cards[i];
 				var plotCard=$('input[type="checkbox"][name="' + card[0] + '"]');
@@ -2455,6 +2454,7 @@ function constructPlotDeckTabFromConfig() {
 					$('#plot img[card="' + card[0] + '"]').addClass('exhausted')
 				}
 			}
+			updatePlotDeck($('#plot .select-plot-deck li a')[0], config.plot.title);
 		}
 	}
 }
