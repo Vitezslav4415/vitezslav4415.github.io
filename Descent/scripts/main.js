@@ -1794,7 +1794,9 @@ function getPlotInfo() {
 	var plot = {};
 	var container = $('#plot .select-row');
 	plot.title = container.find('[name="plot-deck-title"]').val();
-	
+	if (plot.title == undefined || plot.title =='') {
+		return plot;
+	}
 	var cards = [];
 	var plotCards = $(container).find('.checkbox.' + folderize(plot.title) + ' input');
 	for (var i = 0; i < plotCards.length; i++) {
