@@ -1482,6 +1482,9 @@ function clearPlotDeck(element) {
 
 function adjustPlotCardsImages(element, value) {
 	var container = $(element).parents('.select-row');
+	if (value == undefined || value == '') {
+		return;
+	}
 	container.find('.plot-cards-container').attr("class", "showplot plot-cards-container " + folderize(value));
 	container.find('img').removeClass('showimage');
 	var plotCards = $(container).find('.checkbox.' + folderize(value) + ' input');
@@ -2441,14 +2444,14 @@ function constructPlotDeckTabFromConfig() {
 	if (config.plot != undefined) {
 		if (config.plot.title != undefined) {
 			updatePlotDeck($('#plot .select-plot-deck li a')[0], config.plot.title);
-		}
-		for (var i = 0; i < config.plot.cards.length; i++) {
-			var card = config.plot.cards[i];
-			var plotCard=$('input[type="checkbox"][name="' + card[0] + '"]');
-			plotCard.prop('checked', card[1]);
-			if (card[2]) {
-				plotCard.addClass('card-exhausted', 'exhausted');
-				$('#plot img[card="' + card[0] + '"]').addClass('exhausted')
+			for (var i = 0; i < config.plot.cards.length; i++) {
+				var card = config.plot.cards[i];
+				var plotCard=$('input[type="checkbox"][name="' + card[0] + '"]');
+				plotCard.prop('checked', card[1]);
+				if (card[2]) {
+					plotCard.addClass('card-exhausted', 'exhausted');
+					$('#plot img[card="' + card[0] + '"]').addClass('exhausted')
+				}
 			}
 		}
 	}
