@@ -615,3 +615,8 @@ ul#tabs > li > a {
 .feat-used .hero-image-feat {
 	display: block;	
 }
+
+.threat-number-label {
+	line-height: 34px;
+    font-weight: bold;
+}

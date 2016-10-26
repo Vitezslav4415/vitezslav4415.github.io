@@ -1429,6 +1429,8 @@ function createPlotDeckBlock() {
 	plotContainer.append(createInputSelect('Select plot deck ', 'plot-deck-title', 'select-plot-deck'));
 	plotContainer.find('.select-plot-deck ul').append(createPlotDeckSelectContent());
 	plotContainer.append($('<input type="hidden" name="plot-deck-title" value=""/>'));
+	plotContainer.append($('<span class="threat-number-label">Threat tokens: </span>'));
+	plotContainer.append($('<input type="text" name="threat-tokens" class="form-control" placeholder="Set Threat" value="0">'));
 	plotContainer.append(createPlotCardsBlock());
 	$('#plot').html('');
 	$('#plot').append(plotContainer)
@@ -1805,6 +1807,7 @@ function getPlotInfo() {
 		cards.push([currentPlotCard.attr('name'), currentPlotCard.prop('checked'), currentPlotCard.hasClass('card-exhausted')]);
 	}
 	plot.cards = cards;
+	plot.number = $('[name="threat-tokens"]').val();
 	return plot;
 }
 
@@ -2455,6 +2458,7 @@ function constructPlotDeckTabFromConfig() {
 				}
 			}
 			updatePlotDeck($('#plot .select-plot-deck li a')[0], config.plot.title);
+			$('[name="threat-tokens"]').val(config.plot.number);
 		}
 	}
 }
