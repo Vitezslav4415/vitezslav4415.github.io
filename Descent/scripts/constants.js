@@ -1086,6 +1086,7 @@ CONDITIONS_INITIAL = [
 	['Infected',false],
 	['Insight',false],
 	['Marked',false],
+	['Objective',false],
 	['Threat',false],
 	['Valor',false]
 ];
