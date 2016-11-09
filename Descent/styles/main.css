@@ -620,3 +620,9 @@ ul#tabs > li > a {
 	line-height: 34px;
     font-weight: bold;
 }
+
+.agent [onclick="addRelic(this);"],
+.agent .select-relic,
+.agent .relic-image {
+	display: none;
+}

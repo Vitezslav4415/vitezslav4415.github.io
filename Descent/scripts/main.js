@@ -599,12 +599,21 @@ function clearAlly(element) {
 
 function updateLieutenant(element, value, showBack) {
 	var container = $(element).parents('.select-row');
+	var isAgent = value.indexOf('Agent') >= 0;
+	var realName = value.replace('Agent ', '');
 	container.find('.lieutenant-title').html(value + ' ');
 	container.find('input[name="lieutenant-title"]').attr('value',value);
+	if (isAgent) {
+		container.addClass('agent');
+	} else {
+		container.removeClass('agent');
+	}
 	var actAcronym = '_act';
-	container.find('img.lieutenant-image').attr('src', 'images/lieutenant_cards/' + urlize(value) + actAcronym + (actOne ? '1' : '2') + '.jpg').css('display','inline-block');
+	var cardFolder = isAgent ? 'plot_cards/agents' : 'lieutenant_cards';
+	var cardImageExtension = isAgent ? '.png' : '.jpg';
+	container.find('img.lieutenant-image').attr('src', 'images/' + cardFolder + '/' + urlize(realName) + actAcronym + (actOne ? '1' : '2') + cardImageExtension).css('display','inline-block');
 	if (showBack) {
-		container.find('img.lieutenant-image-back').attr('src', 'images/lieutenant_cards/' + urlize(value) + actAcronym + (actOne ? '1' : '2') + '_back.jpg').css('display','inline-block');
+		container.find('img.lieutenant-image-back').attr('src', 'images/lieutenant_cards/' + urlize(realName) + actAcronym + (actOne ? '1' : '2') + '_back.jpg').css('display','inline-block');
 	} else {
 		container.find('img.lieutenant-image-back').css('display','none');
 	}
@@ -977,7 +986,13 @@ function createOverlordRelicsSelectContent() {
 function createLieutenantsSelectContent() {
 	var html = addOption('Clear', '', 'clearLieutenant(this);');
 	for (var i = 0; i < LIEUTENANTS_LIST.length; i++) {
-		html += addOption(LIEUTENANTS_LIST[i][0] + ' ', '', 'updateLieutenant(this, \'' + LIEUTENANTS_LIST[i][0] + '\', ' + LIEUTENANTS_LIST[i][1].toString() + ')');
+		var lieutenatTitle = LIEUTENANTS_LIST[i][0];
+		html += addOption(lieutenatTitle + ' ', '', 'updateLieutenant(this, \'' + lieutenatTitle + '\', ' + LIEUTENANTS_LIST[i][1].toString() + ')');
+	}
+	html += '<li role="separator" class="divider"></li>';
+	for (var i = 0; i < LIEUTENANTS_LIST.length; i++) {
+		var lieutenatTitle = 'Agent ' + LIEUTENANTS_LIST[i][0];
+		html += addOption(lieutenatTitle + ' ', '', 'updateLieutenant(this, \'' + lieutenatTitle + '\', ' + LIEUTENANTS_LIST[i][1].toString() + ')');
 	}
 	return html;
 }
@@ -2051,7 +2066,7 @@ function constructMapFromConfig() {
 			'top' : (lieutenant.y * cellSize).toString() + 'px',
 			'z-index' : z_index
 		});
-		lieutenantImage.attr('src', folder + urlize(lieutenant.title) + '.png');
+		lieutenantImage.attr('src', folder + urlize(lieutenant.title.replace('Agent ', '')) + '.png');
 		lieutenantObject.append(lieutenantImage);
 		lieutenantObject.append(lieutenantHp);
 		addConditionsToImage(lieutenantObject, lieutenant.conditions);
