@@ -107,6 +107,7 @@ var LIEUTENANTS_LIST = [
 	['Sir Alric Farrow', true, 1, 1],
 	['Splig', true, 1, 1],
 	['Tristayne Olliven', false, 1, 1],
+	['Act II Tristayne Olliven', false, 1, 1],
 	['Valyndra', true, 2, 3],
 	['Verminous', true, 1, 2]
 ];

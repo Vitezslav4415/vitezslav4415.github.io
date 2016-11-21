@@ -991,6 +991,9 @@ function createLieutenantsSelectContent() {
 	}
 	html += '<li role="separator" class="divider"></li>';
 	for (var i = 0; i < LIEUTENANTS_LIST.length; i++) {
+		if (LIEUTENANTS_LIST[i][0].indexOf('act') != -1 || LIEUTENANTS_LIST[i][0].indexOf('Act') != -1) {
+			continue;
+		}
 		var lieutenatTitle = 'Agent ' + LIEUTENANTS_LIST[i][0];
 		html += addOption(lieutenatTitle + ' ', '', 'updateLieutenant(this, \'' + lieutenatTitle + '\', ' + LIEUTENANTS_LIST[i][1].toString() + ')');
 	}
