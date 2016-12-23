@@ -347,7 +347,7 @@ TIER2_ITEMS_LIST = [
 	['Stone Armor', armor],
 	['Tival Crystal', item],
 	['Vestments Of Kellos', armor],
-	['Winged Blade', twohand]
+	['Winged Blade', hand]
 ];
 
 RELICS_LIST = [
