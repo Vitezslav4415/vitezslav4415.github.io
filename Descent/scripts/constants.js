@@ -918,7 +918,8 @@ var HEROES_LIST = [
 	['Arvel Worldwalker',10,4,rog],
 	['Karnon',14,3,war],
 	['Steelhorns',14,3,war],
-	['Vyrah The Falconer',10,4,rog]
+	['Vyrah The Falconer',10,4,rog],
+	['Lyssa',8,5,wiz]
 ];
 
 var HEROES = {};
