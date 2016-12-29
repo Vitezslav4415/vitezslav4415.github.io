@@ -681,6 +681,19 @@ function removeCondition(element) {
 	}
 }
 
+function updateTainted(element, value) {
+	var taintedContainer = $(element).parents('.tainted-container');
+	taintedContainer.find('.tainted-title').html(value + ' ');
+	taintedContainer.find('input[name="tainted"]').val(value);
+	taintedContainer.find('img').attr('src','images/tainted_cards/' + urlize(value) + '.jpg');
+}
+
+function removeTainted(element) {
+	var taintedContainer = $(element).parents('.tainted-container');
+	taintedContainer.html('');
+	taintedContainer.append(buildTaintedButton());
+}
+
 function updateOverlordRelic(element, value) {
 	var container = $(element).parents('.select-row');
 	var relicContainer = $(element).parents('.select-relic');
@@ -975,6 +988,15 @@ function createConditionSelectContent() {
 	return html;
 }
 
+function createTaintedSelectContent() {
+	var html = addOption('Remove tainted card', '', 'removeTainted(this);');
+	html += addOption('Back ', '', 'updateTainted(this, \'Back\')');
+	for (var i = 0; i < TAINTED_CARDS_LIST.length; i++) {
+		html += addOption(TAINTED_CARDS_LIST[i] + ' ', '', 'updateTainted(this, \'' + TAINTED_CARDS_LIST[i] + '\')');
+	}
+	return html;	
+}
+
 function createOverlordRelicsSelectContent() {
 	var html = addOption('Remove relic', '', 'removeOverlordRelic(this);');
 	for (var i = 0; i < OVERLORD_RELICS_LIST.length; i++) {
@@ -1060,6 +1082,18 @@ function addCondition(button) {
 	return condition;
 }
 
+function addTainted(button) {
+	var buttonObject = $(button);
+	var buttonContainer = buttonObject.parents('.tainted-container');
+	var taintedSelect = $(createInputSelect('Back', 'tainted-title', 'select-tainted'));
+	taintedSelect.find('ul').append(createTaintedSelectContent());
+	buttonObject.remove();
+	buttonContainer.append($('<img src="images/tainted_cards/back.jpg" class="tainted-image">'));
+	buttonContainer.append(taintedSelect);
+	buttonContainer.append($('<input type="hidden" name="tainted" value="back">'));
+	return taintedSelect;
+}
+
 function addRelic(button) {
 	var relicNumber = overlordRelicNumber += 1;
 	var relic = $(createInputSelect('Select relic', 'relic-title', 'select-relic'));
@@ -1137,7 +1171,19 @@ function addHeroLine(number) {
 	heroLine.append(createItemsBlock());
 	heroLine.append(createSackAndSearchBlock());
 	heroLine.append(getHeroImage());
+	heroLine.append(buildTaintedBlock());
 	$('#hero' + number.toString()).append(heroLine);
+}
+
+function buildTaintedBlock() {
+	var taintedBlock = $('<div>');
+	taintedBlock.addClass('tainted-container');
+	taintedBlock.append(buildTaintedButton());
+	return taintedBlock;
+}
+
+function buildTaintedButton() {
+	return $('<button type="button" class="btn btn-default" aria-expanded="false" onclick="addTainted(this);">Add tainted card</button>');
 }
 
 function getHeroImage() {
@@ -1658,6 +1704,7 @@ function hero(element) {
 		hero.sack = getSackAndSearch(container);
 		hero.conditions = getConditions(container);
 		hero.aura = getAura(container);
+		hero.tainted = getTainted(container);
 	}
 	return hero;
 }
@@ -1699,6 +1746,15 @@ function getAura(container) {
 	aura.radius = auraContainer.find('[name="aura-radius"]').val();
 	aura.color = auraContainer.find('[name="aura-color"]').val();
 	return aura;
+}
+
+function getTainted(container) {
+	var taintedInput = $(container).find('[name="tainted"]');
+	if (taintedInput != undefined) {
+		return taintedInput.val();
+	} else {
+		return undefined;
+	}
 }
 
 function populateQuestObjectives() {
@@ -2291,6 +2347,10 @@ function constructHeroesTabsFromConfig() {
 				var aura = addAura($(heroSelector + ' [onclick="addAura(this);"]'));
 				aura.find('[name="aura-radius"]').val(heroConfig.aura.radius);
 				aura.find('[name="aura-color"]').val(heroConfig.aura.color);
+			}
+			if (heroConfig.tainted != undefined) {
+				var tainted = addTainted($(heroSelector + ' .tainted-container').find('button'));
+				updateTainted($(heroSelector + ' .tainted-container a')[0], heroConfig.tainted);
 			}
 		}
 	}

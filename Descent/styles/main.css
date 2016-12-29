@@ -307,6 +307,12 @@ html body {
 	height: 192px;
 }
 
+.tainted-container img {
+	display: block;
+	width: 165px;
+	margin: 0 0 20px 0;
+}
+
 .items-selects > .btn-group > button,
 .sack-selects > .btn-group > button {
 	width: 128px;
@@ -592,7 +598,14 @@ ul#tabs > li > a {
 .hero-image-container {
 	position: relative;
 	display: inline-block;
+    vertical-align: top;
     padding: 20px 0;
+}
+
+.tainted-container {
+    display: inline-block;
+    vertical-align: top;
+    padding: 20px;
 }
 
 .hero-image-container img {

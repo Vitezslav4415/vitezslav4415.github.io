@@ -426,6 +426,15 @@ for (var i = 0; i < RELICS_LIST.length; i++) {
 	ITEMSR[RELICS_LIST[i][1].className].push(RELICS_LIST[i]);
 }
 
+TAINTED_CARDS_LIST = [
+	'Abomination',
+	'Bad Blood',
+	'Deaths Hand',
+	'Gray Decay',
+	'New Orders',
+	'Ordinary'
+];
+
 //Classes
 var apothecary = {},
 	bard = {},
