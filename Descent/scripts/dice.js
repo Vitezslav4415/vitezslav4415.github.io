@@ -298,8 +298,8 @@ $(function() {
 			[blue, red, yellow], [surgeEffect(0,3,0,1,false)], [blue, yellow], [surgeEffect(0,2,0,1,false)]));
 	monsters.push(monster('Ynfernael Hulk', [blue, red], [surgeEffect(0,0,0,1,false)], 1, [blue, red], [surgeEffect(0,0,0,1,false)], 1,
 			[blue, red, yellow], [surgeEffect(0,0,0,1,false)], [blue, red, yellow], [surgeEffect(0,0,0,1,false)]));
-	monsters.push(monster('Ynfernael Hulk + charge', [blue, red], [surgeEffect(0,3,0,1,false)], 1, [blue, red], [surgeEffect(0,3,0,1,false)], 1,
-			[blue, red, yellow], [surgeEffect(0,3,0,1,false)], [blue, red, yellow], [surgeEffect(0,3,0,1,false)]));
+	monsters.push(monster('Ynfernael Hulk + charge', [blue, red], [surgeEffect(0,3,0,1,false)], 1, [blue, red], [], 1,
+			[blue, red, yellow], [surgeEffect(0,3,0,1,false)], [blue, red, yellow], []));
 	monsters.push(monster('Zombie', [blue, yellow], [surgeEffect(0,1,0,1,false)], 1, [blue, yellow], [surgeEffect(0,1,0,1,false)], 4,
 			[blue, red, yellow], [surgeEffect(0,2,0,1,false)], [blue, yellow], [surgeEffect(0,2,0,1,false)]));
 
