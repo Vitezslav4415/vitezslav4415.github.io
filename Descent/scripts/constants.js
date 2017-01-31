@@ -438,10 +438,16 @@ for (var i = 0; i < RELICS_LIST.length; i++) {
 TAINTED_CARDS_LIST = [
 	'Abomination',
 	'Bad Blood',
+	'Death Rage',
 	'Deaths Hand',
+	'Dream Walk',
 	'Gray Decay',
+	'Great Sorrow',
+	'Martyrdom',
 	'New Orders',
-	'Ordinary'
+	'Ordinary',
+	'Perfect Peace',
+	'Vile Shadow'
 ];
 
 //Classes
