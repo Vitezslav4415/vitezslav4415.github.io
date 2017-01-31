@@ -10,7 +10,7 @@ function listsort(a, b) {
 var bg2e = 'Second Edition Base Game', BoW = 'Bonds of the Wild', CoD = 'Crown of Destiny', CotF = 'Crusade of the Forgotten', GoD = 'Guardians of Deephall',
 	LoR = 'Labyrinth of Ruin', LoW = 'Lair of the Wyrm', MoR = 'Manor of Ravens', OotO = 'Oath of the Outcast', 
 	SoE = 'Shards of Everdark', SoN = 'Shadow of Narekhall', SotS = 'Stewards of the Secret', TF = 'The Trollfens', ToC = 'Treaty of Champions',
-	VoD = 'Visions of Dawn', CK = 'Conversion Kit', MoB = 'Mists of Bilehall';
+	VoD = 'Visions of Dawn', CK = 'Conversion Kit', MoB = 'Mists of Bilehall', CtR = 'Chains that Rust';
 var Building = 'Building',
 	Cave = 'Cave',
 	Civilized = 'Civilized',
@@ -65,6 +65,7 @@ var MONSTERS_LIST = [
 	['Kobold CK',1,1,false,CK,[Building,Cave]],
 	['Lava Beetle',1,1,true,CoD,[Hot,Cave]],
 	['Manticore',2,2,true,VoD,[Wilderness,Dark]],
+	['Marrow Priest',1,1,false,CtR,[Dark, Building],true],
 	['Medusa',1,1,true,CotF,[Cursed,Building]],
 	['Merriod',2,2,false,bg2e,[Wilderness,Water]],
 	['Naga',2,2,true,SotS,[Water,Cave]],
@@ -75,8 +76,10 @@ var MONSTERS_LIST = [
 	['Reanimate',1,1,false,MoB,[Civilized,Cursed],true],
 	['Shade',1,1,false,SoE,[Dark,Cursed]],
 	['Shadow Dragon',2,3,false,bg2e,[Dark,Cave]],
+	['Shambling Colossus',2,2,false,CtR,[Cursed,Wilderness],true],
 	['Skeleton Archer',1,1,true,ToC,[Cursed,Civilized]],
 	['Sorcerer',1,1,true,CotF,[Civilized,Building]],
+	['The Dispossessed',1,1,false,CtR,[Civilized,Cursed],true],
 	['Troll',2,2,false,VoD,[Mountain,Cave]],
 	['Volucrix Reaver',1,1,false,LoR,[Building,Mountain]],
 	['Wendigo',2,2,false,GoD,[Cold,Cave]],
@@ -85,17 +88,19 @@ var MONSTERS_LIST = [
 	['Zombie',1,1,false,bg2e,[Cursed,Building]]
 ];
 
-var EXPANSIONS = [bg2e, BoW, CoD, CotF, GoD, LoR, LoW, MoR, OotO, SoE, SoN, SotS, TF, ToC, VoD, CK, MoB];
+var EXPANSIONS = [bg2e, BoW, CoD, CotF, GoD, LoR, LoW, MoR, OotO, SoE, SoN, SotS, TF, ToC, VoD, CK, MoB, CtR];
 var selectedExpansions = {};
 for (var i=0; i < EXPANSIONS.length; i++) {
 	selectedExpansions[folderize(EXPANSIONS[i])] = folderize(EXPANSIONS[i]);
 }
 
 var LIEUTENANTS_LIST = [
+    ['Ardus IxErebus', true, 1, 1],
 	['Ariad', true, 1, 1],
 	['Baron Zachareth', true, 1, 1],
 	['Belthir', true, 1, 1],
 	['Bolgoreth', true, 2, 2],
+	['Kyndrithul', true, 1, 1],
 	['Lady Eliza Farrow', true, 1, 1],
 	['Lord Merick Farrow', true, 1, 1],
 	['Mirklace', false, 2, 2],
@@ -109,7 +114,8 @@ var LIEUTENANTS_LIST = [
 	['Tristayne Olliven', false, 1, 1],
 	['Act II Tristayne Olliven', false, 1, 1],
 	['Valyndra', true, 2, 3],
-	['Verminous', true, 1, 2]
+	['Verminous', true, 1, 2],
+	['Zarihell', true, 1, 1]
 ];
 
 var LIEUTENANTS = {};
@@ -155,6 +161,7 @@ var MONSTERS_HP = [
 	['Kobold',2,5,4,7],
 	['Kobold CK',2,4,4,6],
 	['Lava Beetle',3,5,5,7],
+	['Marrow Priest',7,9,8,10],
 	['Manticore',5,7,7,9],
 	['Medusa',4,6,6,9],
 	['Merriod',5,7,7,9],
@@ -166,8 +173,10 @@ var MONSTERS_HP = [
 	['Reanimate',3,5,5,8],
 	['Shade',2,4,4,6],
 	['Shadow Dragon',6,9,8,10],
+	['Shambling Colossus',5,8,7,9],
 	['Skeleton Archer',2,5,4,8],
 	['Sorcerer',3,5,5,8],
+	['The Dispossessed',6,8,8,10],
 	['Troll',8,10,10,13],
 	['Volucrix Reaver',3,5,4,6],
 	['Wendigo',4,7,7,10],
@@ -954,6 +963,7 @@ FAMILIARS_LIST = [
 	'Pico',
 	'Raven',
 	'Reanimate',
+	'Scourge',
 	'Shadow',
 	'Skye',
 	'Summoned Stone',
@@ -1231,7 +1241,15 @@ OVERLORD_CARDS_LIST = [
 	['Wristlet Of Wind', 'enchanter', 1],
 	['Ward Of Peace', 'enchanter', 1],
 	['Rune Of The Phoenix', 'enchanter', 1],
-	['Sign Of The Last Zenith', 'enchanter', 1]
+	['Sign Of The Last Zenith', 'enchanter', 1],
+	['Dance Macabre', 'soulbinder', 1],
+	['Dark Silhouette', 'soulbinder', 1],
+	['Grotesque', 'soulbinder', 1],
+	['Haunted Steps', 'soulbinder', 1],
+	['Possessive', 'soulbinder', 1],
+	['Restless Spirit', 'soulbinder', 1],
+	['Ties That Bind', 'soulbinder', 1],
+	['Unblinking', 'soulbinder', 1]
 ];
 
 var OVERLORD_CARDS = {};
