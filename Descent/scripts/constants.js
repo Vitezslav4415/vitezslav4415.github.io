@@ -962,21 +962,21 @@ MONSTERS_LIST.sort(listsort);
 HEROES_LIST.sort(listsort);
 
 FAMILIARS_LIST = [
-	'Brightblaze',
-	'Image',
-	'Kata',
-	'Mata',
-	'Pico',
-	'Raven',
-	'Reanimate',
-	'Scourge',
-	'Shadow',
-	'Skye',
-	'Summoned Stone',
-	'Trap',
-	'Wolf',
-	'Villager Female',
-	'Villager Male'
+	['Brightblaze',true],
+	['Image',false],
+	['Kata',false],
+	['Mata',false],
+	['Pico',true],
+	['Raven Flock',true],
+	['Reanimate',true],
+	['Scourge',true],
+	['Shadow',true],
+	['Skye',true],
+	['Summoned Stone',true],
+	['Trap',false],
+	['Wolf',true],
+	['Villager Female',false],
+	['Villager Male',false]
 ];
 
 ALLIES_LIST = [

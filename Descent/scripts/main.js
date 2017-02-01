@@ -630,9 +630,18 @@ function clearLieutenant(element) {
 }
 
 function updateFamiliar(element, value) {
+	if (value == 'Raven') {
+		value = 'Raven Flock';
+	} 
 	var container = $(element).parents('.select-row');
 	container.find('.familiar-title').html(value + ' ');
 	container.find('input[name="familiar-title"]').attr('value',value);
+	$('.familiar-image').css('display','none');
+	var familiarTitlesContainers = $('input[name="familiar-title"]');
+	for (var i = 0; i < familiarTitlesContainers.length; i++) {
+		var titleContainer = $(familiarTitlesContainers[i]);
+		$('[name="' + urlize(titleContainer.attr('value')) + '"]').css('display','inline-block');
+	}
 }
 
 function clearFamiliar(element) {
@@ -963,7 +972,7 @@ function createAlliesSelectContent() {
 function createFamiliarsSelectContent() {
 	var html = addOption('Clear', '', 'clearFamiliar(this);');
 	for (var i = 0; i < FAMILIARS_LIST.length; i++) {
-		html += addOption(FAMILIARS_LIST[i] + ' ', '', 'updateFamiliar(this, \'' + FAMILIARS_LIST[i] + '\')');
+		html += addOption(FAMILIARS_LIST[i][0] + ' ', '', 'updateFamiliar(this, \'' + FAMILIARS_LIST[i][0] + '\')');
 	}
 	return html;
 }
@@ -1579,6 +1588,18 @@ function createFullMapsBlock() {
 	ul.append(createMapsSelectContent());
 	html.append(select);
 	$('#full-maps-container').append(html);
+}
+
+function createFamiliarsImagesBlock() {
+	var familiarsContainer = $('#familiars-container');
+	var familiarImagesContainer = $('<div>').addClass('familiars-images');
+	for (var i = 0; i < FAMILIARS_LIST.length; i++) {
+		if (FAMILIARS_LIST[i][1]) {
+			var familiarImage = $('<img>').addClass('familiar-image').attr('name',urlize(FAMILIARS_LIST[i][0])).attr('src','images/familiars_cards/' + urlize(FAMILIARS_LIST[i][0]) + '.jpg').css('display','none');
+			familiarImagesContainer.append(familiarImage);
+		}
+	}
+	familiarsContainer.append(familiarImagesContainer);
 }
 
 function adjustOverlordCardsImages() {
@@ -2896,6 +2917,7 @@ $(function() {
 		addHeroLine(i);
 	}
 	createFullMapsBlock();
+	createFamiliarsImagesBlock();
 	createMonsterTraitsBlock();
 	createExpansionsBlock();
 	createOverlordCardsBlock();

@@ -307,10 +307,15 @@ html body {
 	height: 192px;
 }
 
-.tainted-container img {
+.tainted-container img,
+.familiar-image {
 	display: block;
-	width: 165px;
+	height: 255px;
 	margin: 0 0 20px 0;
+}
+
+img.familiar-image {
+    margin-right: 20px;
 }
 
 .items-selects > .btn-group > button,
