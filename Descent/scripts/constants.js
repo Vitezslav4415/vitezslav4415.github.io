@@ -1090,7 +1090,8 @@ MAP_TILES_LIST_COMPLETE = [
 	['Extension1x2',2,1],
 	['Extension2x2',2,2],
 	['Portal Extension 2x2',2,2],
-	['Cobble-stone Extension 2x2',2,2]
+	['Cobble-stone Extension 2x2',2,2],
+	['Crumbling',1,1]
 ];
 
 MAP_TILES_LIST = [];
@@ -1107,7 +1108,8 @@ DOORS_LIST = [
 	'Red Rune Blocked',
 	'Shrubbery',
 	'Yellow Rune Blocked',
-	'Portcullis'
+	'Portcullis',
+	'Wall'
 ];
 
 BLOCKS_LIST = [
