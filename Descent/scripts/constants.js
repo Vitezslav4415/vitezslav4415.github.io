@@ -76,7 +76,7 @@ var MONSTERS_LIST = [
 	['Reanimate',1,1,false,MoB,[Civilized,Cursed],true],
 	['Shade',1,1,false,SoE,[Dark,Cursed]],
 	['Shadow Dragon',2,3,false,bg2e,[Dark,Cave]],
-	['Shambling Colossus',2,2,false,CtR,[Cursed,Wilderness],true],
+	['Shambling Colossus',1,2,false,CtR,[Cursed,Wilderness],true],
 	['Skeleton Archer',1,1,true,ToC,[Cursed,Civilized]],
 	['Sorcerer',1,1,true,CotF,[Civilized,Building]],
 	['The Dispossessed',1,1,false,CtR,[Civilized,Cursed],true],
