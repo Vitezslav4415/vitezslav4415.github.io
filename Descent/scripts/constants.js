@@ -944,7 +944,8 @@ var HEROES_LIST = [
 	['Steelhorns',14,3,war],
 	['Vyrah The Falconer',10,4,rog],
 	['Lyssa',8,5,wiz],
-	['Zyla',8,5,wiz]
+	['Zyla',8,5,wiz],
+	['Tatianna',12,4,rog]
 ];
 
 var HEROES = {};
