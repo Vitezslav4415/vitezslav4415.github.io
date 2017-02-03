@@ -1720,7 +1720,7 @@ function hero(element) {
 		hero.className = container.find('[name="class-title"]').val();
 		if (CLASSES[hero.className].allowHybrid) hero.hybridClassName = container.find('[name="hybrid-class-title"]').val(); 
 		hero.featUsed = container.find('.hero-image-container img').parent().hasClass('feat-used');
-		hero.skills = getSkills(container, hero.className);
+		hero.skills = getSkills(container, hero.className, hero.hybridClassName);
 		hero.items = getItems(container);
 		hero.sack = getSackAndSearch(container);
 		hero.conditions = getConditions(container);
@@ -1730,13 +1730,21 @@ function hero(element) {
 	return hero;
 }
 
-function getSkills(container, className) {
+function getSkills(container, className, hybridClassName) {
 	var result = [];
 	var skills = $(container).find('.checkbox.' + folderize(className) + ' input');
 	for (var i = 0; i < skills.length; i++) {
 		var currentSkill = $(skills[i]); 
 		var image = container.find('img[skill="' + currentSkill.attr('name') + '"]');
 		result.push([currentSkill.attr('name'), currentSkill.prop('checked'), currentSkill.hasClass('card-exhausted'), image.hasClass('hasmelody'), image.hasClass('hasharmony')]);
+	}
+	if (hybridClassName != undefined) {
+		var hybridSkills = $(container).find('.checkbox.' + folderize(hybridClassName) + ' input');
+		for (var i = 0; i < hybridSkills.length; i++) {
+			var currentSkill = $(hybridSkills[i]); 
+			var image = container.find('img[skill="' + currentSkill.attr('name') + '"]');
+			result.push([currentSkill.attr('name'), currentSkill.prop('checked'), currentSkill.hasClass('card-exhausted'), image.hasClass('hasmelody'), image.hasClass('hasharmony')]);
+		}
 	}
 	return result;
 }
