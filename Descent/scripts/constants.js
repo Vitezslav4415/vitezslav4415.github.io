@@ -1150,7 +1150,7 @@ CONDITIONS_INITIAL = [
 	['Hexed',false],
 	['Infected',false],
 	['Insight',false],
-	['Marked',false],
+	['Tracked',false],
 	['Objective',false],
 	['Threat',false],
 	['Valor',false]

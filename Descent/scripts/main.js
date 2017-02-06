@@ -663,6 +663,9 @@ function clearObjective(element) {
 }
 
 function updateCondition(element, value) {
+	if (value == 'Marked') {
+		value = 'Tracked';
+	}
 	var container = $(element).parents('.select-row');
 	var id = $(element).parents('.select-condition').attr('id');
 	container.find('#' + id + ' .condition-title').html(value + ' ');
