@@ -412,7 +412,7 @@ OVERLORD_RELICS_LIST = [
 	'Taskmasters Ring',
 	'The Manors Heart',
 	'The Shadow Rune',
-	'Tome of Five Lies',
+	'Tome Of The Five Lies',
 	'Undertakers Coat',
 	'Valyndras Gift',
 	'Waiqars Favor',
