@@ -222,7 +222,13 @@ SEARCH_ITEMS_LIST = [
 	'Stamina Potion',
 	'Treasure Chest',
 	'Warding Talisman',
-	'Flipped'
+	'Flipped',
+	'Flipped (Curse Doll)',
+	'Flipped (Fire Flask)',
+	'Flipped (Health Potion)',
+	'Flipped (Power Potion)',
+	'Flipped (Stamina Potion)',
+	'Flipped (Warding Talisman)'
 ];
 
 //Items
