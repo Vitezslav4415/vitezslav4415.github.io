@@ -983,7 +983,8 @@ FAMILIARS_LIST = [
 	['Trap',false],
 	['Wolf',true],
 	['Villager Female',false],
-	['Villager Male',false]
+	['Villager Male',false],
+	['Desmond',true]
 ];
 
 ALLIES_LIST = [
