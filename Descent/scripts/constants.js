@@ -912,6 +912,7 @@ var HEROES_LIST = [
 	['Jaes the exile',12,3,wiz],
 	['Lindel',10,5,rog],
 	['Andria Runehand',12,4,sup],
+	['Andira Runehand',12,4,sup],
 	['Astarra',10,5,wiz],
 	['Tahlia',14,4,war],
 	['Tetherys',10,4,rog],
@@ -997,7 +998,7 @@ ALLIES_SKILLS['Serena'] = ['Aura Of Might', 'Healing Aura', 'Holy Hammer'];
 ALLIES_SKILLS['Raythen'] = ['Back Strike', 'Night Prowler', 'Sharp Eyes'];
 
 MAP_TILES_LIST_COMPLETE = [
-	['1',6,4],
+	['1',8,6],
 	['2',6,6],
 	['3',6,4],
 	['4',6,6],
