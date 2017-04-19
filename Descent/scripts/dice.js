@@ -276,8 +276,8 @@ $(function() {
 			[blue, red, yellow], [surgeEffect(0,0,0,1,true)], [blue, red], [surgeEffect(0,0,0,1,true)]));
 	monsters.push(monster('Ogre', [blue, red], [surgeEffect(0,3,0,1,false)], 1, [blue, yellow], [surgeEffect(0,3,0,1,false)], 1,
 			[blue, red, yellow], [surgeEffect(0,3,0,1,false)],  [blue, red], [surgeEffect(0,3,0,1,false)]));
-	monsters.push(monster('Rat Swarm', [green], [surgeEffect(0,0,0,1,true)], 1, [green], [surgeEffect(0,0,0,1,true)], 3,
-			[green], [surgeEffect(0,0,0,1,true)], [green], [surgeEffect(0,0,0,1,true)]));
+	monsters.push(monster('Rat Swarm', [green], [surgeEffect(0,5,0,1,true)], 1, [green], [surgeEffect(0,4,0,1,true)], 3,
+			[green], [surgeEffect(0,6,0,1,true)], [green], [surgeEffect(0,5,0,1,true)]));
 	monsters.push(monster('Razorwing', [blue, yellow], [surgeEffect(0,1,0,1,false)], 1, [blue, yellow], [surgeEffect(0,1,0,1,false)], 3,
 			[blue, yellow, yellow], [surgeEffect(0,2,0,1,false)], [blue, yellow], [surgeEffect(0,2,0,1,false)]));
 	monsters.push(monster('Shade', [blue, yellow], [surgeEffect(2,0,0,1,false)], 1, [blue, yellow], [surgeEffect(2,0,0,1,false)], 4,
