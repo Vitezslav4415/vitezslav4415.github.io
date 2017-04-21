@@ -64,7 +64,7 @@ var MONSTERS_LIST = [
 	['Kobold',1,1,false,BoW,[Building,Cave],true],
 	['Kobold CK',1,1,false,CK,[Building,Cave]],
 	['Lava Beetle',1,1,true,CoD,[Hot,Cave],true],
-	['Manticore',2,2,true,VoD,[Wilderness,Dark],true],
+	['Manticore',1,2,true,VoD,[Wilderness,Dark],true],
 	['Marrow Priest',1,1,false,CtR,[Dark, Building],true],
 	['Medusa',1,1,true,CotF,[Cursed,Building],true],
 	['Merriod',2,2,false,bg2e,[Wilderness,Water],true],
