@@ -1232,6 +1232,14 @@ function addDoorLine() {
 	addUnitLine(doorLine, 'door');
 	doorLine.find('input[type="text"]').remove();
 	doorLine.find('.select-door').after(createInputSelect('Select direction', 'direction-title', 'select-direction'));
+
+	var openedCheckbox = $('<div>').addClass('checkbox').addClass('door-opened');
+	var checkboxContent = $('<label>');
+	checkboxContent.append($('<input>').attr('type', 'checkbox').attr('name','opened'));//.attr('onclick','updateOpened(this)')
+	checkboxContent.append('opened');
+	openedCheckbox.append(checkboxContent);
+	doorLine.append(openedCheckbox);
+
 	doorLine.append($('<input type="hidden" name="door-direction" value=""/>'));
 	
 	doorLine.find('.select-door ul').append(createDoorSelectContent());
@@ -1824,6 +1832,7 @@ function getDoors() {
 		door.vertical = container.find('[name="door-direction"]').val() == 'vertical';
 		door.x = container.find('[name="door-x"]').val();
 		door.y = container.find('[name="door-y"]').val();
+		door.opened = container.find('[name="opened"]').prop('checked');
 		result.push(door);
 	}
 	return result;
@@ -2029,6 +2038,9 @@ function constructMapFromConfig() {
 				'transform' : 'rotate(90deg)',
 				'transform-origin' : cellSize.toString() + 'px'
 			});
+		}
+		if (door.opened != undefined && door.opened) {
+			doorObject.addClass('opened');
 		}
 		doorImage.attr('src', folder + urlize(door.title) + '.png');
 		doorObject.append(doorImage);
@@ -2471,6 +2483,9 @@ function constructMapControlsTabFromConfig() {
 			var door = config.doors[i];
 			updateDoor(container.find('.select-door li')[0], door.title);
 			updateDirection(container.find('.select-direction li')[0], door.vertical ? 'vertical' : 'horizontal');
+			if (door.opened != undefined) {
+				container.find('[name="opened"]').prop('checked', door.opened);
+			}
 			container.find('[name="door-x"]').val(door.x);
 			container.find('.x-title').html(getAlphabetChar(door.x - 1) + ' ');
 			container.find('[name="door-y"]').val(door.y);

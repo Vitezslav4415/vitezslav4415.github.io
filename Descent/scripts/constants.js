@@ -1118,8 +1118,7 @@ DOORS_LIST = [
 	'Shrubbery',
 	'Yellow Rune Blocked',
 	'Portcullis',
-	'Wall',
-	'Opened'
+	'Wall'
 ];
 
 BLOCKS_LIST = [
