@@ -39,7 +39,7 @@ var MONSTERS_LIST = [
 	['Carrion Drake',1,1,false,LoR,[Water,Dark],true],
 	['Cave Spider',1,1,false,bg2e,[Wilderness,Cave],true],
 	['Changeling',1,1,false,SoN,[Civilized,Cursed],true],
-	['Chaos Beast',1,2,false,CoD,[Dark,Cursed],true],
+	['Chaos Beast',2,2,false,CoD,[Dark,Cursed],true],
 	['Crypt Dragon',2,3,true,GoD,[Dark,Cursed],true],
 //	['Crow Hag',1,2,true,ToC,[Dark,Civilized],true],
 	['Dark Priest',1,1,true,GoD,[Civilized,Cursed],true],
