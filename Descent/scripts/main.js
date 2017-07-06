@@ -1,7 +1,5 @@
 function createSelect(title) {
-	html = '<div class="btn-group select-x showOneCell showTwoCells"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">' + title + ' <span class="caret"></span></button><ul class="dropdown-menu" role="menu"></ul></div>';
-	
-	return html;
+	return '<div class="btn-group select-x showOneCell showTwoCells"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">' + title + ' <span class="caret"></span></button><ul class="dropdown-menu" role="menu"></ul></div>';
 }
 
 function addOptionOld(title, value, optionClass) {
@@ -107,7 +105,7 @@ function updateCoordinate(element, value) {
 function updateOption(element, value, isMonster) {
 	var container = $(element).parents('.select-row');
 	if (isMonster || value == 'Clear') { //monster select or clearing cordinates
-		monsterTitle = $(element).html();
+		var monsterTitle = $(element).html();
 		container.find('input[name="master"]').attr('value', monsterTitle.indexOf('master') > -1);
 		var xYSelects = $(container).find('.select-x, .select-y');
 		
@@ -688,7 +686,7 @@ function removeCondition(element) {
 	if (container.parents('#monsters').length > 0) {
 		adjustMonsterList();
 	} else {
-		conditionsContainer.html('');
+		container.find('.conditions-container').html('');
 		addConditions(getConditions(container), conditionsContainer);
 	}
 }
@@ -737,7 +735,7 @@ function removeMonsterRows() {
 }
 
 function getAlphabetChar(number) {
-	result = '';
+	var result = '';
 	if (number >= 26) {
 		result += ALPHABET.charAt(Math.floor(number/26) - 1);
 	}
@@ -1020,16 +1018,16 @@ function createOverlordRelicsSelectContent() {
 function createLieutenantsSelectContent() {
 	var html = addOption('Clear', '', 'clearLieutenant(this);');
 	for (var i = 0; i < LIEUTENANTS_LIST.length; i++) {
-		var lieutenatTitle = LIEUTENANTS_LIST[i][0];
-		html += addOption(lieutenatTitle + ' ', '', 'updateLieutenant(this, \'' + lieutenatTitle + '\', ' + LIEUTENANTS_LIST[i][1].toString() + ')');
+		var lieutenantTitle = LIEUTENANTS_LIST[i][0];
+		html += addOption(lieutenantTitle + ' ', '', 'updateLieutenant(this, \'' + lieutenantTitle + '\', ' + LIEUTENANTS_LIST[i][1].toString() + ')');
 	}
 	html += '<li role="separator" class="divider"></li>';
 	for (var i = 0; i < LIEUTENANTS_LIST.length; i++) {
 		if (LIEUTENANTS_LIST[i][0].indexOf('act') != -1 || LIEUTENANTS_LIST[i][0].indexOf('Act') != -1) {
 			continue;
 		}
-		var lieutenatTitle = 'Agent ' + LIEUTENANTS_LIST[i][0];
-		html += addOption(lieutenatTitle + ' ', '', 'updateLieutenant(this, \'' + lieutenatTitle + '\', ' + LIEUTENANTS_LIST[i][1].toString() + ')');
+		var lieutenantTitle = 'Agent ' + LIEUTENANTS_LIST[i][0];
+		html += addOption(lieutenantTitle + ' ', '', 'updateLieutenant(this, \'' + lieutenantTitle + '\', ' + LIEUTENANTS_LIST[i][1].toString() + ')');
 	}
 	return html;
 }
@@ -1345,8 +1343,7 @@ function addLieutenantLine() {
 }
 
 function createConditionsBlock() {
-	var html = $('<div>').addClass('conditions-container');
-	return html;
+	return $('<div>').addClass('conditions-container');
 }
 
 function createSkillsBlock(heroNumber) {
@@ -1354,7 +1351,7 @@ function createSkillsBlock(heroNumber) {
 	html.append($('<h1>Skills</h1>'));
 	
 	for (var i = 0; i < HYBRID_CLASSES.length; i++) {
-		hc = HYBRID_CLASSES[i];
+		var hc = HYBRID_CLASSES[i];
 		var hybridInput = createInputSelect('Select Class ', 'hybrid-class-title', 'select-hybrid-class ' + folderize(hc.title));
 		html.append(hybridInput);
 		hybridInput.find('ul').addClass(folderize(hc.newArchetype.title) + ' showarch').append(createClassSelectContent(true));
@@ -1516,8 +1513,9 @@ function createPlotDeckBlock() {
 	plotContainer.append($('<span class="threat-number-label">Threat tokens: </span>'));
 	plotContainer.append($('<input type="text" name="threat-tokens" class="form-control" placeholder="Set Threat" value="0">'));
 	plotContainer.append(createPlotCardsBlock());
-	$('#plot').html('');
-	$('#plot').append(plotContainer)
+	var plot = $('#plot');
+    plot.html('');
+    plot.append(plotContainer)
 }
 
 function createPlotCardsBlock() {
@@ -1918,7 +1916,7 @@ function getPlotInfo() {
 	var plotCards = $(container).find('.checkbox.' + folderize(plot.title) + ' input');
 	for (var i = 0; i < plotCards.length; i++) {
 		var currentPlotCard = $(plotCards[i]); 
-		var image = container.find('img[skill="' + currentPlotCard.attr('name') + '"]');
+		// var image = container.find('img[skill="' + currentPlotCard.attr('name') + '"]');
 		cards.push([currentPlotCard.attr('name'), currentPlotCard.prop('checked'), currentPlotCard.hasClass('card-exhausted')]);
 	}
 	plot.cards = cards;
@@ -1991,9 +1989,11 @@ function addMapObject(xCoordinate, yCoordinate, object, priority) {
 }
 
 function constructMapFromConfig() {
-	/*under construction*/;
-	$('#map .map').html('');
-	$('#map .figures').html('');
+	var mapContainer = $('#map');
+    var map = mapContainer.find('.map');
+    var figures = mapContainer.find('.figures');
+    map.html('');
+    figures.html('');
 	mapObjects = [];
 	
 	for (var i = 0; config.tiles != undefined && i < config.tiles.length; i++) {
@@ -2018,7 +2018,7 @@ function constructMapFromConfig() {
 		});
 		tileImage.attr('src', folder + mapTilize(tile.title) + tile.side + '.png');
 		tileObject.append(tileImage);
-		$('#map .map').append(tileObject);
+        map.append(tileObject);
 	}
 	
 	for (var i = 0; config.doors != undefined && i < config.doors.length; i++) {
@@ -2044,7 +2044,7 @@ function constructMapFromConfig() {
 		}
 		doorImage.attr('src', folder + urlize(door.title) + '.png');
 		doorObject.append(doorImage);
-		$('#map .map').append(doorObject);
+        map.append(doorObject);
 	}
 	
 	for (var i = 0; config.xs != undefined && i < config.xs.length; i++) {
@@ -2059,7 +2059,7 @@ function constructMapFromConfig() {
 		});
 		xsImage.attr('src', folder + urlize(xs.title) + '.png');
 		xsObject.append(xsImage);
-		$('#map .map').append(xsObject);
+        map.append(xsObject);
 	}
 	
 	for (var i = 0; config.objectives != undefined && i < config.objectives.length; i++) {
@@ -2082,7 +2082,7 @@ function constructMapFromConfig() {
 			objectiveObject.append(objectiveHp);
 		}
 		addMapObject(objective.x, objective.y, objectiveObject, z_index);
-		$('#map .map').append(objectiveObject);
+        map.append(objectiveObject);
 	}
 	
 	for (var i = 0; config.familiars != undefined && i < config.familiars.length; i++) {
@@ -2106,7 +2106,7 @@ function constructMapFromConfig() {
 		}
 		addConditionsToImage(familiarObject, familiar.conditions);
 		addMapObject(familiar.x, familiar.y, familiarObject, z_index);
-		$('#map .figures').append(familiarObject);
+        figures.append(familiarObject);
 	}
 	
 	for (var i = 0; config.monsters != undefined && i < config.monsters.length; i++) {
@@ -2129,7 +2129,7 @@ function constructMapFromConfig() {
 		monsterObject.append(monsterHp);
 		addConditionsToImage(monsterObject, monster.conditions);
 		addMapObject(monster.x, monster.y, monsterObject, z_index);
-		$('#map .figures').append(monsterObject);
+        figures.append(monsterObject);
 	}
 	
 	for (var i = 0; config.allies != undefined && i < config.allies.length; i++) {
@@ -2151,7 +2151,7 @@ function constructMapFromConfig() {
 		allyObject.append(allyHp);
 		addConditionsToImage(allyObject, ally.conditions);
 		addMapObject(ally.x, ally.y, allyObject, z_index);
-		$('#map .figures').append(allyObject);
+        figures.append(allyObject);
 	}
 	
 	for (var i = 0; config.lieutenants != undefined && i < config.lieutenants.length; i++) {
@@ -2174,7 +2174,7 @@ function constructMapFromConfig() {
 		lieutenantObject.append(lieutenantHp);
 		addConditionsToImage(lieutenantObject, lieutenant.conditions);
 		addMapObject(lieutenant.x, lieutenant.y, lieutenantObject, z_index);
-		$('#map .figures').append(lieutenantObject);
+        figures.append(lieutenantObject);
 	}
 	
 	addHeroToMap(config.hero1);
@@ -2668,8 +2668,9 @@ function setShortLink() {
 	}
 	uri = 'http://tinyurl.com/create.php?source=indexpage&url=' + encodeURIComponent(location.href) + '&alias=' + string;
 	$('body').append('<img src="' + uri + '" style="height: 1px; width: 1px; position: absolute; z-index: -999; opacity: 0;" />');
-	$('#tinyUrl').html('Tiny link: http://tinyurl.com/' + string);
-	$('#tinyUrl').attr('href', 'http://tinyurl.com/' + string);
+	var tinyUrl = $('#tinyUrl');
+    tinyUrl.html('Tiny link: http://tinyurl.com/' + string);
+    tinyUrl.attr('href', 'http://tinyurl.com/' + string);
 }
 
 function getMapHash() {

@@ -462,7 +462,7 @@ var apothecary = {},
 	disciple = {},
 	prophet = {},
 	spiritspeaker = {},
-	watchman = {}
+	watchman = {},
 	beastmaster = {},
 	berserker = {},
 	champion = {},
@@ -762,7 +762,7 @@ var apothecary = {},
 		['Keen Edge', 1],
 		['Rusted Handaxe', 0, hand],
 		['Unrelenting', 2],
-		['Unstoppable', 3],
+		['Unstoppable', 3]
 	];
 	
 	spiritspeaker.skills = [
@@ -1481,7 +1481,7 @@ var PLOT_DECKS = [
 		['Soul Ensnare',3,1],
 		['Summon - Tristayne',3,2],
 		['Wild Energy',0,0]]]
-]
+];
 
 var SHOWING_CLASSES = [];
 SHOWING_CLASSES[1] = 'showOneCell';
