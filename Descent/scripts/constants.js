@@ -174,7 +174,7 @@ var MONSTERS_HP = [
 	['Shade',2,4,4,6],
 	['Shadow Dragon',6,9,8,10],
 	['Shambling Colossus',5,8,7,9],
-	['Skeleton Archer',2,5,4,8],
+	['Skeleton Archer',3,6,4,8],
 	['Sorcerer',3,5,5,8],
 	['The Dispossessed',6,8,8,10],
 	['Troll',8,10,10,13],
