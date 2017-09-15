@@ -923,6 +923,7 @@ var HEROES_LIST = [
 	['Ispher',10,4,sup],
 	['Master Thorn',8,4,wiz],
 	['Nanok of the Blade',12,4,war],
+	['Nanok of the Blade CK',12,4,war],
 	['Nara the Fang',10,4,war],
 	['Sir Valadir',12,4,war],
 	['Sir Valadir CK',12,3,war],
@@ -952,7 +953,10 @@ var HEROES_LIST = [
 	['Vyrah The Falconer',10,4,rog],
 	['Lyssa',8,5,wiz],
 	['Zyla',8,5,wiz],
-	['Tatianna',12,4,rog]
+	['Tatianna',12,4,rog],
+	['Okaluk and Rakash',8,3,sup],
+	['Krutzbeck',12,4,war],
+	['Jonas the Kind',10,4,sup]
 ];
 
 var HEROES = {};
