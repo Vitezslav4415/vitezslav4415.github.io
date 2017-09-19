@@ -179,7 +179,7 @@ var MONSTERS_HP = [
 	['The Dispossessed',6,8,8,10],
 	['Troll',8,10,10,13],
 	['Volucrix Reaver',3,5,4,6],
-	['Wendigo',4,7,7,10],
+	['Wendigo',5,7,7,10],
 	['Wraith',5,7,6,8],
 	['Ynfernael Hulk',8,9,9,10],
 	['Zombie',3,6,5,9]
