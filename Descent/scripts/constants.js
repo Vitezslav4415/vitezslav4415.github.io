@@ -982,7 +982,7 @@ FAMILIARS_LIST = [
 	['Raven Flock',true],
 	['Reanimate',true],
 	['Scourge',true],
-	['Shadow',true],
+	['Shadow Soul',true],
 	['Skye',true],
 	['Summoned Stone',true],
 	['Trap',false],

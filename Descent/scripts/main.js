@@ -630,7 +630,10 @@ function clearLieutenant(element) {
 function updateFamiliar(element, value) {
 	if (value == 'Raven') {
 		value = 'Raven Flock';
-	} 
+	}
+	if (value == 'Shadow') {
+		value = 'Shadow Soul';
+	}
 	var container = $(element).parents('.select-row');
 	container.find('.familiar-title').html(value + ' ');
 	container.find('input[name="familiar-title"]').attr('value',value);
