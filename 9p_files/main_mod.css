@@ -40,9 +40,12 @@ q:before, q:after { content: ""; content: none; }
 .order-march-3,
 .order-defend-1,
 .order-defend-2,
+.order-defend-3,
+.order-defend-4,
 .order-support-1,
 .order-support-2,
 .order-support-3,
+.order-support-4,
 .order-raid-1,
 .order-raid-2,
 .order-power-1,
@@ -249,7 +252,13 @@ q:before, q:after { content: ""; content: none; }
     background-position: -186px 0;
 }
 .order-defend-2 {
-    background-position: -248px 0;
+  background-position: -248px 0;
+}
+.order-defend-3 {
+  background-position: -942px -1px;
+}
+.order-defend-4 {
+  background-position: -1051px 0;
 }
 .order-support-1 {
     background-position: -310px 0;
@@ -258,7 +267,10 @@ q:before, q:after { content: ""; content: none; }
     background-position: -372px 0;
 }
 .order-support-3 {
-    background-position: -877px 0;
+  background-position: -877px 0;
+}
+.order-support-4 {
+  background-position: -1117px 0;
 }
 .order-raid-1 {
     background-position: -434px 0;

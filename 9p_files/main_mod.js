@@ -94,12 +94,15 @@ var $board = $('.board'),
                     .replace(/ r(aid)?\*(\n|$)/ig, ' raid-2$2')
                     .replace(/ d(efend)?(\+1)?(\n|$)/ig, ' defend-1$3')
                     .replace(/ d(efend)?(\+2)?\*?(\n|$)/ig, ' defend-2$3')
+                    .replace(/ d(efend)?(\+3)?(\n|$)/ig, ' defend-3$3')
+                    .replace(/ d(efend)?-m(uster)?(\n|$)/ig, ' defend-4$3')
                     .replace(/ b(ank)?(\n|$)/ig, ' bank-1$2')
                     .replace(/ iron bank?(\n|$)/ig, ' bank-1$2')
                     .replace(/ ib?(\n|$)/ig, ' bank-1$2')
                     .replace(/ ns(upport)?(\n|$)/ig, ' support-3$2')
                     .replace(/ s(upport)?(\n|$)/ig, ' support-1$2')
                     .replace(/ s(upport)?(\+1)?\*?(\n|$)/ig, ' support-2$3')
+                    .replace(/ s(upport)?-r(aid)?(\n|$)/ig, ' support-4$3')
                     .split('\n');
                 for(var i = 0; i < value.length; i += 1) {
                     var valueSplitted = value[i].split(': '),
