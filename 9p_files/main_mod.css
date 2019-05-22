@@ -184,6 +184,11 @@ q:before, q:after { content: ""; content: none; }
     margin-top: -31px;
 }
 
+.routed-dragon-targaryen,
+.dragon-targaryen {
+    width: 44px;
+}
+
 .loyalty {
 	background: url(images/loyalty.png) no-repeat;
 	width: 39px;
@@ -572,7 +577,7 @@ q:before, q:after { content: ""; content: none; }
 
 .routed-dragon-targaryen,
 .dragon-targaryen {
-	background-position: -994px 0px;
+	background-position: -1005px 0;
 }
 
 .pos-throne-1 {
