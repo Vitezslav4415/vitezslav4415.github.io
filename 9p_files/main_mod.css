@@ -454,11 +454,12 @@ q:before, q:after { content: ""; content: none; }
 }
 .routed-footman-tyrell,
 .footman-tyrell {
-    background-position: -810px -62px;
+    background-position: -810px -64px;
 }
 .routed-footman-martell,
 .footman-martell {
-    background-position: -874px -62px;
+    background-position: -874px -65px;
+    height: 59px;
 }
 .routed-footman-arryn,
 .footman-arryn {
