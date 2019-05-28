@@ -2220,7 +2220,80 @@ input[type="checkbox"][name^="housecard-"]:checked + label {
 .loyalty.pos-bite ~ .loyalty.pos-bite ~ .loyalty.pos-bite ~ .loyalty.pos-bite,
 .loyalty.pos-braavosiancoastlands ~ .loyalty.pos-braavosiancoastlands ~ .loyalty.pos-braavosiancoastlands ~ .loyalty.pos-braavosiancoastlands,
 .loyalty.pos-skagos ~ .loyalty.pos-skagos ~ .loyalty.pos-skagos ~ .loyalty.pos-skagos {
-    margin-left: 0px;
+    margin-left: 0;
     margin-top: -10px;
     z-index: 25;
+}
+
+.dragon-2,
+.dragon-4,
+.dragon-6,
+.dragon-8,
+.dragon-10,
+.dragons-strength {
+    width: 56px;
+    height: 63px;
+    background: url('images/dragon-strength.jpg');
+    position: absolute;
+}
+
+.dragon-2,
+.dragon-4,
+.dragon-6,
+.dragon-8,
+.dragon-10 {
+    left: 86.7%;
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+.dragon-2 {
+    top: 92%;
+}
+
+.dragon-4 {
+    top: 86%;
+}
+
+.dragon-6 {
+    top: 80.2%;
+}
+
+.dragon-8 {
+    top: 74.3%;
+}
+
+.dragon-10 {
+    top: 68.3%;
+}
+
+.dragons-strength {
+    left: 87%;
+    top: 7.1%;
+    background-size: 100%;
+    width: 34px;
+    height: 38px;
+}
+
+.dragons-strength {
+    left: 87%;
+}
+
+.dragons-strength + .dragons-strength {
+    left: 88.9%;
+}
+
+.dragons-strength + .dragons-strength + .dragons-strength {
+    left: 90.8%;
+}
+
+.dragons-strength + .dragons-strength + .dragons-strength + .dragons-strength {
+    left: 92.7%;
+}
+
+.dragons-strength + .dragons-strength + .dragons-strength + .dragons-strength + .dragons-strength {
+    left: 94.6%;
 }

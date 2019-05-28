@@ -59,6 +59,28 @@ var $board = $('.board'),
         // VSB and Raven token
         htmlString += '<div class="vsb-token ' + (conf.vsbUsed ? 'used' : 'unused') + '"></div>';
         htmlString += '<div class="raven-token ' + (conf.ravenUsed ? 'used' : 'unused') + '"></div>';
+        // Dragons strength
+        if (conf.dragon2) {
+            htmlString += '<div class="dragon-2"></div>';
+        }
+        if (conf.dragon4) {
+            htmlString += '<div class="dragon-4"></div>';
+        }
+        if (conf.dragon6) {
+            htmlString += '<div class="dragon-6"></div>';
+        }
+        if (conf.dragon8) {
+            htmlString += '<div class="dragon-8"></div>';
+        }
+        if (conf.dragon10) {
+            htmlString += '<div class="dragon-10"></div>';
+        }
+        if (conf.dragonsStrength) {
+            for (var i = 1; i <= conf.dragonsStrength; i++) {
+                htmlString += '<div class="dragons-strength"></div>';
+            }
+        }
+
         // Units
         for(var house in conf.units) {
             if (conf.units[house].length > 0) {
@@ -156,6 +178,12 @@ var $board = $('.board'),
             "victory": $('[name="victory"]').val(),
             "vsbUsed": $('[name="vsb-used"]').attr('checked'),
             "ravenUsed": $('[name="raven-used"]').attr('checked'),
+            "dragonsStrength": $('[name="dragons-strength"]').val(),
+            "dragon2": $('[name="dragon-2"]').attr('checked'),
+            "dragon4": $('[name="dragon-4"]').attr('checked'),
+            "dragon6": $('[name="dragon-6"]').attr('checked'),
+            "dragon8": $('[name="dragon-8"]').attr('checked'),
+            "dragon10": $('[name="dragon-10"]').attr('checked'),
             
             "units": {
 				"arryn": $('[name="units-arryn"]').val(),
@@ -303,6 +331,12 @@ var $board = $('.board'),
         $('[name="victory"]').val(conf.victory);
         $('[name="vsb-used"]').attr('checked', conf.vsbUsed);
         $('[name="raven-used"]').attr('checked', conf.ravenUsed);
+        $('[name="dragons-strength"]').val(conf.dragonsStrength || 0);
+        $('[name="dragon-2"]').attr('checked', conf.dragon2);
+        $('[name="dragon-4"]').attr('checked', conf.dragon4);
+        $('[name="dragon-6"]').attr('checked', conf.dragon6);
+        $('[name="dragon-8"]').attr('checked', conf.dragon8);
+        $('[name="dragon-10"]').attr('checked', conf.dragon10);
 
         $('[name="units-arryn"]').val(conf.units.arryn);
         $('[name="units-baratheon"]').val(conf.units.baratheon);
