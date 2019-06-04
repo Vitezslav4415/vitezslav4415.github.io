@@ -29,7 +29,7 @@ q:before, q:after { content: ""; content: none; }
 .board {
     position: relative;
     height: 2585px;
-    width: 2264px;
+    width: 2447px;
     background: url(images/Map2.jpg);
 	background-size: cover;
 }
@@ -582,140 +582,147 @@ q:before, q:after { content: ""; content: none; }
 }
 
 .pos-throne-1 {
-	left: 85.65%;
-	top: 56.45%;
+	left: 2122px;
+	top: 1459px;
 }
 .pos-throne-2 {
-    left: 85.65%;
+    left: 2122px;
     top: 51.4%;
 }
 .pos-throne-3 {
-    left: 85.65%;
+    left: 2122px;
     top: 46.4%;
 }
 .pos-throne-4 {
-    left: 85.65%;
+    left: 2122px;
     top: 41.35%;
 }
 .pos-throne-5 {
-    left: 85.65%;
+    left: 2122px;
     top: 36.3%;
 }
 .pos-throne-6 {
-    left: 85.65%;
+    left: 2122px;
     top: 30.9%;
 }
 .pos-throne-7 {
-    left: 85.65%;
+    left: 2122px;
     top: 25.9%;
 }
 .pos-throne-8 {
-    left: 85.65%;
+    left: 2122px;
     top: 20.8%;
 }
 .pos-throne-9 {
-    left: 85.65%;
+    left: 2122px;
     top: 15.85%;
 }
 .pos-fiefdom-1 {
-    left: 91.3%;
+    left: 2251px;
     top: 56.4%;
 }
 .pos-fiefdom-2 {
-    left: 91.3%;
+    left: 2251px;
     top: 51.35%;
 }
 .pos-fiefdom-3 {
-    left: 91.3%;
+    left: 2251px;
     top: 46.35%;
 }
 .pos-fiefdom-4 {
-    left: 91.3%;
+    left: 2251px;
     top: 41.27%;
 }
 .pos-fiefdom-5 {
-    left: 91.3%;
+    left: 2251px;
     top: 36.23%;
 }
 .pos-fiefdom-6 {
-    left: 91.3%;
+    left: 2251px;
     top: 30.9%;
 }
 .pos-fiefdom-7 {
-    left: 91.3%;
+    left: 2251px;
     top: 25.87%;
 }
 .pos-fiefdom-8 {
-    left: 91.3%;
+    left: 2251px;
     top: 20.8%;
 }
 .pos-fiefdom-9 {
-    left: 91.3%;
+    left: 2251px;
     top: 15.8%;
 }
 .pos-court-1 {
-    left: 96.8%;
+    left: 2376px;
     top: 56.4%;
 }
 .pos-court-2 {
-    left: 96.8%;
+    left: 2376px;
     top: 51.35%;
 }
 .pos-court-3 {
-    left: 96.8%;
+    left: 2376px;
     top: 46.35%;
 }
 .pos-court-4 {
-    left: 96.8%;
+    left: 2376px;
     top: 41.27%;
 }
 .pos-court-5 {
-    left: 96.95%;
+    left: 2376px;
     top: 36.23%;
 }
 .pos-court-6 {
-    left: 96.8%;
-    top: 30.65%;
+    left: 2376px;
+    top: 30.85%;
 }
 .pos-court-7 {
-    left: 96.8%;
+    left: 2376px;
     top: 25.87%;
 }
 .pos-court-8 {
-    left: 96.8%;
+    left: 2376px;
     top: 20.8%;
 }
 .pos-court-9 {
-    left: 96.8%;
+    left: 2376px;
     top: 15.8%;
 }
+.pos-supply-0,
+.pos-supply-1,
+.pos-supply-2,
+.pos-supply-3,
+.pos-supply-4,
+.pos-supply-5,
+.pos-supply-6 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    top: 124px;
+}
 .pos-supply-0 {
-    left: 71.4%;
-    top: 23.2%;
+    left: 1533px;
 }
 .pos-supply-1 {
-    left: 71.4%;
-    top: 20%;
+    left: 1604px;
 }
 .pos-supply-2 {
-    left: 71.4%;
-    top: 16.6%;
+    left: 1678px;
 }
 .pos-supply-3 {
-    left: 71.4%;
-    top: 13.4%;
+    left: 1750px;
 }
 .pos-supply-4 {
-    left: 71.4%;
-    top: 10.3%;
+    left: 1821px;
 }
 .pos-supply-5 {
-    left: 71.4%;
-    top: 7%;
+    left: 1893px;
 }
 .pos-supply-6 {
-    left: 71.4%;
-    top: 3.8%;
+    left: 1963px;
 }
 .pos-victory-1 {
     left: 95.6%;
@@ -746,71 +753,71 @@ q:before, q:after { content: ""; content: none; }
     top: 69.5%;
 }
 .pos-wilding-0 {
-    left: 17%;
+    left: 380px;
     top: 3.95%;
 }
 .pos-wilding-2 {
-    left: 21%;
+    left: 472px;
     top: 3.95%;
 }
 .pos-wilding-4 {
-    left: 25%;
+    left: 563px;
     top: 3.95%;
 }
 .pos-wilding-6 {
-    left: 28.5%;
+    left: 646px;
     top: 3.95%;
 }
 .pos-wilding-8 {
-    left: 32.5%;
+    left: 736px;
     top: 3.95%;
 }
 .pos-wilding-10 {
-    left: 36.5%;
+    left: 826px;
     top: 3.95%;
 }
 .pos-wilding-12 {
-    left: 40.5%;
+    left: 926px;
     top: 3.95%;
 }
 .pos-round-1 {
-    left: 88%;
+    left: 2175px;
     top: 96.4%;
 }
 .pos-round-2 {
-    left: 88%;
+    left: 2175px;
     top: 93.4%;
 }
 .pos-round-3 {
-    left: 88%;
+    left: 2175px;
     top: 90.4%;
 }
 .pos-round-4 {
-    left: 88%;
+    left: 2175px;
     top: 87.4%;
 }
 .pos-round-5 {
-    left: 88%;
+    left: 2175px;
     top: 84.4%;
 }
 .pos-round-6 {
-    left: 88%;
+    left: 2175px;
     top: 81.4%;
 }
 .pos-round-7 {
-    left: 88%;
+    left: 2175px;
     top: 78.4%;
 }
 .pos-round-8 {
-    left: 88%;
+    left: 2175px;
     top: 75.4%;
 }
 .pos-round-9 {
-    left: 88%;
+    left: 2175px;
     top: 72.4%;
 }
 .pos-round-10 {
-    left: 88%;
+    left: 2175px;
     top: 89.4%;
 }
 .pos-victory-1 ~ .pos-victory-1,
@@ -947,7 +954,7 @@ q:before, q:after { content: ""; content: none; }
 }
 .pos-castleblack {
     top: 11%;
-    left: 36%;
+    left: 800px;
 }
 .pos-bearisland {
 	top: 11.5%;
@@ -963,7 +970,7 @@ q:before, q:after { content: ""; content: none; }
 }
 .pos-winterfell {
     top: 32%;
-    left: 26%;
+    left: 580px;
 }
 .pos-winterfell-harbor {
     top: 17%;
@@ -971,44 +978,44 @@ q:before, q:after { content: ""; content: none; }
 }
 .pos-karhold {
     top: 16%;
-    left: 42%;
+    left: 980px;
 }
 .pos-stonyshore, .pos-stoneyshore {
     top: 31%;
-    left: 17%;
+    left: 380px;
 }
 .pos-whiteharbor {
     top: 29%;
-    left: 34%;
+    left: 800px;
 }
 .pos-whiteharbor-harbor {
     top: 37%;
-    left: 35%;
+    left: 790px;
 }
 .pos-widowswatch {
     top: 29%;
-    left: 41%;
+    left: 930px;
 }
 .pos-flintsfinger {
     top: 40%;
-    left: 13%;
+    left: 300px;
 }
 .pos-greywaterwatch {
-    top: 41%;
-    left: 21%;
+    top: 39%;
+    left: 454px;
 }
 .pos-moatcailin {
     top: 38%;
-    left: 26%;
+    left: 590px;
 }
 .pos-dragonstone {
     top: 60%;
-    left: 54%;
+    left: 1190px;
 }
 
 .pos-dragonstone-harbor {
     top: 65%;
-    left: 54%;
+    left: 1190px;
 }
 
 .pos-bayofice {
@@ -1017,15 +1024,15 @@ q:before, q:after { content: ""; content: none; }
 }
 .pos-shiveringsea {
     top: 20%;
-    left: 53%;
+    left: 1200px;
 }
 .pos-narrowsea {
     top: 40%;
-    left: 55%;
+    left: 1220px;
 }
 .pos-shipbreakerbay {
     top: 74%;
-    left: 53%;
+    left: 1220px;
 }
 /*****************************************/
 .pos-sunsetsea {
@@ -1038,11 +1045,11 @@ q:before, q:after { content: ""; content: none; }
 }
 .pos-lannisport {
     top: 60%;
-    left: 15%;
+    left: 340px;
 }
 .pos-lannisport-harbor {
     top: 59%;
-    left: 11%;
+    left: 240px;
 }
 .pos-stoneysept {
     top: 61%;
@@ -1050,11 +1057,11 @@ q:before, q:after { content: ""; content: none; }
 }
 .pos-harrenhal {
     top: 59%;
-    left: 31%;
+    left: 700px;
 }
 .pos-riverrun {
     top: 54.5%;
-    left: 24%;
+    left: 540px;
 }
 .pos-searoadmarches {
     top: 69%;
@@ -1062,7 +1069,7 @@ q:before, q:after { content: ""; content: none; }
 }
 .pos-blackwater {
     top: 67%;
-    left: 30%;
+    left: 680px;
 }
 .pos-reach {
     top: 74%;
@@ -1088,15 +1095,15 @@ q:before, q:after { content: ""; content: none; }
 /*****************************************/
 .pos-highgarden {
     top: 78%;
-    left: 17%;
+    left: 380px;
 }
 .pos-dornishmarches {
     top: 79%;
-    left: 24%;
+    left: 550px;
 }
 .pos-oldtown {
     top: 83%;
-    left: 13%;
+    left: 300px;
 }
 .pos-oldtown-harbor {
     top: 82%;
@@ -1112,11 +1119,11 @@ q:before, q:after { content: ""; content: none; }
 }
 .pos-sunspear {
     top: 89%;
-	left: 45%;
+	left: 1010px;
 }
 .pos-sunspear-harbor {
     top: 90%;
-    left: 52%;
+    left: 1190px;
 }
 .pos-saltshore {
     top: 92%;
@@ -1124,12 +1131,12 @@ q:before, q:after { content: ""; content: none; }
 }
 .pos-seaofdorne {
     top: 85%;
-    left: 45%;
+    left: 1000px;
 }
 /*****************************************/
 .pos-blackwaterbay {
     top: 65%;
-    left: 44%;
+    left: 1000px;
 }
 .pos-eastsummersea {
     top: 96%;
@@ -1145,7 +1152,7 @@ q:before, q:after { content: ""; content: none; }
 }
 .pos-boneway {
     top: 81%;
-    left: 32%;
+    left: 730px;
 }
 .pos-princespass {
     top: 84%;
@@ -1156,180 +1163,114 @@ q:before, q:after { content: ""; content: none; }
     left: 29%;
 }
 .pos-stormsend {
-    top: 75%;
-    left: 40%;
+    top: 2000px;
+    left: 920px;
 }
 .pos-stormsend-harbor {
     top: 77%;
-    left: 46%;
+    left: 1030px;
 }
 .pos-starfall {
     top: 92%;
-    left: 25%;
+    left: 550px;
 }
 /*****************************************/
 .pos-twins {
     top: 46%;
-    left: 29%;
+    left: 670px;
 }
 .pos-fingers {
     top: 43%;
-    left: 40%;
+    left: 900px;
 }
 .pos-eyrie {
     top: 53%;
-    left: 44%;
+    left: 980px;
 }
 .pos-mountainsofthemoon {
     top: 50%;
-    left: 36%;
+    left: 800px;
 }
 .pos-crackclawpoint {
     top: 60%;
-    left: 39%;
+    left: 850px;
 }
 .pos-kingslanding {
     top: 67%;
-    left: 36%;
+    left: 810px;
 }
 .pos-kingswood {
     top: 71%;
-    left: 42%;
+    left: 930px;
 }
 /*****************************************/
 .pos-valeofarryn {
 	top: 47%;
-	left: 45%;
-}
-.pos-bloodygate {
-	top: 52%;
-	left: 40%;
-}
-.pos-kingsroad {
-	top: 55%;
-	left: 36%;
-}
-.pos-gulltown {
-	top: 55%;
-	left: 43%;
-}
-.pos-whisperingwood {
-	top: 53%;
-	left: 23%;
-}
-.pos-banefort {
-	top: 56%;
-	left: 17%;
-}
-.pos-goldentooth {
-	top: 61%;
-	left: 20%;
-}
-.pos-casterlyrock {
-	top: 68%;
-	left: 20%;
-}
-.pos-bitterbridge {
-	top: 76%;
-	left: 30%;
-}
-.pos-rainwood,
-.pos-griffinsroost {
-	top: 80%;
-	left: 43%;
-}
-.pos-lys {
-	top: 92%;
-	left: 64%
+	left: 1030px;
 }
 .pos-braavos {
-	top: 50%;
-	left: 72%
-}
-.pos-andalos {
-	top: 56%;
-	left: 67%
+	top: 1060px;
+	left: 1590px;
 }
 .pos-norvos {
-	top: 58%;
-	left: 74%
+	top: 1320px;
+	left: 1800px;
 }
 .pos-pentos {
-	top: 58%;
-	left: 66%
+	top: 1400px;
+	left: 1580px;
 }
 .pos-rhoyne {
 	top: 66%;
 	left: 78%
 }
 .pos-myr {
-	top: 65%;
-	left: 68%
+	top: 1750px;
+	left: 1770px;
 }
 .pos-disputedlands {
-	top: 78%;
-	left: 67%
+	top: 2020px;
+	left: 1510px;
 }
 .pos-volantis {
-	top: 77%;
-	left: 76%
-}
-.pos-seagard-harbor {
-	top: 52%;
-	left: 19%
+	top: 2050px;
+	left: 1870px;
 }
 .pos-eyrie-harbor {
 	top: 52%;
-	left: 50%
+	left: 1120px;
 }
 .pos-braavos-harbor {
-	top: 47%;
-	left: 68%
-}
-.pos-braavos-harbor {
-	top: 47.5%;
-	left: 68%
+	top: 920px;
+	left: 1490px;
 }
 .pos-pentos-harbor {
-	top: 58%;
-	left: 60%
+	top: 1540px;
+	left: 1420px;
 }
 .pos-volantis-harbor {
-	top: 86%;
-	left: 80%
+	top: 2260px;
+	left: 1930px;
 }
 .pos-orangeshore {
-	top: 94%;
-	left: 74%
-}
-.pos-gullet, .pos-thegullet {
-	top: 55%;
-	left: 58%
+	top: 2290px;
+	left: 1720px;
 }
 .pos-seaofmyrth {
-	top: 70%;
-	left: 60%
+	top: 1850px;
+	left: 1510px;
 }
 .pos-bayofpentos {
-	top: 52%;
-	left: 61%
-}
-.pos-bayofcrabs {
-	top: 49.5%;
-	left: 53%
+	top: 1660px;
+	left: 1430px;
 }
 .pos-bite, .pos-thebite {
-	top: 38%;
-	left: 44%
+	top: 1000px;
+	left: 920px;
 }
 .pos-braavosiancoastlands {
-	top: 39%;
-	left: 64%
-}
-
-.pos-skagos {
-  left: 48.5%;
-  top: 10%;
+	top: 860px;
+	left: 1690px;
 }
 
 
@@ -2242,7 +2183,7 @@ input[type="checkbox"][name^="housecard-"]:checked + label {
 .dragon-6,
 .dragon-8,
 .dragon-10 {
-    left: 86.7%;
+    left: 2145px;
     -webkit-transform: rotate(270deg);
     -moz-transform: rotate(270deg);
     -ms-transform: rotate(270deg);
@@ -2271,29 +2212,28 @@ input[type="checkbox"][name^="housecard-"]:checked + label {
 }
 
 .dragons-strength {
-    left: 87%;
-    top: 7.1%;
+    top: 2398px;
     background-size: 100%;
-    width: 34px;
-    height: 38px;
+    width: 69px;
+    height: 79px;
 }
 
 .dragons-strength {
-    left: 87%;
+    left: 1483px;
 }
 
 .dragons-strength + .dragons-strength {
-    left: 88.9%;
+    left: 1566px;
 }
 
 .dragons-strength + .dragons-strength + .dragons-strength {
-    left: 90.8%;
+    left: 1647px;
 }
 
 .dragons-strength + .dragons-strength + .dragons-strength + .dragons-strength {
-    left: 92.7%;
+    left: 1729px;
 }
 
 .dragons-strength + .dragons-strength + .dragons-strength + .dragons-strength + .dragons-strength {
-    left: 94.6%;
+    left: 1811px;
 }
