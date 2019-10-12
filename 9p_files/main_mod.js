@@ -75,6 +75,15 @@ var $board = $('.board'),
         if (conf.dragon10) {
             htmlString += '<div class="dragon-10"></div>';
         }
+		if (conf.ironbank1 && conf.ironbank1 != 'empty') {
+			htmlString += '<div class="iron-bank bank-1"><img src="9p_files/images/loans/' + conf.ironbank1 + '.jpg"/></div>';
+		}
+		if (conf.ironbank4 && conf.ironbank4 != 'empty') {
+			htmlString += '<div class="iron-bank bank-4"><img src="9p_files/images/loans/' + conf.ironbank4 + '.jpg"/></div>';
+		}
+		if (conf.ironbank7 && conf.ironbank7 != 'empty') {
+			htmlString += '<div class="iron-bank bank-7"><img src="9p_files/images/loans/' + conf.ironbank7 + '.jpg"/></div>';
+		}
         if (conf.dragonsStrength) {
             for (var i = 1; i <= conf.dragonsStrength; i++) {
                 htmlString += '<div class="dragons-strength"></div>';
@@ -184,6 +193,9 @@ var $board = $('.board'),
             "dragon6": $('[name="dragon-6"]').attr('checked'),
             "dragon8": $('[name="dragon-8"]').attr('checked'),
             "dragon10": $('[name="dragon-10"]').attr('checked'),
+			"ironbank1": $('[name="iron-bank-1"]').val(),
+			"ironbank4": $('[name="iron-bank-4"]').val(),
+			"ironbank7": $('[name="iron-bank-7"]').val(),
             
             "units": {
 				"arryn": $('[name="units-arryn"]').val(),
@@ -337,6 +349,10 @@ var $board = $('.board'),
         $('[name="dragon-6"]').attr('checked', conf.dragon6);
         $('[name="dragon-8"]').attr('checked', conf.dragon8);
         $('[name="dragon-10"]').attr('checked', conf.dragon10);
+		
+		$('[name="iron-bank-1"]').val(conf.ironbank1);
+		$('[name="iron-bank-4"]').val(conf.ironbank4);
+		$('[name="iron-bank-7"]').val(conf.ironbank7);
 
         $('[name="units-arryn"]').val(conf.units.arryn);
         $('[name="units-baratheon"]').val(conf.units.baratheon);

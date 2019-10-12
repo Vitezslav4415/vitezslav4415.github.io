@@ -2237,3 +2237,20 @@ input[type="checkbox"][name^="housecard-"]:checked + label {
 .dragons-strength + .dragons-strength + .dragons-strength + .dragons-strength + .dragons-strength {
     left: 1811px;
 }
+
+.iron-bank {
+	position: absolute;
+	top: 496px;
+}
+
+.bank-1 {
+	left: 1361px;
+}
+
+.bank-4 {
+	left: 1524px;
+}
+
+.bank-7 {
+	left: 1686px;
+}
