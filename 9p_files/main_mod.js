@@ -546,3 +546,10 @@ $('body').on('click', function (e) {
     }
 });
 });
+
+function moveIronBankLeft() {
+    $('[name="iron-bank-1"]').val($('[name="iron-bank-4"]').val());
+    $('[name="iron-bank-4"]').val($('[name="iron-bank-7"]').val());
+    $('[name="iron-bank-7"]').val('empty');
+    $('[name="iron-bank-7"]').trigger('change');
+}
